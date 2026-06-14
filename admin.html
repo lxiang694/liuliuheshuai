@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>星星学习乐园 · 数据后台</title>
+<style>
+  :root{
+    --night:#0E1230; --panel:#171C42; --panel2:#1F2552; --line:#2C3370;
+    --ink:#EAECFF; --muted:#8E94C7; --gold:#FFC83D; --sky:#5BB8F5; --coral:#FF7E67; --grass:#6FBF73; --violet:#9B7EDE;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;
+    background:var(--night);color:var(--ink);min-height:100vh;
+    background-image:radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,.5), transparent),
+      radial-gradient(1.5px 1.5px at 70% 20%, rgba(255,255,255,.35), transparent),
+      radial-gradient(1.5px 1.5px at 85% 60%, rgba(255,255,255,.4), transparent),
+      radial-gradient(1.5px 1.5px at 40% 80%, rgba(255,255,255,.3), transparent),
+      radial-gradient(2px 2px at 55% 45%, rgba(255,200,61,.5), transparent);
+    background-attachment:fixed;}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 18px 60px}
+
+  /* 登录门 */
+  #gate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(8,10,28,.9);backdrop-filter:blur(6px);z-index:10}
+  .gate-card{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:32px 26px;max-width:370px;width:100%;text-align:center}
+  .gate-card .star{font-size:44px}
+  .gate-card h1{font-size:20px;font-weight:800;margin:10px 0 4px}
+  .gate-card p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+  .gate-card input{width:100%;padding:13px 14px;border-radius:13px;border:1.5px solid var(--line);background:var(--panel2);color:var(--ink);font-size:15px;font-family:inherit;margin-bottom:11px}
+  .gate-card input:focus{outline:none;border-color:var(--sky)}
+  .gate-card button{width:100%;margin-top:4px;padding:13px;border:none;border-radius:13px;cursor:pointer;font-family:inherit;
+    font-weight:800;font-size:15px;color:#3A2A00;background:linear-gradient(180deg,#FFD64D,#FFB300)}
+  .gate-card button:disabled{opacity:.6}
+  .gate-row{display:flex;align-items:center;gap:7px;justify-content:center;margin-top:14px;font-size:12.5px;color:var(--muted)}
+  .gate-err{color:var(--coral);font-size:13px;margin-top:12px;min-height:18px;font-weight:600;line-height:1.5}
+
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+  header .brand{display:flex;align-items:center;gap:11px}
+  header .brand .logo{font-size:30px}
+  header .brand h1{font-size:19px;font-weight:800;letter-spacing:.5px}
+  header .brand p{font-size:12px;color:var(--muted);margin-top:1px}
+  .hbtns{display:flex;gap:8px}
+  .btn-ghost{background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:11px;padding:9px 15px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700}
+  .btn-ghost:active{transform:scale(.97)}
+
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px 16px;position:relative;overflow:hidden}
+  .stat::after{content:"";position:absolute;right:-10px;top:-10px;width:54px;height:54px;border-radius:50%;background:var(--ac);opacity:.14}
+  .stat .n{font-size:34px;font-weight:800;line-height:1;letter-spacing:-1px}
+  .stat .l{font-size:12.5px;color:var(--muted);margin-top:8px}
+  .stat.gold{--ac:var(--gold)} .stat.sky{--ac:var(--sky)} .stat.coral{--ac:var(--coral)} .stat.grass{--ac:var(--grass)}
+
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px;margin-bottom:18px}
+  .panel h2{font-size:15px;font-weight:800;margin-bottom:4px}
+  .panel .sub{font-size:12px;color:var(--muted);margin-bottom:18px}
+
+  .bars{display:flex;align-items:flex-end;gap:6px;height:140px}
+  .bars .bar{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+  .bars .bar .col{width:100%;max-width:30px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,var(--sky),#3B7FD0);min-height:3px;transition:height .5s}
+  .bars .bar .v{font-size:11px;color:var(--ink);font-weight:700}
+  .bars .bar .d{font-size:10px;color:var(--muted);transform:rotate(-30deg);white-space:nowrap;margin-top:2px}
+
+  .hbars{display:flex;flex-direction:column;gap:11px}
+  .hbar{display:flex;align-items:center;gap:11px}
+  .hbar .name{width:96px;flex:none;font-size:12.5px;color:var(--ink);text-align:right}
+  .hbar .track{flex:1;background:var(--panel2);border-radius:8px;height:22px;overflow:hidden}
+  .hbar .fill{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--violet),#7C5BD0);min-width:2px;transition:width .5s}
+  .hbar.g .fill{background:linear-gradient(90deg,var(--grass),#4E9D52)}
+  .hbar .cnt{width:44px;flex:none;font-size:12.5px;font-weight:700;color:var(--muted)}
+
+  .empty{text-align:center;color:var(--muted);font-size:13.5px;padding:24px 10px;line-height:1.8}
+  .foot{text-align:center;color:var(--muted);font-size:11.5px;margin-top:26px;line-height:1.8}
+  .loading{text-align:center;color:var(--muted);padding:40px;font-size:14px}
+  .rolechip{font-size:11px;font-weight:800;color:#3A2A00;background:var(--gold);border-radius:999px;padding:2px 9px;margin-left:8px;vertical-align:middle}
+
+  @media (max-width:560px){
+    .stat-grid{grid-template-columns:1fr 1fr}
+    .stat .n{font-size:28px}
+    .hbar .name{width:80px;font-size:11.5px}
+  }
+</style>
+</head>
+<body>
+
+<!-- 登录门 -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="star">🌟</div>
+    <h1>数据后台</h1>
+    <p>星星学习乐园 · 仅限管理员<br>请用管理员邮箱与密码登录</p>
+    <input id="email" type="email" placeholder="邮箱" autocomplete="username">
+    <input id="password" type="password" placeholder="密码" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
+    <button id="loginBtn" onclick="login()">登录</button>
+    <div class="gate-err" id="gate-err"></div>
+  </div>
+</div>
+
+<div class="wrap" id="dash" style="display:none">
+  <header>
+    <div class="brand">
+      <span class="logo">🌌</span>
+      <div><h1>星星学习乐园 · 数据后台<span class="rolechip" id="rolechip" style="display:none"></span></h1><p id="updated">—</p></div>
+    </div>
+    <div class="hbtns">
+      <button class="btn-ghost" onclick="loadStats()">↻ 刷新</button>
+      <button class="btn-ghost" onclick="logout()">退出登录</button>
+    </div>
+  </header>
+
+  <div id="content"><div class="loading">正在加载数据…</div></div>
+
+  <div class="foot">
+    数据每次打开/刷新时实时统计 · 仅含匿名使用数据<br>
+    若长期为 0，可能是统计尚未产生数据，或访问 Supabase 网络不通
+  </div>
+</div>
+
+<script>
+const SB_URL = "https://ghxwzqaxifumxiuimcvz.supabase.co";
+const SB_KEY = "sb_publishable_f3gUm3FRy0424pTwua-DUA_y1PImumD";
+const SESSION_KEY = "xxly-admin-session";
+
+const FEATURE_NAMES = {
+  "theme":"主题学习周", "reading":"分级阅读", "kepu":"科普图书馆", "weekly":"家长周报",
+  "review":"错题复习", "sport":"运动打卡", "labor":"劳动打卡", "mood":"情绪卡片",
+  "practice-math":"数学练习", "practice-chinese":"语文练习", "practice-english":"英语练习", "practice-kepu":"科普练习"
+};
+const GRADE_NAMES = ["幼小衔接","一年级","二年级","三年级","四年级","五年级","六年级"];
+
+function getSession(){ try{ return JSON.parse(localStorage.getItem(SESSION_KEY)||"null"); }catch(e){ return null; } }
+function setSession(s){ try{ localStorage.setItem(SESSION_KEY, JSON.stringify(s)); }catch(e){} }
+function clearSession(){ try{ localStorage.removeItem(SESSION_KEY); }catch(e){} }
+
+// 打开时若已有登录态，直接尝试进入
+window.onload = function(){
+  const s = getSession();
+  if(s && s.access_token){ loadStats(); }
+};
+
+async function login(){
+  const email = (document.getElementById("email").value||"").trim();
+  const password = document.getElementById("password").value||"";
+  const err = document.getElementById("gate-err");
+  if(!email || !password){ err.textContent = "请输入邮箱和密码"; return; }
+  const btn = document.getElementById("loginBtn");
+  btn.disabled = true; err.textContent = "登录中…";
+  try{
+    const res = await fetch(SB_URL + "/auth/v1/token?grant_type=password", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json", "apikey":SB_KEY },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if(!res.ok || !data.access_token){
+      err.textContent = "邮箱或密码不正确";
+      btn.disabled = false; return;
+    }
+    setSession(data);
+    err.textContent = "";
+    await loadStats(true);
+  }catch(e){
+    err.textContent = "网络连接失败，请检查网络后重试";
+  }
+  btn.disabled = false;
+}
+
+async function refreshToken(){
+  const s = getSession();
+  if(!s || !s.refresh_token) return false;
+  try{
+    const res = await fetch(SB_URL + "/auth/v1/token?grant_type=refresh_token", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json", "apikey":SB_KEY },
+      body: JSON.stringify({ refresh_token: s.refresh_token })
+    });
+    const data = await res.json();
+    if(res.ok && data.access_token){ setSession(data); return true; }
+  }catch(e){}
+  return false;
+}
+
+async function callStats(){
+  const s = getSession();
+  if(!s || !s.access_token) return { ok:false, status:401 };
+  const res = await fetch(SB_URL + "/rest/v1/rpc/xxly_stats", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json", "apikey":SB_KEY, "Authorization":"Bearer "+s.access_token },
+    body: "{}"
+  });
+  return res;
+}
+
+async function loadStats(fromLogin){
+  const err = document.getElementById("gate-err");
+  try{
+    let res = await callStats();
+    // token 过期：刷新后重试一次
+    if(res.status===401){
+      const refreshed = await refreshToken();
+      if(refreshed) res = await callStats();
+    }
+    if(res.status===401 || res.status===403){
+      // 登录态失效，回到登录页
+      clearSession();
+      showGate();
+      if(err) err.textContent = fromLogin ? "登录已过期，请重新登录" : "";
+      return;
+    }
+    const data = await res.json();
+    if(!res.ok){
+      // 例如已登录但不在管理员名单
+      const msg = (data && (data.message || data.error)) ? "无后台访问权限（该账户不是管理员）" : "读取数据失败";
+      if(getSession()){ // 已登录但无权限
+        showDash(); document.getElementById("content").innerHTML = '<div class="empty">'+msg+'<br><br><button class="btn-ghost" onclick="logout()">退出登录</button></div>';
+      }else{ showGate(); if(err) err.textContent = msg; }
+      return;
+    }
+    showDash();
+    render(data);
+  }catch(e){
+    if(getSession() && !fromLogin){
+      document.getElementById("content").innerHTML = '<div class="empty">网络连接失败，点右上角“刷新”重试</div>';
+    }else if(err){ err.textContent = "网络连接失败，请重试"; }
+  }
+}
+
+async function logout(){
+  const s = getSession();
+  try{
+    if(s && s.access_token){
+      await fetch(SB_URL + "/auth/v1/logout", { method:"POST", headers:{ "apikey":SB_KEY, "Authorization":"Bearer "+s.access_token } }).catch(()=>{});
+    }
+  }catch(e){}
+  clearSession();
+  showGate();
+  document.getElementById("password").value = "";
+  document.getElementById("gate-err").textContent = "";
+}
+
+function showGate(){ document.getElementById("gate").style.display = "flex"; document.getElementById("dash").style.display = "none"; }
+function showDash(){ document.getElementById("gate").style.display = "none"; document.getElementById("dash").style.display = "block"; }
+
+function render(d){
+  d = d || {};
+  const now = new Date();
+  document.getElementById("updated").textContent = "更新于 " + (now.getMonth()+1) + "月" + now.getDate() + "日 " +
+    String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0");
+
+  const rc = document.getElementById("rolechip");
+  if(d.role){ rc.textContent = d.role==="admin" ? "管理员" : "只读"; rc.style.display = "inline-block"; }
+
+  const daily = d.daily || [], features = d.features || [], grades = d.grades || [];
+
+  let html = `<div class="stat-grid">
+    <div class="stat gold"><div class="n">${d.total_users||0}</div><div class="l">累计用户（设备）</div></div>
+    <div class="stat sky"><div class="n">${d.dau_today||0}</div><div class="l">今日活跃</div></div>
+    <div class="stat coral"><div class="n">${d.dau_7d||0}</div><div class="l">近 7 天活跃</div></div>
+    <div class="stat grass"><div class="n">${d.new_users_7d||0}</div><div class="l">近 7 天新增</div></div>
+  </div>`;
+
+  html += `<div class="panel"><h2>每日活跃趋势</h2><div class="sub">最近 14 天，每天打开过的设备数</div>`;
+  if(daily.length){
+    const max = Math.max(1, ...daily.map(x=>x.active||0));
+    html += `<div class="bars">` + daily.map(x=>{
+      const h = Math.round((x.active||0)/max*100);
+      return `<div class="bar"><div class="v">${x.active||0}</div><div class="col" style="height:${h}%"></div><div class="d">${x.day}</div></div>`;
+    }).join("") + `</div>`;
+  }else{ html += `<div class="empty">还没有活跃数据</div>`; }
+  html += `</div>`;
+
+  html += `<div class="panel"><h2>各功能使用次数</h2><div class="sub">用户用得最多和最少的功能，帮你判断该优化什么</div>`;
+  if(features.length){
+    const max = Math.max(1, ...features.map(x=>x.cnt||0));
+    html += `<div class="hbars">` + features.map(x=>{
+      const label = FEATURE_NAMES[x.feature] || x.feature;
+      const w = Math.round((x.cnt||0)/max*100);
+      return `<div class="hbar"><div class="name">${label}</div><div class="track"><div class="fill" style="width:${w}%"></div></div><div class="cnt">${x.cnt||0}</div></div>`;
+    }).join("") + `</div>`;
+  }else{ html += `<div class="empty">还没有功能使用数据</div>`; }
+  html += `</div>`;
+
+  html += `<div class="panel"><h2>孩子年级分布</h2><div class="sub">用户添加的孩子档案，各年级人次</div>`;
+  if(grades.length){
+    const max = Math.max(1, ...grades.map(x=>x.cnt||0));
+    html += `<div class="hbars">` + grades.map(x=>{
+      const label = GRADE_NAMES[x.grade] != null ? GRADE_NAMES[x.grade] : ("年级"+x.grade);
+      const w = Math.round((x.cnt||0)/max*100);
+      return `<div class="hbar g"><div class="name">${label}</div><div class="track"><div class="fill" style="width:${w}%"></div></div><div class="cnt">${x.cnt||0}</div></div>`;
+    }).join("") + `</div>`;
+  }else{ html += `<div class="empty">还没有年级数据</div>`; }
+  html += `</div>`;
+
+  document.getElementById("content").innerHTML = html;
+}
+</script>
+</body>
+</html>
