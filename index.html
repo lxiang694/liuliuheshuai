@@ -204,6 +204,17 @@
   .kp-tool.drill{border-color:var(--sky);background:#EAF5FF;color:var(--sky-deep)}
   .kp-tool:active{transform:scale(.97)}
   .kp-tip{background:#FFF6E0;border-radius:13px;padding:11px 13px;font-size:15px;line-height:1.75;color:#6B5320;margin-bottom:10px}
+  .wsol-btn{margin-top:9px;border:1.5px solid #BFE3C4;background:#F0FBF1;border-radius:11px;padding:7px 12px;font-family:inherit;font-size:14px;font-weight:800;color:var(--grass-deep);cursor:pointer}
+  .wsol-btn:active{transform:scale(.97)}
+  .wsol-btn.ai{border-color:#C8B8F2;background:#F4EFFD;color:#5E3DBA}
+  .wsol{margin-top:9px;background:#F2FAF3;border:1px solid #D6EEDA;border-radius:12px;padding:12px 14px;font-size:16px;line-height:1.85;color:#2E5A36;white-space:pre-line}
+  .ai-hint{color:#7F6AB0;font-size:15px}
+  .ai-loading{display:flex;align-items:center;gap:10px;color:#5E3DBA;font-size:16px}
+  .ai-spin{width:16px;height:16px;border:2px solid #D9CDF2;border-top-color:#5E3DBA;border-radius:50%;animation:aispin .8s linear infinite}
+  @keyframes aispin{to{transform:rotate(360deg)}}
+  .ai-tag{margin-top:10px;font-size:13px;color:var(--ink-soft);font-weight:600}
+  .ai-err{color:#C25549;font-size:15px;margin-bottom:8px}
+  .ai-fb{font-size:15px;color:#6B5320;line-height:1.8}
   .wrong-item .wtag{font-size:13px;font-weight:800;color:var(--coral-deep);background:#FFEBE6;border-radius:999px;padding:3px 10px;display:inline-block;margin-bottom:7px}
   .wrong-item .wq{font-size:17px;font-weight:700;line-height:1.7}
   .wrong-item .wa{font-size:16px;color:var(--grass-deep);font-weight:800;margin-top:5px}
@@ -1224,41 +1235,41 @@ function readQuestion(q){
 const COUNT_EMOJIS = ["🍎","🐤","⭐","🎈","🐟","🌸","🚗","🍓"];
 function genCountK(){
   const n = ri(3,9), e = COUNT_EMOJIS[ri(0,COUNT_EMOJIS.length-1)];
-  return {tag:"数数小火车", emoji:e.repeat(n), text:"数一数，一共有几个？", options:numOptions(n,2), answer:String(n)};
+  return {tag:"数数小火车", emoji:e.repeat(n), text:"数一数，一共有几个？", options:numOptions(n,2), answer:String(n), sol:`数一数上面的图案，一个一个地点，不重复、不漏数，一共有 ${n} 个。\n所以答案是 ${n}。`};
 }
 function genCompareK(){
   let a=ri(1,10), b=ri(1,10); while(b===a) b=ri(1,10);
   const big = Math.max(a,b);
   return Math.random()<.5
-    ? {tag:"比一比", text:`${a} 和 ${b}，哪个数更大？`, options:shuffle([String(a),String(b)]), answer:String(big)}
-    : {tag:"比一比", text:`${a} 和 ${b}，哪个数更小？`, options:shuffle([String(a),String(b)]), answer:String(Math.min(a,b))};
+    ? {tag:"比一比", text:`${a} 和 ${b}，哪个数更大？`, options:shuffle([String(a),String(b)]), answer:String(big), sol:`比较 ${a} 和 ${b} 的大小。\n位数都是一位/两位，从最高位一位一位地比。\n${Math.max(a,b)} 比 ${Math.min(a,b)} 大，写成 ${Math.max(a,b)} > ${Math.min(a,b)}。\n所以更大的数是 ${big}。`}
+    : {tag:"比一比", text:`${a} 和 ${b}，哪个数更小？`, options:shuffle([String(a),String(b)]), answer:String(Math.min(a,b)), sol:`比较 ${a} 和 ${b} 的大小。\n${Math.max(a,b)} 比 ${Math.min(a,b)} 大，写成 ${Math.max(a,b)} > ${Math.min(a,b)}。\n所以更小的数是 ${Math.min(a,b)}。`};
 }
 function genAdd10(){
   if(Math.random()<.55){ const a=ri(1,8), b=ri(1,9-a);
-    return {tag:"10以内加法", text:`${a} + ${b} = <span class="blank">?</span>`, options:numOptions(a+b,2), answer:String(a+b)}; }
+    return {tag:"10以内加法", text:`${a} + ${b} = <span class="blank">?</span>`, options:numOptions(a+b,2), answer:String(a+b), sol:`把两个数合起来。\n可以伸手指数一数：先伸 ${a} 根手指，再加 ${b} 根，一共 ${a+b} 根。\n${a} + ${b} = ${a+b}。\n所以答案是 ${a+b}。`}; }
   const a=ri(3,10), b=ri(1,a-1);
-  return {tag:"10以内减法", text:`${a} − ${b} = <span class="blank">?</span>`, options:numOptions(a-b,2), answer:String(a-b)};
+  return {tag:"10以内减法", text:`${a} − ${b} = <span class="blank">?</span>`, options:numOptions(a-b,2), answer:String(a-b), sol:`从 ${a} 里去掉 ${b}。\n可以画 ${a} 个圆圈，划掉 ${b} 个，还剩 ${a-b} 个。\n${a} − ${b} = ${a-b}。\n所以答案是 ${a-b}。`};
 }
 function genFill10(){
   const a=ri(1,9);
   return Math.random()<.5
-    ? {tag:"凑十好朋友", text:`${a} + <span class="blank">?</span> = 10`, options:numOptions(10-a,2), answer:String(10-a)}
-    : {tag:"凑十好朋友", text:`<span class="blank">?</span> + ${a} = 10`, options:numOptions(10-a,2), answer:String(10-a)};
+    ? {tag:"凑十好朋友", text:`${a} + <span class="blank">?</span> = 10`, options:numOptions(10-a,2), answer:String(10-a), sol:`想一想：${a} 再加上几就正好等于 10？\n因为 ${a} + ${10-a} = 10，所以括号里填 ${10-a}。\n小技巧：1和9、2和8、3和7、4和6、5和5，都是凑十好朋友。`}
+    : {tag:"凑十好朋友", text:`<span class="blank">?</span> + ${a} = 10`, options:numOptions(10-a,2), answer:String(10-a), sol:`想一想：几再加上 ${a} 就正好等于 10？\n因为 ${10-a} + ${a} = 10，所以括号里填 ${10-a}。\n小技巧：1和9、2和8、3和7、4和6、5和5，都是凑十好朋友。`};
 }
 function genAdd20(){
   if(Math.random()<.5){ const a=ri(5,18), b=ri(2,20-a);
-    return {tag:"20以内加法", text:`${a} + ${b} = <span class="blank">?</span>`, options:numOptions(a+b,3), answer:String(a+b)}; }
+    return {tag:"20以内加法", text:`${a} + ${b} = <span class="blank">?</span>`, options:numOptions(a+b,3), answer:String(a+b), sol:(function(){var big=Math.max(a,b),sml=Math.min(a,b),need=10-(big%10);if((a%10)+(b%10)>=10 && big%10!==0 && need<=sml){return `个位相加超过 10，用「凑十法」更稳：\n第一步：${big} 再加 ${need} 就凑成整十 ${big+need}（把 ${sml} 拆成 ${need} 和 ${sml-need}）。\n第二步：${big+need} + ${sml-need} = ${a+b}。\n所以答案是 ${a+b}。`;}return `把两个数合起来：${a} + ${b} = ${a+b}。\n所以答案是 ${a+b}。`;})()}; }
   const a=ri(8,20), b=ri(2,a-2);
-  return {tag:"20以内减法", text:`${a} − ${b} = <span class="blank">?</span>`, options:numOptions(a-b,3), answer:String(a-b)};
+  return {tag:"20以内减法", text:`${a} − ${b} = <span class="blank">?</span>`, options:numOptions(a-b,3), answer:String(a-b), sol:(function(){if(a>10 && (a%10)<(b%10)){return `个位 ${a%10} 不够减 ${b%10}，用「破十法」：\n第一步：把 ${a} 看成 10 和 ${a-10}。\n第二步：用 10 减 ${b} 得 ${10-b}，再加上 ${a-10}：${10-b} + ${a-10} = ${a-b}。\n所以答案是 ${a-b}。`;}return `从 ${a} 里去掉 ${b}，还剩 ${a-b}。\n${a} − ${b} = ${a-b}。\n所以答案是 ${a-b}。`;})()};
 }
 function genClock(){
   const h=ri(1,11);
   if(Math.random()<.5){
     return {tag:"认识钟表", text:`时针指着 ${h}，分针指着 12，现在是几点？`,
-      options:strOptions(h+"时整",[ (h%12+1)+"时整",(h>1?h-1:12)+"时整",h+"时半",(h%12+2>12?h%12+2-12:h%12+2)+"时整"]), answer:h+"时整"};
+      options:strOptions(h+"时整",[ (h%12+1)+"时整",(h>1?h-1:12)+"时整",h+"时半",(h%12+2>12?h%12+2-12:h%12+2)+"时整"]), answer:h+"时整", sol:`分针指着 12，说明是「整点」。\n时针指着 ${h}，所以现在是 ${h} 时整。`};
   }
   return {tag:"认识钟表", text:`时针在 ${h} 和 ${h+1} 之间，分针指着 6，现在是几点？`,
-    options:strOptions(h+"时半",[(h+1)+"时半",h+"时整",(h+1)+"时整",(h>1?h-1:12)+"时半"]), answer:h+"时半"};
+    options:strOptions(h+"时半",[(h+1)+"时半",h+"时整",(h+1)+"时整",(h>1?h-1:12)+"时半"]), answer:h+"时半", sol:`分针指着 6，说明已经走了「半小时」。\n时针在 ${h} 和 ${h+1} 之间，表示刚过了 ${h} 时，再走半小时到 ${h+1} 时。\n所以现在是 ${h} 时半。`};
 }
 const RMB0 = [
   {tag:"认识人民币", text:"1元 = <span class='blank'>?</span> 角", options:["10角","100角","2角","5角"], answer:"10角"},
@@ -1309,40 +1320,40 @@ function genHanziNum(){
    题库 —— 二、三年级（数学）
 ================================================================ */
 function genMul(){ const a=ri(2,9), b=ri(2,9), c=a*b;
-  return {tag:"乘法口诀", text:`${a} × ${b} = <span class="blank">?</span>`, options:numOptions(c,Math.max(3,Math.min(a,b))), answer:String(c)}; }
+  return {tag:"乘法口诀", text:`${a} × ${b} = <span class="blank">?</span>`, options:numOptions(c,Math.max(3,Math.min(a,b))), answer:String(c), sol:`${a} × ${b} 表示「${b} 个 ${a} 相加」。${b<=6?"\n就是 "+Array(b).fill(a).join(" + ")+" = "+c+"。":""}\n用乘法口诀更快：${["零","一","二","三","四","五","六","七","八","九"][Math.min(a,b)]}${["零","一","二","三","四","五","六","七","八","九"][Math.max(a,b)]}${c<10?"得"+["零","一","二","三","四","五","六","七","八","九"][c]:c}。\n所以答案是 ${c}。`}; }
 function genDiv(){ const a=ri(2,9), b=ri(2,9), c=a*b;
-  return {tag:"除法小能手", text:`${c} ÷ ${a} = <span class="blank">?</span>`, options:numOptions(b,3), answer:String(b)}; }
+  return {tag:"除法小能手", text:`${c} ÷ ${a} = <span class="blank">?</span>`, options:numOptions(b,3), answer:String(b), sol:`${c} ÷ ${a} 的意思是「把 ${c} 平均分成 ${a} 份，每份是多少」。\n反过来想乘法：${a} 乘几等于 ${c}？因为 ${a} × ${b} = ${c}。\n所以 ${c} ÷ ${a} = ${b}。`}; }
 function genAdd2(){
   if(Math.random()<.5){ const a=ri(15,80), b=ri(10,99-a);
-    return {tag:"加法闯关", text:`${a} + ${b} = <span class="blank">?</span>`, options:numOptions(a+b,10), answer:String(a+b)}; }
+    return {tag:"加法闯关", text:`${a} + ${b} = <span class="blank">?</span>`, options:numOptions(a+b,10), answer:String(a+b), sol:`数位对齐，从个位开始加：\n个位：${a%10} + ${b%10} = ${a%10+b%10}${(a%10+b%10)>=10?"，满十向十位进 1":""}。\n十位：${Math.floor(a/10)} + ${Math.floor(b/10)}${(a%10+b%10)>=10?" + 1":""} = ${Math.floor((a+b)/10)}。\n合起来：${a} + ${b} = ${a+b}。`}; }
   const a=ri(40,99), b=ri(10,a-5);
-  return {tag:"减法闯关", text:`${a} − ${b} = <span class="blank">?</span>`, options:numOptions(a-b,10), answer:String(a-b)};
+  return {tag:"减法闯关", text:`${a} − ${b} = <span class="blank">?</span>`, options:numOptions(a-b,10), answer:String(a-b), sol:`数位对齐，从个位开始减：\n${(a%10)<(b%10)?"个位 "+(a%10)+" 不够减 "+(b%10)+"，向十位借 1，变成 "+(a%10+10)+" − "+(b%10)+" = "+(a%10+10-b%10)+"。":"个位："+(a%10)+" − "+(b%10)+" = "+(a%10-b%10)+"。"}\n再算十位，合起来：${a} − ${b} = ${a-b}。`};
 }
 function genAdd3(){
   if(Math.random()<.5){ const a=ri(120,860), b=ri(110,Math.max(110,999-a));
-    return {tag:"大数加法", text:`${a} + ${b} = <span class="blank">?</span>`, options:numOptions(a+b,40), answer:String(a+b)}; }
+    return {tag:"大数加法", text:`${a} + ${b} = <span class="blank">?</span>`, options:numOptions(a+b,40), answer:String(a+b), sol:`三位数加法，数位对齐，从个位开始一位一位加，满十进一。\n${a} + ${b} = ${a+b}。\n所以答案是 ${a+b}。`}; }
   const a=ri(400,990), b=ri(110,a-50);
-  return {tag:"大数减法", text:`${a} − ${b} = <span class="blank">?</span>`, options:numOptions(a-b,40), answer:String(a-b)};
+  return {tag:"大数减法", text:`${a} − ${b} = <span class="blank">?</span>`, options:numOptions(a-b,40), answer:String(a-b), sol:`三位数减法，数位对齐，从个位开始减，哪一位不够减就向前一位借 1。\n${a} − ${b} = ${a-b}。\n所以答案是 ${a-b}。`};
 }
 function genMix(){ const a=ri(2,9), b=ri(2,9), c=ri(2,20);
-  return {tag:"混合运算", text:`${a} × ${b} + ${c} = <span class="blank">?</span>`, options:numOptions(a*b+c,6), answer:String(a*b+c)}; }
+  return {tag:"混合运算", text:`${a} × ${b} + ${c} = <span class="blank">?</span>`, options:numOptions(a*b+c,6), answer:String(a*b+c), sol:`口诀：先乘除，后加减。\n第一步：先算乘法，${a} × ${b} = ${a*b}。\n第二步：再加上 ${c}，${a*b} + ${c} = ${a*b+c}。\n所以答案是 ${a*b+c}。`}; }
 function genTimes(){
   const a=ri(2,9), k=ri(2,6);
   return Math.random()<.5
-    ? {tag:"倍数问题", text:`${a} 的 ${k} 倍是多少？`, options:numOptions(a*k,5), answer:String(a*k)}
-    : {tag:"倍数问题", text:`${a*k} 是 ${a} 的几倍？`, options:numOptions(k,2), answer:String(k)};
+    ? {tag:"倍数问题", text:`${a} 的 ${k} 倍是多少？`, options:numOptions(a*k,5), answer:String(a*k), sol:`「${a} 的 ${k} 倍」就是 ${k} 个 ${a} 合起来，用乘法：\n${a} × ${k} = ${a*k}。\n所以答案是 ${a*k}。`}
+    : {tag:"倍数问题", text:`${a*k} 是 ${a} 的几倍？`, options:numOptions(k,2), answer:String(k), sol:`求「${a*k} 是 ${a} 的几倍」，用除法：\n${a*k} ÷ ${a} = ${k}。\n所以是 ${k} 倍。`};
 }
 function genPerimeter(){
   if(Math.random()<.6){ const a=ri(3,9), b=ri(2,a-1);
-    return {tag:"周长小卫士", text:`长 ${a} 厘米、宽 ${b} 厘米的长方形，周长是多少厘米？`, options:numOptions(2*(a+b),4), answer:String(2*(a+b))}; }
+    return {tag:"周长小卫士", text:`长 ${a} 厘米、宽 ${b} 厘米的长方形，周长是多少厘米？`, options:numOptions(2*(a+b),4), answer:String(2*(a+b)), sol:`长方形周长 = （长 + 宽）× 2。\n（${a} + ${b}）× 2 = ${a+b} × 2 = ${2*(a+b)} 厘米。\n所以周长是 ${2*(a+b)} 厘米。`}; }
   const a=ri(2,9);
-  return {tag:"周长小卫士", text:`边长 ${a} 厘米的正方形，周长是多少厘米？`, options:numOptions(4*a,4), answer:String(4*a)};
+  return {tag:"周长小卫士", text:`边长 ${a} 厘米的正方形，周长是多少厘米？`, options:numOptions(4*a,4), answer:String(4*a), sol:`正方形四条边一样长，周长 = 边长 × 4。\n${a} × 4 = ${4*a} 厘米。\n所以周长是 ${4*a} 厘米。`};
 }
 function genFrac0(){
   if(Math.random()<.5){
     const n=ri(2,8);
     return {tag:"分数初步", text:`把一块蛋糕平均分成 ${n} 份，每份是它的几分之一？`,
-      options:strOptions("1/"+n, [2,3,4,5,6,7,8,9].map(x=>"1/"+x)), answer:"1/"+n};
+      options:strOptions("1/"+n, [2,3,4,5,6,7,8,9].map(x=>"1/"+x)), answer:"1/"+n, sol:`把一个整体平均分成 ${n} 份，每一份就叫做它的 ${n} 分之一。\n写成分数：1/${n}（读作「${n}分之一」）。\n所以答案是 1/${n}。`};
   }
   const foods = ["西瓜","披萨","蛋糕","饼"];
   const f = foods[ri(0,foods.length-1)];
@@ -1350,7 +1361,7 @@ function genFrac0(){
   const wrong = [];
   for(let d of [n, n+1, Math.max(2,n-1)]) for(let a=1;a<d;a++) wrong.push(a+"/"+d);
   return {tag:"分数初步", text:`把一个${f}平均切成 ${n} 块，吃了 ${m} 块，吃了这个${f}的几分之几？`,
-    options:strOptions(m+"/"+n, wrong), answer:m+"/"+n};
+    options:strOptions(m+"/"+n, wrong), answer:m+"/"+n, sol:`这个${f}被平均切成 ${n} 块，每一块是 1/${n}。\n吃了 ${m} 块，就是吃了 ${m} 个 1/${n}，写成 ${m}/${n}。\n所以答案是 ${m}/${n}。`};
 }
 const LIFE_REAL = [
   {tag:"生活数学 · 买菜找零", text:"妈妈买菜花了 37 元，付了 50 元，应该找回多少元？", options:["13 元","23 元","87 元","17 元"], answer:"13 元"},
@@ -1420,13 +1431,13 @@ const OLYMPIAD = [
 ================================================================ */
 function genMulBig(){
   if(Math.random()<.5){ const a=ri(12,39), b=ri(11,29);
-    return {tag:"两位数乘法", text:`${a} × ${b} = <span class="blank">?</span>`, options:numOptions(a*b,30), answer:String(a*b)}; }
+    return {tag:"两位数乘法", text:`${a} × ${b} = <span class="blank">?</span>`, options:numOptions(a*b,30), answer:String(a*b), sol:`两位数乘法，可以拆开算：\n${a} × ${b} = ${a} × ${Math.floor(b/10)*10} + ${a} × ${b%10} = ${a*Math.floor(b/10)*10} + ${a*(b%10)} = ${a*b}。\n所以答案是 ${a*b}。`}; }
   const a=ri(110,950), b=ri(2,9);
-  return {tag:"三位数乘一位数", text:`${a} × ${b} = <span class="blank">?</span>`, options:numOptions(a*b,90), answer:String(a*b)};
+  return {tag:"三位数乘一位数", text:`${a} × ${b} = <span class="blank">?</span>`, options:numOptions(a*b,90), answer:String(a*b), sol:`三位数乘一位数，把三位数拆成 百+十+个 再分别乘：\n${a} × ${b} = ${Math.floor(a/100)*100} × ${b} + ${Math.floor(a%100/10)*10} × ${b} + ${a%10} × ${b}\n= ${Math.floor(a/100)*100*b} + ${Math.floor(a%100/10)*10*b} + ${a%10*b} = ${a*b}。\n所以答案是 ${a*b}。`};
 }
 function genDiv3(){
   const b=ri(2,9), q=ri(12,120), a=b*q;
-  return {tag:"除法进阶", text:`${a} ÷ ${b} = <span class="blank">?</span>`, options:numOptions(q,8), answer:String(q)};
+  return {tag:"除法进阶", text:`${a} ÷ ${b} = <span class="blank">?</span>`, options:numOptions(q,8), answer:String(q), sol:`${a} ÷ ${b}：想「${b} 乘几等于 ${a}」。\n因为 ${b} × ${q} = ${a}，所以 ${a} ÷ ${b} = ${q}。\n所以答案是 ${q}。`};
 }
 const ANGLES = [
   {tag:"角与图形", text:"直角等于多少度？", options:["90度","180度","45度","100度"], answer:"90度"},
@@ -1462,15 +1473,15 @@ function genDec5(){
 }
 function genEq(){
   if(Math.random()<.5){ const a=ri(2,30), x=ri(2,40);
-    return {tag:"简易方程", text:`x + ${a} = ${x+a}，x = <span class="blank">?</span>`, options:numOptions(x,5), answer:String(x)}; }
+    return {tag:"简易方程", text:`x + ${a} = ${x+a}，x = <span class="blank">?</span>`, options:numOptions(x,5), answer:String(x), sol:`要让 x 自己留在一边，两边同时减 ${a}：\nx + ${a} − ${a} = ${x+a} − ${a}\nx = ${x}。\n所以 x = ${x}。`}; }
   const a=ri(2,9), x=ri(2,20);
-  return {tag:"简易方程", text:`${a}x = ${a*x}，x = <span class="blank">?</span>`, options:numOptions(x,4), answer:String(x)};
+  return {tag:"简易方程", text:`${a}x = ${a*x}，x = <span class="blank">?</span>`, options:numOptions(x,4), answer:String(x), sol:`两边同时除以 ${a}：\n${a}x ÷ ${a} = ${a*x} ÷ ${a}\nx = ${x}。\n所以 x = ${x}。`};
 }
 function genArea(){
   if(Math.random()<.6){ const a=ri(3,12), b=ri(2,a);
-    return {tag:"面积达人", text:`长 ${a} 米、宽 ${b} 米的长方形，面积是多少平方米？`, options:numOptions(a*b,8), answer:String(a*b)}; }
+    return {tag:"面积达人", text:`长 ${a} 米、宽 ${b} 米的长方形，面积是多少平方米？`, options:numOptions(a*b,8), answer:String(a*b), sol:`长方形面积 = 长 × 宽。\n${a} × ${b} = ${a*b}（平方米）。\n所以面积是 ${a*b} 平方米。`}; }
   const a=ri(2,12);
-  return {tag:"面积达人", text:`边长 ${a} 米的正方形，面积是多少平方米？`, options:numOptions(a*a,8), answer:String(a*a)};
+  return {tag:"面积达人", text:`边长 ${a} 米的正方形，面积是多少平方米？`, options:numOptions(a*a,8), answer:String(a*a), sol:`正方形面积 = 边长 × 边长。\n${a} × ${a} = ${a*a}（平方米）。\n所以面积是 ${a*a} 平方米。`};
 }
 function fracOptions(numer, d){
   // 围绕正确分子生成不重复的分子，组成 x/d 形式的4个选项
@@ -1488,55 +1499,55 @@ function genFrac5(){
   const d=ri(5,12);
   if(Math.random()<.5){ const x=ri(1,d-2), y=ri(1,d-1-x);
     return {tag:"同分母分数加法", text:`${x}/${d} + ${y}/${d} = <span class="blank">?</span>`,
-      options:fracOptions(x+y,d), answer:`${x+y}/${d}`}; }
+      options:fracOptions(x+y,d), answer:`${x+y}/${d}`, sol:`同分母分数相加，分母不变，分子相加：\n${x}/${d} + ${y}/${d} = (${x} + ${y})/${d} = ${x+y}/${d}。\n所以答案是 ${x+y}/${d}。`}; }
   const x=ri(2,d-1), y=ri(1,x-1);
   return {tag:"同分母分数减法", text:`${x}/${d} − ${y}/${d} = <span class="blank">?</span>`,
-    options:fracOptions(x-y,d), answer:`${x-y}/${d}`};
+    options:fracOptions(x-y,d), answer:`${x-y}/${d}`, sol:`同分母分数相减，分母不变，分子相减：\n${x}/${d} − ${y}/${d} = (${x} − ${y})/${d} = ${x-y}/${d}。\n所以答案是 ${x-y}/${d}。`};
 }
 function genAvg(){
   const m=ri(5,40), arr=[m-2,m,m+2];
-  return {tag:"平均数", text:`小明三次跳绳分别跳了 ${arr[0]}、${arr[1]}、${arr[2]} 下，平均每次跳多少下？`, options:numOptions(m,4), answer:String(m)};
+  return {tag:"平均数", text:`小明三次跳绳分别跳了 ${arr[0]}、${arr[1]}、${arr[2]} 下，平均每次跳多少下？`, options:numOptions(m,4), answer:String(m), sol:`平均数 = 总和 ÷ 个数。\n总和：${arr[0]} + ${arr[1]} + ${arr[2]} = ${arr[0]+arr[1]+arr[2]}。\n个数是 3 次：${arr[0]+arr[1]+arr[2]} ÷ 3 = ${m}。\n所以平均每次跳 ${m} 下。`};
 }
 function genFracMul(){
   if(Math.random()<.5){ const d=ri(2,9), n=ri(1,d-1), k=ri(1,5);
-    return {tag:"分数乘法", text:`${n}/${d} × ${d*k} = <span class="blank">?</span>`, options:numOptions(n*k,4), answer:String(n*k)}; }
+    return {tag:"分数乘法", text:`${n}/${d} × ${d*k} = <span class="blank">?</span>`, options:numOptions(n*k,4), answer:String(n*k), sol:`分数乘整数：分子乘以整数，分母不变，能约分先约分。\n${n}/${d} × ${d*k} = (${n} × ${d*k}) / ${d} = ${n*d*k}/${d} = ${n*k}。\n或者先约分：${d*k} 里有 ${k} 个 ${d}，约掉分母得 ${n} × ${k} = ${n*k}。\n所以答案是 ${n*k}。`}; }
   const d=ri(2,9), a=ri(2,9);
-  return {tag:"分数除法", text:`${a} ÷ 1/${d} = <span class="blank">?</span>`, options:numOptions(a*d,6), answer:String(a*d)};
+  return {tag:"分数除法", text:`${a} ÷ 1/${d} = <span class="blank">?</span>`, options:numOptions(a*d,6), answer:String(a*d), sol:`除以一个分数，等于乘上它的倒数。\n1/${d} 的倒数是 ${d}。\n${a} ÷ 1/${d} = ${a} × ${d} = ${a*d}。\n所以答案是 ${a*d}。`};
 }
 function genPercent(){
   if(Math.random()<.5){
     const pairs=[[50,10],[50,50],[20,25],[40,25],[80,75],[200,20],[25,20],[60,50]];
     const [b,p]=pairs[ri(0,pairs.length-1)], a=b*p/100;
-    return {tag:"百分数", text:`${a} 是 ${b} 的百分之几？`, options:strOptions(p+"%",[p+10+"%",Math.max(5,p-10)+"%",p*2+"%",p+5+"%",Math.max(1,p-5)+"%",p+20+"%",p+15+"%"]), answer:p+"%"}; }
+    return {tag:"百分数", text:`${a} 是 ${b} 的百分之几？`, options:strOptions(p+"%",[p+10+"%",Math.max(5,p-10)+"%",p*2+"%",p+5+"%",Math.max(1,p-5)+"%",p+20+"%",p+15+"%"]), answer:p+"%", sol:`「A 是 B 的百分之几」=（A ÷ B）× 100%。\n${a} ÷ ${b} = ${a/b}，再乘 100% = ${p}%。\n所以答案是 ${p}%。`}; }
   const b=ri(2,20)*10;
-  return {tag:"百分数 · 打折", text:`一件衣服原价 ${b} 元，打八折后是多少元？`, options:numOptions(b*0.8,Math.max(4,b/10)), answer:String(b*0.8)};
+  return {tag:"百分数 · 打折", text:`一件衣服原价 ${b} 元，打八折后是多少元？`, options:numOptions(b*0.8,Math.max(4,b/10)), answer:String(b*0.8), sol:`「打八折」就是按原价的 80% 来算。\n${b} × 80% = ${b} × 0.8 = ${b*0.8} 元。\n所以打折后是 ${b*0.8} 元。`};
 }
 function genRatio(){
   const g=ri(2,9); let a=ri(1,9), b=ri(1,9); while(gcd(a,b)!==1 || a===b){ a=ri(1,9); b=ri(1,9); }
   return {tag:"比与比例", text:`化简比：${a*g} : ${b*g} = <span class="blank">?</span>`,
-    options:strOptions(`${a}:${b}`,[`${b}:${a}`,`${a*g}:${b}`,`${a}:${b*g}`,`${a+1}:${b}`,`${a}:${b+1}`,`${a*2}:${b*2}`,`${a+1}:${b+1}`]), answer:`${a}:${b}`};
+    options:strOptions(`${a}:${b}`,[`${b}:${a}`,`${a*g}:${b}`,`${a}:${b*g}`,`${a+1}:${b}`,`${a}:${b+1}`,`${a*2}:${b*2}`,`${a+1}:${b+1}`]), answer:`${a}:${b}`, sol:`化简比：前项和后项同时除以它们的最大公因数。\n${a*g} 和 ${b*g} 的最大公因数是 ${g}：\n${a*g} ÷ ${g} = ${a}，${b*g} ÷ ${g} = ${b}。\n所以 ${a*g} : ${b*g} = ${a} : ${b}。`};
 }
 function genCircle(){
   const r=ri(1,10);
   if(Math.random()<.5){ const c=Math.round(2*3.14*r*100)/100;
     return {tag:"圆的世界", text:`半径 ${r} 厘米的圆，周长是多少厘米？（π取3.14）`,
-      options:strOptions(String(c),[String(Math.round(3.14*r*100)/100),String(Math.round(3.14*r*r*100)/100),String(c+3.14),String(2*r)]), answer:String(c)}; }
+      options:strOptions(String(c),[String(Math.round(3.14*r*100)/100),String(Math.round(3.14*r*r*100)/100),String(c+3.14),String(2*r)]), answer:String(c), sol:`圆的周长公式：C = 2 × π × 半径。\nC = 2 × 3.14 × ${r} = ${c}（厘米）。\n所以周长是 ${c} 厘米。`}; }
   const s=Math.round(3.14*r*r*100)/100;
   return {tag:"圆的世界", text:`半径 ${r} 厘米的圆，面积是多少平方厘米？（π取3.14）`,
-    options:strOptions(String(s),[String(Math.round(2*3.14*r*100)/100),String(Math.round(3.14*r*100)/100),String(s+3.14),String(r*r)]), answer:String(s)};
+    options:strOptions(String(s),[String(Math.round(2*3.14*r*100)/100),String(Math.round(3.14*r*100)/100),String(s+3.14),String(r*r)]), answer:String(s), sol:`圆的面积公式：S = π × 半径 × 半径。\nS = 3.14 × ${r} × ${r} = ${s}（平方厘米）。\n所以面积是 ${s} 平方厘米。`};
 }
 function genWP3(){
   const t = ri(0,4);
   if(t===0){ const a=ri(12,48), b=ri(11,29);
-    return {tag:"应用题进阶", text:`果园有 ${a} 行果树，每行 ${b} 棵，一共有多少棵？`, options:numOptions(a*b,30), answer:String(a*b)}; }
+    return {tag:"应用题进阶", text:`果园有 ${a} 行果树，每行 ${b} 棵，一共有多少棵？`, options:numOptions(a*b,30), answer:String(a*b), sol:`每行 ${b} 棵，共 ${a} 行，求总数用乘法。\n${a} × ${b} = ${a*b}（棵）。\n所以一共有 ${a*b} 棵。`}; }
   if(t===1){ const v=ri(40,90), h=ri(2,6);
-    return {tag:"应用题进阶", text:`汽车每小时行 ${v} 千米，${h} 小时行多少千米？`, options:numOptions(v*h,30), answer:String(v*h)}; }
+    return {tag:"应用题进阶", text:`汽车每小时行 ${v} 千米，${h} 小时行多少千米？`, options:numOptions(v*h,30), answer:String(v*h), sol:`路程 = 速度 × 时间。\n${v} × ${h} = ${v*h}（千米）。\n所以行了 ${v*h} 千米。`}; }
   if(t===2){ const q=ri(12,60), c=ri(3,9);
-    return {tag:"应用题进阶", text:`${q*c} 个苹果平均装进 ${c} 个箱子，每箱装多少个？`, options:numOptions(q,8), answer:String(q)}; }
+    return {tag:"应用题进阶", text:`${q*c} 个苹果平均装进 ${c} 个箱子，每箱装多少个？`, options:numOptions(q,8), answer:String(q), sol:`「平均装」用除法：总数 ÷ 份数 = 每份。\n${q*c} ÷ ${c} = ${q}（个）。\n所以每箱装 ${q} 个。`}; }
   if(t===3){ const a=ri(20,60), b=ri(2,9), tot=a*b, c=ri(10, Math.max(11, tot-10));
-    return {tag:"应用题进阶", text:`每盒 ${b} 支铅笔，买了 ${a} 盒，送出 ${c} 支后还剩多少支？`, options:numOptions(tot-c,20), answer:String(tot-c)}; }
+    return {tag:"应用题进阶", text:`每盒 ${b} 支铅笔，买了 ${a} 盒，送出 ${c} 支后还剩多少支？`, options:numOptions(tot-c,20), answer:String(tot-c), sol:`两步走：先算总数，再减去送出的。\n第一步：${a} 盒 × ${b} 支 = ${tot} 支。\n第二步：${tot} − ${c} = ${tot-c} 支。\n所以还剩 ${tot-c} 支。`}; }
   const p=ri(3,18), n=ri(12,40);
-  return {tag:"应用题进阶", text:`一支钢笔 ${p} 元，买 ${n} 支需要多少元？`, options:numOptions(p*n,25), answer:String(p*n)};
+  return {tag:"应用题进阶", text:`一支钢笔 ${p} 元，买 ${n} 支需要多少元？`, options:numOptions(p*n,25), answer:String(p*n), sol:`单价 × 数量 = 总价。\n${p} × ${n} = ${p*n}（元）。\n所以需要 ${p*n} 元。`};
 }
 const OLY2 = [
   {tag:"奥数 · 鸡兔同笼", text:"鸡和兔关在一个笼子里，共有8个头、26只脚，兔有几只？", options:["5只","3只","4只","6只"], answer:"5只"},
@@ -2800,6 +2811,8 @@ function buildQuestions(level){
   // 盖上知识点+学科标签（来自关卡），供错题分类/掌握率/薄弱点分析使用
   if(level.kp) out.forEach(q=>{ if(!q.kp) q.kp = level.kp; });
   if(level.subj) out.forEach(q=>{ if(!q.subj) q.subj = level.subj; });
+  // 附带分步解析（答案怎么来的），供错题本和复习显示
+  out.forEach(q=>{ if(!q.sol){ const s = explainAnswer(q); if(s) q.sol = s; } });
   return out;
 }
 function startLevel(id){
@@ -3222,6 +3235,7 @@ function addToWrong(q){
   if(ex){ srsReschedule(ex, false); saveState(); return; }   // 已在本中：答错→重置复习计划
   p.wrong.push({key:k, tag:q.tag, text:q.text, options:q.options, answer:q.answer,
     emoji:q.emoji||"", passage:q.passage||"", say:q.say||"", subj:q.subj||currentSubject, kp:q.kp||"",
+    sol:q.sol||explainAnswer(q)||"",
     stage:0, due:dayIndex()+SRS_INTERVALS[0]});
   if(p.wrong.length>100) p.wrong = p.wrong.slice(-100);
   saveState();
@@ -3299,6 +3313,116 @@ const KP_TIPS = {
 function kpTip(kp){ return KP_TIPS[kp] || "仔细读题，想清楚这道题考的是什么，再作答。回看课本上这部分的例子会很有帮助。"; }
 const SUBJ_NAME = {math:"数学", chinese:"语文", english:"英语", review:"复习", kepu:"科普"};
 
+/* ===== 针对"这一道题"的分步解析：答案是怎么一步步算出来的 ===== */
+function explainAnswer(q){
+  if(!q) return "";
+  if(q.sol) return q.sol;   // 出题时已附带解析则优先用
+  let t = String(q.text||"").replace(/<[^>]+>/g,"").replace(/＝/g,"=").replace(/\s+/g,"");
+  // a 的 k 倍
+  let m = t.match(/^(\d+)的(\d+)倍/);
+  if(m){ const a=+m[1], k=+m[2]; return `“${a} 的 ${k} 倍”就是 ${k} 个 ${a} 合起来，用乘法算：${a} × ${k} = ${a*k}。所以答案是 ${a*k}。`; }
+  // M 是 A 的几倍
+  m = t.match(/^(\d+)是(\d+)的几倍/);
+  if(m){ const M=+m[1], a=+m[2]; const r=Math.round(M/a); return `求“${M} 是 ${a} 的几倍”，用除法：${M} ÷ ${a} = ${r}。所以是 ${r} 倍。`; }
+  // 混合运算 a×b±c
+  m = t.match(/^(\d+)[×x*](\d+)([+\-−])(\d+)=/);
+  if(m){ const a=+m[1], b=+m[2], op=m[3], c=+m[4]; const ab=a*b; const r=(op==='+')?ab+c:ab-c;
+    return `要先算乘法、再算加减。\n第一步，算乘法：${a} × ${b} = ${ab}。\n第二步，${op==='+'?'加上':'减去'} ${c}：${ab} ${op==='+'?'+':'−'} ${c} = ${r}。\n所以答案是 ${r}。（口诀：先乘除，后加减）`; }
+  // 简单两数运算 A op B = ?
+  m = t.match(/^(\d+)([×x*÷\/+\-−])(\d+)=/);
+  if(m){
+    const a=+m[1], op=m[2], b=+m[3];
+    if(op==='×'||op==='x'||op==='*'){ const c=a*b;
+      if(a<=9 && b<=9) return `${a} × ${b} 表示“${b} 个 ${a} 相加”。用乘法口诀就能记住：${a} × ${b} = ${c}。所以答案是 ${c}。`;
+      return `${a} × ${b}：可以一位一位地乘再相加（竖式），一步步算完得到 ${c}。所以答案是 ${c}。`;
+    }
+    if(op==='÷'||op==='/'){ const r=a/b;
+      return `${a} ÷ ${b}：可以想“${b} 乘几等于 ${a}”。因为 ${b} × ${r} = ${a}，所以 ${a} ÷ ${b} = ${r}。答案是 ${r}。`;
+    }
+    if(op==='+'){ const c=a+b; const carry=(a%10)+(b%10)>=10;
+      return `${a} + ${b}：从个位开始加。\n个位：${a%10} + ${b%10} = ${a%10+b%10}${carry?'，满十，向前一位进 1':''}。\n再把前面的数位加好，合起来就是 ${c}。所以答案是 ${c}。`;
+    }
+    if(op==='−'||op==='-'){ const c=a-b; const borrow=(a%10)<(b%10);
+      return `${a} − ${b}：从个位开始减。\n个位：${borrow?`${a%10} 不够减 ${b%10}，先向前一位借 1，变成 ${a%10+10} − ${b%10} = ${a%10+10-b%10}`:`${a%10} − ${b%10} = ${a%10-b%10}`}。\n再把前面的数位减好，合起来就是 ${c}。所以答案是 ${c}。`;
+    }
+  }
+  return "";   // 无法解析的（如分数/小数/应用题）交给知识点方法讲解
+}
+// 错题的解析：优先用本题分步解析，没有就用知识点方法
+function wrongSolution(w){
+  const s = explainAnswer(w);
+  if(s) return s;
+  return "正确答案是「" + (w.answer||"") + "」。" + kpTip(w.kp||"");
+}
+
+/* ===== 分步解析：针对这一道题，把答案怎么来的一步步讲清楚 ===== */
+function cleanMathText(html){
+  return String(html||"").replace(/<[^>]+>/g,"").replace(/&nbsp;/g," ").replace(/\s+/g," ").trim();
+}
+function explainQuestion(q){
+  // 优先用题目自带的分步解析（在生成器里写好的，最精准）
+  if(q && q.sol) return q.sol;
+  const ans = (q.answer!=null) ? String(q.answer) : "";
+  const t = cleanMathText(q.text);
+  let m;
+  // 混合运算 a × b + c = ?
+  m = t.match(/^(\d+)\s*[×x*]\s*(\d+)\s*\+\s*(\d+)\s*=/);
+  if(m){ const a=+m[1],b=+m[2],c=+m[3];
+    return `这是混合运算，要先算乘法、再算加法。\n第一步：先算 ${a}×${b}=${a*b}。\n第二步：再加上 ${c}，${a*b}+${c}=${a*b+c}。\n所以答案是 ${a*b+c}。`; }
+  // 乘法 a × b = ?
+  m = t.match(/^(\d+)\s*[×x*]\s*(\d+)\s*=/);
+  if(m){ const a=+m[1],b=+m[2],c=a*b;
+    let s = `${a}×${b} 的意思是「${b} 个 ${a} 相加」。\n`;
+    if(b<=6){ s += `就是 ${Array(b).fill(a).join("+")}=${c}。\n`; }
+    s += `背乘法口诀会更快：${cnNum(a)}${cnNum(b)}${cnMul(c)}。\n所以答案是 ${c}。`;
+    return s; }
+  // 除法 c ÷ a = ?
+  m = t.match(/^(\d+)\s*[÷\/]\s*(\d+)\s*=/);
+  if(m){ const c=+m[1],a=+m[2]; if(a!==0 && c%a===0){ const b=c/a;
+    return `${c}÷${a} 的意思是「把 ${c} 平均分成 ${a} 份，每份是多少」。\n可以反过来想乘法：${a} 乘几等于 ${c}？因为 ${a}×${b}=${c}，所以每份是 ${b}。\n答案是 ${b}。`; } }
+  // 凑十 a + ? = 10  或  ? + a = 10
+  m = t.match(/(\d+)\s*\+\s*\?\s*=\s*10/) || t.match(/\?\s*\+\s*(\d+)\s*=\s*10/);
+  if(m){ const a=+m[1], need=10-a;
+    return `这是「凑十」：想一想 ${a} 再加上几就正好等于 10。\n因为 ${a}+${need}=10，所以括号里填 ${need}。\n小技巧：1和9、2和8、3和7、4和6、5和5，都是凑十好朋友。`; }
+  // 加法 a + b = ?
+  m = t.match(/^(\d+)\s*\+\s*(\d+)\s*=/);
+  if(m){ const a=+m[1],b=+m[2],c=a+b;
+    const big=Math.max(a,b), small=Math.min(a,b);
+    if(a<20 && b<20 && (a%10)+(b%10)>=10 && big%10!==0){
+      const need=10-(big%10);
+      if(need<=small){
+        return `个位相加超过 10，用「凑十法」更稳：\n第一步：${big} 再加 ${need} 就凑成整十 ${big+need}（把 ${small} 拆成 ${need} 和 ${small-need}）。\n第二步：${big+need}+${small-need}=${c}。\n所以答案是 ${c}。`;
+      }
+    }
+    return `把两个数合起来：${a}+${b}=${c}。\n可以先凑成整十再加会更快。\n所以答案是 ${c}。`; }
+  // 减法 a − b = ?
+  m = t.match(/^(\d+)\s*[−\-]\s*(\d+)\s*=/);
+  if(m){ const a=+m[1],b=+m[2],c=a-b;
+    if(a<=20 && (a%10)<(b%10) && a>10){
+      return `个位不够减，用「破十法」：\n第一步：先把 ${a} 看成 10 和 ${a-10}。\n第二步：用 10 减 ${b} 得 ${10-b}，再加上 ${a-10}，${10-b}+${a-10}=${c}。\n所以答案是 ${c}。`;
+    }
+    return `从 ${a} 里去掉 ${b}，还剩 ${c}。\n所以答案是 ${c}。`; }
+  // 比大小：a 和 b，哪个数更大/更小？
+  m = t.match(/(\d+)\s*和\s*(\d+).*哪个数更?(大|小)/);
+  if(m){ const a=+m[1],b=+m[2],big=Math.max(a,b),sml=Math.min(a,b);
+    return `比较 ${a} 和 ${b} 的大小。\n比大小先看位数，位数一样就从最高位一位一位地比。\n${big} 比 ${sml} 大，写成 ${big} > ${sml}。\n所以${m[3]==="大"?`更大的是 ${big}`:`更小的是 ${sml}`}。`; }
+  // 长方形/正方形周长
+  m = t.match(/长\s*(\d+).*宽\s*(\d+).*周长/);
+  if(m){ const a=+m[1],b=+m[2]; return `长方形周长 =（长 + 宽）× 2。\n（${a}+${b}）×2 = ${a+b}×2 = ${(a+b)*2}（厘米）。\n所以答案是 ${(a+b)*2}。`; }
+  m = t.match(/边长\s*(\d+).*正方形.*周长|边长\s*(\d+).*周长/);
+  if(m){ const a=+(m[1]||m[2]); return `正方形四条边一样长，周长 = 边长 × 4。\n${a}×4 = ${a*4}（厘米）。\n所以答案是 ${a*4}。`; }
+  // 数一数
+  if(/数一数|一共有几个/.test(t) && q.emoji){ const n=Array.from(q.emoji).length;
+    return `数一数上面的图案，一个一个地点，不重复、不漏数，一共有 ${n} 个。\n所以答案是 ${n}。`; }
+  // 兜底：知识点方法 + 正确答案
+  const tip = q.kp ? kpTip(q.kp) : "";
+  return (ans?`正确答案是「${ans}」。\n`:"") + (tip||"想一想这道题考的是什么，回看课本上的例子会很有帮助。");
+}
+// 乘法口诀辅助（一~九 + 得数）
+function cnNum(n){ return ["零","一","二","三","四","五","六","七","八","九"][n] || String(n); }
+function cnMul(c){ // 口诀里得数：小于10用"得X"，否则直接说数字
+  return c<10 ? ("得"+cnNum(c)) : String(c); }
+
 function srsDots(w){
   const total = SRS_INTERVALS.length, done = w.stage||0;
   const t = dayIndex(), isDue = (w.due==null?t:w.due) <= t;
@@ -3332,14 +3456,27 @@ function openWrong(){
       (groups[key] || (groups[key]={subj, kp, items:[]})).items.push(w);
     });
     const arr = Object.values(groups).sort((a,b)=>b.items.length-a.items.length);
+    window.__wrongMap = {};   // 存放每条错题，AI解析时按 gi-ii 取
     $("wr-list").innerHTML = arr.map((g,gi)=>{
       const sn = SUBJ_NAME[g.subj] || "";
       const canDrill = g.kp!=="未分类" && g.subj && LEVELS[g.subj] && LEVELS[g.subj].some(l=>l.kp===g.kp && !l.type);
-      const items = g.items.slice().sort((a,b)=>(a.due||0)-(b.due||0)).map(w=>
-        `<div class="wrong-item"><span class="wtag">${w.tag||'题目'}</span>
+      const items = g.items.slice().sort((a,b)=>(a.due||0)-(b.due||0)).map((w,ii)=>{
+        window.__wrongMap[gi+"-"+ii] = w;
+        // 本地能讲清楚的（生成型题带sol或正则能匹配）：直接渲染
+        // 其它（题库题）：先显示提示，点按钮再调AI
+        const localSol = (w.sol && w.sol.length>10) ? w.sol : "";
+        const initial = localSol
+          ? localSol
+          : `<div class="ai-hint">这道题需要 AI 帮忙详细讲解，点上面的按钮试试看～</div>`;
+        return `<div class="wrong-item"><span class="wtag">${w.tag||'题目'}</span>
          <div class="wq">${w.emoji?w.emoji+' ':''}${(w.passage?('<div style="font-size:15px;color:var(--ink-soft);margin-bottom:5px">'+w.passage+'</div>'):'')}${w.text}</div>
          <div class="wa">✓ 正确答案：${w.answer}</div>
-         <div class="srs-dots">${srsDots(w)}</div></div>`).join("");
+         ${localSol
+           ? `<button class="wsol-btn" onclick="toggleSol(${gi},${ii})">📝 答案是怎么来的</button>`
+           : `<button class="wsol-btn ai" onclick="askAIExplain(${gi},${ii})">🤖 让 AI 讲讲答案怎么来的</button>`}
+         <div class="wsol hidden" id="sol-${gi}-${ii}">${initial}</div>
+         <div class="srs-dots">${srsDots(w)}</div></div>`;
+      }).join("");
       return `<div class="kp-group">
         <div class="kp-head"><span class="kp-name">${sn?sn+'·':''}${g.kp}</span><span class="kp-cnt">${g.items.length} 道</span></div>
         <div class="kp-tools">
@@ -3357,6 +3494,67 @@ function openWrong(){
   show("page-wrong");
 }
 function toggleKpTip(gi){ $("kptip-"+gi).classList.toggle("hidden"); }
+function toggleSol(gi,ii){ $("sol-"+gi+"-"+ii).classList.toggle("hidden"); }
+
+/* ===== AI 智能解析（题库题用，前端通过后台中转，结果本地+云端双缓存）===== */
+const AI_EXPLAIN_URL = "https://ghxwzqaxifumxiuimcvz.supabase.co/functions/v1/xxly_explain";
+const AI_EXPLAIN_ANON = "sb_publishable_f3gUm3FRy0424pTwua-DUA_y1PImumD";
+function aiExplainCacheKey(w){
+  return "xxly-aiexp:" + (w.text||"") + "|" + (w.answer||"") + "|" + (w.kp||"");
+}
+function getAIExplainCache(w){
+  try{ return localStorage.getItem(aiExplainCacheKey(w)) || ""; }catch(e){ return ""; }
+}
+function setAIExplainCache(w, txt){
+  try{ localStorage.setItem(aiExplainCacheKey(w), txt); }catch(e){}
+}
+function ensureDeviceId(){
+  let id = "";
+  try{ id = localStorage.getItem("xxly-device-id")||""; if(!id){ id = "dev_" + Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem("xxly-device-id", id); } }catch(e){}
+  return id;
+}
+async function askAIExplain(gi, ii){
+  const w = window.__wrongMap[gi+"-"+ii]; if(!w) return;
+  const box = $("sol-"+gi+"-"+ii); box.classList.remove("hidden");
+  // 1) 本地缓存
+  const cached = getAIExplainCache(w);
+  if(cached){ box.innerHTML = renderAIText(cached); return; }
+  // 2) 显示加载状态
+  box.innerHTML = `<div class="ai-loading"><span class="ai-spin"></span>AI 正在思考这道题，请稍等几秒…</div>`;
+  // 3) 调用后台
+  try{
+    const headers = { "Content-Type":"application/json", "apikey": AI_EXPLAIN_ANON };
+    const s = isLoggedIn() && getUserSession();
+    if(s && s.access_token) headers["Authorization"] = "Bearer " + s.access_token;
+    const resp = await fetch(AI_EXPLAIN_URL, {
+      method:"POST", headers,
+      body: JSON.stringify({
+        text: cleanMathText(w.text), answer: String(w.answer||""),
+        kp: w.kp||"", subj: w.subj||"", grade: P().grade,
+        device_id: ensureDeviceId()
+      })
+    });
+    const data = await resp.json().catch(()=>({}));
+    if(resp.ok && data.explanation){
+      setAIExplainCache(w, data.explanation);
+      box.innerHTML = renderAIText(data.explanation) + (data.cached?`<div class="ai-tag">📚 来自其他孩子已查询过的答案</div>`:`<div class="ai-tag">🤖 AI 刚刚为你生成</div>`);
+    }else if(resp.status===429){
+      box.innerHTML = `<div class="ai-err">${data.message||"今天的 AI 解析次数到上限啦，明天再试。"}</div>` + fallbackExplainHTML(w);
+    }else{
+      box.innerHTML = `<div class="ai-err">${data.message||"AI 暂时无法解答这道题，稍后再试。"}</div>` + fallbackExplainHTML(w);
+    }
+  }catch(e){
+    box.innerHTML = `<div class="ai-err">网络连接失败，请检查网络后重试。</div>` + fallbackExplainHTML(w);
+  }
+}
+function renderAIText(s){
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\n/g,"<br>");
+}
+function fallbackExplainHTML(w){
+  const ans = w.answer||"";
+  const tip = w.kp ? kpTip(w.kp) : "";
+  return `<div class="ai-fb">${ans?`正确答案是「${ans}」。<br>`:""}${tip||"想一想这道题考的是什么，回看课本上的例子会很有帮助。"}</div>`;
+}
 function startKpDrill(subj, kp){
   const g = P().grade;
   let lv = (LEVELS[subj]||[]).find(l=>l.kp===kp && !l.type && l.grades.includes(g))
