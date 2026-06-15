@@ -347,6 +347,15 @@
   /* 账号入口（天蓝） */
   .account-entry{display:flex;align-items:center;gap:13px;width:100%;border:none;cursor:pointer;font-family:inherit;text-align:left;
     border-radius:20px;padding:15px 17px;margin-bottom:16px;color:#fff;background:linear-gradient(135deg,#5BB8F5,#3E8FD6);box-shadow:0 6px 0 rgba(0,0,0,.08);transition:transform .08s}
+  /* 建档页提示条：警示色 + 引导登录 */
+  .acclogin-hint{display:flex;align-items:center;gap:13px;width:100%;border:none;cursor:pointer;font-family:inherit;text-align:left;
+    border-radius:20px;padding:15px 17px;margin-bottom:16px;color:#fff;background:linear-gradient(135deg,#FF9A56,#FF6B5E);box-shadow:0 6px 0 rgba(0,0,0,.08);transition:transform .08s}
+  .acclogin-hint:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(0,0,0,.08)}
+  .acclogin-hint .ah-ic{font-size:37px;flex:none}
+  .acclogin-hint .ah-tx{flex:1;display:flex;flex-direction:column;line-height:1.5}
+  .acclogin-hint .ah-tx b{font-size:18px;font-weight:900}
+  .acclogin-hint .ah-tx span{font-size:14px;opacity:.95}
+  .acclogin-hint .ah-go{font-size:15px;font-weight:800;flex:none;background:rgba(255,255,255,.25);border-radius:999px;padding:6px 12px}
   .account-entry:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(0,0,0,.08)}
   .account-entry .wg-ic{font-size:35px;flex:none}
   .account-entry .wg-tx{flex:1;display:flex;flex-direction:column}
@@ -546,6 +555,8 @@
   .wel-cta:active{transform:translateY(3px);box-shadow:0 3px 0 #E8A800}
   .wel-cta .arr{margin-left:6px}
   .wel-cta-sub{position:relative;color:#fff;font-size:14px;opacity:.92;margin-top:12px;line-height:1.7}
+  .wel-already{position:relative;display:block;margin:8px auto 0;background:transparent;border:none;color:#fff;font-family:inherit;font-size:15px;cursor:pointer;opacity:.95;padding:6px 10px}
+  .wel-already u{text-decoration:underline}
   /* 数据信任条 */
   .wel-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:16px 10px;margin-bottom:18px}
   .wel-stats .ws-item{text-align:center}
@@ -613,6 +624,7 @@
       <div class="sub">幼小衔接到六年级，一个让孩子<b>爱上学习</b>的乐园<br>边玩边学 · 集星星 · 交伙伴，每天进步一点点</div>
       <button class="wel-cta" onclick="enterApp()">🚀 免费开始学习<span class="arr">→</span></button>
       <div class="wel-cta-sub">✓ 打开即用，无需注册　✓ 想换设备同步进度再登录</div>
+      <button class="wel-already" onclick="enterAppAndLogin()">已经有账号？<u>立即登录找回进度 →</u></button>
     </div>
 
     <div class="wel-stats">
@@ -689,6 +701,11 @@
       <button class="back-btn" id="su-back" onclick="goHome()">←</button>
       <div class="page-title">我们家的小学霸 👨‍👩‍👦‍👦</div>
     </div>
+    <button id="su-login-hint" class="acclogin-hint hidden" onclick="openAccount()">
+      <span class="ah-ic">☁️</span>
+      <span class="ah-tx"><b>已经有账号？立即登录找回进度</b><span>之前注册过的话，登录就能把孩子的星星、错题、勋章都同步回来</span></span>
+      <span class="ah-go">登录 →</span>
+    </button>
     <div id="su-list" style="margin-bottom:16px"></div>
     <div class="card">
       <div style="font-weight:800;font-size:20px">➕ 添加小朋友</div>
@@ -3978,6 +3995,12 @@ async function aiAnalyze(){
 let suAvatar = AVATARS[0], suGrade = 0;
 function openSetup(first){
   $("su-back").style.visibility = (state.profiles.length===0) ? "hidden" : "visible";
+  // 第一次进入(新设备/无档案) 且 未登录 → 显示"已有账号去登录"醒目提示
+  const hint = $("su-login-hint");
+  if(hint){
+    if(first && !isLoggedIn() && state.profiles.length===0) hint.classList.remove("hidden");
+    else hint.classList.add("hidden");
+  }
   suAvatar = AVATARS[0]; suGrade = 0;
   $("su-avatars").innerHTML = AVATARS.map(a=>
     `<button class="avatar-pick ${a===suAvatar?'sel':''}" onclick="pickAvatar('${a}')">${a}</button>`).join("");
@@ -4160,22 +4183,53 @@ async function cloudPushNow(){
 }
 
 // 登录后：合并本地与云端（按更新时间取较新者）
+// 衡量一份进度的"真实学习量"，避免空白档案因时间戳新而覆盖云端
+function progressWeight(s){
+  if(!s || !Array.isArray(s.profiles) || s.profiles.length===0) return 0;
+  let w = 0;
+  for(const p of s.profiles){
+    const stars = (p.stars && (p.stars.math||0)+(p.stars.chinese||0)+(p.stars.english||0)+(p.stars.kepu||0)+(p.stars.sport||0)+(p.stars.labor||0)) || 0;
+    const logs = (p.log && p.log.length) || 0;
+    const wrongs = (p.wrong && p.wrong.length) || 0;
+    w += stars + logs*2 + wrongs;   // 学习记录权重更高
+  }
+  return w;
+}
 async function syncAfterAuth(){
   const local = readLocalState();
   let cloud = null;
   try{ cloud = await cloudFetch(); }catch(e){}
-  if(cloud && cloud.data && cloud.data.profiles){
-    const cloudUpd = cloud.data.updatedAt || Date.parse(cloud.updated_at) || 0;
-    const localUpd = (local && local.updatedAt) || 0;
-    if(local && local.profiles && local.profiles.length && localUpd > cloudUpd){
-      applyState(local); saveStateLocalOnly(); cloudPushNow();   // 本地更新，推到云端
+
+  const localW = progressWeight(local);
+  const cloudHas = !!(cloud && cloud.data && cloud.data.profiles && cloud.data.profiles.length);
+  const cloudW = cloudHas ? progressWeight(cloud.data) : 0;
+
+  if(cloudHas){
+    // 云端有进度
+    if(localW === 0){
+      // 本地空白（新设备）→ 无条件用云端，绝不推送，避免空档覆盖
+      applyState(cloud.data); saveStateLocalOnly();
+    }else if(cloudW > localW){
+      // 云端进度比本地更丰富 → 用云端（保护多花精力的那份）
+      applyState(cloud.data); saveStateLocalOnly();
+    }else if(localW > cloudW){
+      // 本地确实比云端更丰富 → 用本地并推送到云端
+      applyState(local); saveStateLocalOnly(); cloudPushNow();
     }else{
-      applyState(cloud.data); saveStateLocalOnly();               // 用云端
+      // 进度量相同 → 比时间戳，新的为准（一般是同一台设备多次同步的情况）
+      const cloudUpd = cloud.data.updatedAt || Date.parse(cloud.updated_at) || 0;
+      const localUpd = (local && local.updatedAt) || 0;
+      if(localUpd > cloudUpd){ applyState(local); saveStateLocalOnly(); cloudPushNow(); }
+      else { applyState(cloud.data); saveStateLocalOnly(); }
     }
   }else{
-    // 云端还没有数据：把本地进度上传
-    if(local && local.profiles) applyState(local); else applyState({active:0,profiles:[]});
-    saveStateLocalOnly(); cloudPushNow();
+    // 云端还没有数据
+    if(local && local.profiles && local.profiles.length){
+      // 本地有档案（哪怕只是刚建的空白档），上传到云端作为第一次同步
+      applyState(local); saveStateLocalOnly(); cloudPushNow();
+    }else{
+      applyState({active:0,profiles:[]}); saveStateLocalOnly();
+    }
   }
 }
 function saveStateLocalOnly(){
@@ -4190,6 +4244,15 @@ function enterApp(){
   }else{
     loadState();
   }
+}
+function enterAppAndLogin(){
+  try{ window.speechSynthesis && window.speechSynthesis.getVoices(); }catch(e){}
+  xxlyInit();
+  if(isLoggedIn()){ bootWithCloud(); return; }
+  // 直接进登录页，不建档、不进首页（避免误建空白档覆盖云端）
+  if(!state || !state.profiles) state = { active:0, profiles:[] };
+  memoryOnly = false;
+  openAccount();
 }
 async function bootWithCloud(){
   try{ await syncAfterAuth(); }
