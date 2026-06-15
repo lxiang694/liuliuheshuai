@@ -248,9 +248,9 @@ function showDash(){ document.getElementById("gate").style.display = "none"; doc
 
 function render(d){
   d = d || {};
-  const now = new Date();
+  const now = new Date(Date.now() + (new Date().getTimezoneOffset()*60000) + 8*3600*1000); // 北京时间
   document.getElementById("updated").textContent = "更新于 " + (now.getMonth()+1) + "月" + now.getDate() + "日 " +
-    String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0");
+    String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0") + "（北京时间）";
 
   const rc = document.getElementById("rolechip");
   if(d.role){ rc.textContent = d.role==="admin" ? "管理员" : "只读"; rc.style.display = "inline-block"; }
@@ -335,6 +335,18 @@ async function loadUsers(){
   }catch(e){ box.innerHTML = '<div class="empty">网络连接失败，请重试</div>'; }
 }
 
+// 把 Supabase 返回的 UTC 时间转换为中国时间(UTC+8)显示，不依赖浏览器所在时区
+function cnTime(s, withTime){
+  if(!s) return s;
+  let iso = String(s).trim().replace(" ", "T");
+  if(!/[zZ]|[+-]\d\d:?\d\d$/.test(iso)) iso += "Z";   // 无时区信息视为 UTC
+  const d = new Date(iso);
+  if(isNaN(d.getTime())) return s;
+  const p = n => String(n).padStart(2,"0");
+  const t = new Date(d.getTime() + 8*3600*1000);      // 加 8 小时换算为北京时间
+  const date = t.getUTCFullYear()+"-"+p(t.getUTCMonth()+1)+"-"+p(t.getUTCDate());
+  return withTime ? (date+" "+p(t.getUTCHours())+":"+p(t.getUTCMinutes())) : date;
+}
 function renderUsers(list){
   const box = document.getElementById("user-list");
   if(!list.length){ box.innerHTML = '<div class="empty">还没有注册用户</div>'; return; }
@@ -343,7 +355,7 @@ function renderUsers(list){
   h += list.map(u=>{
     const sync = u.has_progress ? '✅ 已同步' : '—';
     const op = isAdmin ? `<td><button class="btn-mini" onclick="resetPwd('${u.user_id}','${u.phone_mask}')">重置密码</button></td>` : '';
-    return `<tr><td>${u.phone_mask||'-'}</td><td>${u.created_at||'-'}</td><td>${u.last_sign_in||'未登录'}</td><td>${sync}</td>${op}</tr>`;
+    return `<tr><td>${u.phone_mask||'-'}</td><td>${cnTime(u.created_at)||'-'}</td><td>${u.last_sign_in?cnTime(u.last_sign_in,true):'未登录'}</td><td>${sync}</td>${op}</tr>`;
   }).join("");
   h += `</tbody></table><div class="sub" style="margin-top:8px">共 ${list.length} 个注册账号</div>`;
   box.innerHTML = h;
