@@ -72,6 +72,11 @@
   .empty{text-align:center;color:var(--muted);font-size:13.5px;padding:24px 10px;line-height:1.8}
   .foot{text-align:center;color:var(--muted);font-size:11.5px;margin-top:26px;line-height:1.8}
   .loading{text-align:center;color:var(--muted);padding:40px;font-size:14px}
+  .utable{width:100%;border-collapse:collapse;font-size:13px}
+  .utable th{text-align:left;color:var(--muted);font-weight:700;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+  .utable td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--ink)}
+  .utable tr:last-child td{border-bottom:none}
+  .btn-mini{background:var(--coral,#FF7E67);color:#fff;border:none;border-radius:9px;padding:7px 12px;cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:700}
   .rolechip{font-size:11px;font-weight:800;color:#3A2A00;background:var(--gold);border-radius:999px;padding:2px 9px;margin-left:8px;vertical-align:middle}
 
   @media (max-width:560px){
@@ -249,6 +254,7 @@ function render(d){
 
   const rc = document.getElementById("rolechip");
   if(d.role){ rc.textContent = d.role==="admin" ? "管理员" : "只读"; rc.style.display = "inline-block"; }
+  window.__role = d.role || "";
 
   const daily = d.daily || [], features = d.features || [], grades = d.grades || [];
 
@@ -257,6 +263,19 @@ function render(d){
     <div class="stat sky"><div class="n">${d.dau_today||0}</div><div class="l">今日活跃</div></div>
     <div class="stat coral"><div class="n">${d.dau_7d||0}</div><div class="l">近 7 天活跃</div></div>
     <div class="stat grass"><div class="n">${d.new_users_7d||0}</div><div class="l">近 7 天新增</div></div>
+  </div>`;
+
+  // 账号概况（注册登录功能的使用情况）
+  const reg = d.registered_users||0, dev = d.total_users||0;
+  const conv = dev ? Math.round(reg/dev*100) : 0;
+  html += `<div class="panel"><h2>账号概况</h2><div class="sub">注册登录（手机号+密码）功能的使用情况</div>
+    <div class="stat-grid">
+      <div class="stat sky"><div class="n">${reg}</div><div class="l">注册账号数</div></div>
+      <div class="stat grass"><div class="n">${d.synced_accounts||0}</div><div class="l">已开启云端同步</div></div>
+      <div class="stat gold"><div class="n">${d.reg_7d||0}</div><div class="l">近 7 天新注册</div></div>
+      <div class="stat coral"><div class="n">${conv}%</div><div class="l">注册转化率</div></div>
+    </div>
+    <div class="sub" style="margin-top:10px">注册转化率 = 注册账号数 ÷ 累计设备数（多少用户最终选择了注册）</div>
   </div>`;
 
   html += `<div class="panel"><h2>每日活跃趋势</h2><div class="sub">最近 14 天，每天打开过的设备数</div>`;
@@ -291,7 +310,61 @@ function render(d){
   }else{ html += `<div class="empty">还没有年级数据</div>`; }
   html += `</div>`;
 
+  // 用户管理面板
+  html += `<div class="panel"><h2>用户管理</h2>
+    <div class="sub">查看注册用户；管理员可帮忘记密码的家长重置密码（重置后请把新密码告知家长本人）</div>
+    <button class="btn-ghost" onclick="loadUsers()">📋 加载用户列表</button>
+    <div id="user-list" style="margin-top:14px"></div>
+  </div>`;
+
   document.getElementById("content").innerHTML = html;
+}
+
+async function loadUsers(){
+  const box = document.getElementById("user-list");
+  box.innerHTML = '<div class="loading">正在加载用户…</div>';
+  try{
+    const s = getSession();
+    let res = await fetch(SB_URL + "/rest/v1/rpc/xxly_user_list", {
+      method:"POST", headers:{ "Content-Type":"application/json", "apikey":SB_KEY, "Authorization":"Bearer "+s.access_token }, body:"{}"
+    });
+    if(res.status===401){ if(await refreshToken()){ return loadUsers(); } }
+    if(!res.ok){ box.innerHTML = '<div class="empty">读取用户失败（可能无权限或网络不通）</div>'; return; }
+    const list = await res.json();
+    renderUsers(list||[]);
+  }catch(e){ box.innerHTML = '<div class="empty">网络连接失败，请重试</div>'; }
+}
+
+function renderUsers(list){
+  const box = document.getElementById("user-list");
+  if(!list.length){ box.innerHTML = '<div class="empty">还没有注册用户</div>'; return; }
+  const isAdmin = window.__role === "admin";
+  let h = `<table class="utable"><thead><tr><th>手机号</th><th>注册日期</th><th>最后登录</th><th>云端同步</th>${isAdmin?'<th>操作</th>':''}</tr></thead><tbody>`;
+  h += list.map(u=>{
+    const sync = u.has_progress ? '✅ 已同步' : '—';
+    const op = isAdmin ? `<td><button class="btn-mini" onclick="resetPwd('${u.user_id}','${u.phone_mask}')">重置密码</button></td>` : '';
+    return `<tr><td>${u.phone_mask||'-'}</td><td>${u.created_at||'-'}</td><td>${u.last_sign_in||'未登录'}</td><td>${sync}</td>${op}</tr>`;
+  }).join("");
+  h += `</tbody></table><div class="sub" style="margin-top:8px">共 ${list.length} 个注册账号</div>`;
+  box.innerHTML = h;
+}
+
+async function resetPwd(userId, phoneMask){
+  const np = prompt("为账号 "+phoneMask+" 设置新密码（至少 6 位）。\n重置后请把新密码当面或私信告知家长本人：");
+  if(np===null) return;
+  if(np.length < 6){ alert("密码至少 6 位"); return; }
+  if(!confirm("确认把 "+phoneMask+" 的密码重置为：\n"+np+"\n\n（重置后家长需用新密码登录）")) return;
+  try{
+    const s = getSession();
+    let res = await fetch(SB_URL + "/rest/v1/rpc/xxly_reset_password", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json", "apikey":SB_KEY, "Authorization":"Bearer "+s.access_token },
+      body: JSON.stringify({ target_user: userId, new_pw: np })
+    });
+    const data = await res.json().catch(()=>({}));
+    if(res.ok && data && data.ok){ alert("✅ 已重置成功！\n请把新密码告知 "+phoneMask+" 的家长：\n"+np); }
+    else{ alert("重置失败：" + ((data && (data.message||data.error)) || "可能无权限或网络问题")); }
+  }catch(e){ alert("网络连接失败，请重试"); }
 }
 </script>
 </body>

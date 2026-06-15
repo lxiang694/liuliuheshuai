@@ -115,7 +115,7 @@
   .level p{font-size:12.5px;color:var(--ink-soft);margin-top:2px}
   .level .best{margin-left:auto;font-size:12.5px;color:var(--sun-deep);font-weight:800;flex:none}
   .back-row{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-  .back-btn{border:none;background:#fff;border-radius:14px;width:42px;height:42px;font-size:20px;box-shadow:var(--shadow);cursor:pointer;color:var(--ink);flex:none}
+  .back-btn{border:none;background:#fff;border-radius:14px;width:46px;height:46px;font-size:21px;box-shadow:var(--shadow);cursor:pointer;color:var(--ink);flex:none}
   .page-title{font-size:20px;font-weight:800}
 
   /* 答题 */
@@ -195,6 +195,15 @@
 
   /* 错题本 / 报告 */
   .wrong-item{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:14px 16px;margin-bottom:11px}
+  .kp-group{margin-bottom:20px}
+  .kp-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
+  .kp-name{font-weight:900;font-size:16px;color:var(--ink)}
+  .kp-cnt{font-size:12px;color:#fff;background:var(--coral);border-radius:999px;padding:3px 10px;font-weight:800;flex:none}
+  .kp-tools{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+  .kp-tool{border:1.5px solid #E6E3D8;background:#fff;border-radius:12px;padding:8px 13px;font-family:inherit;font-size:13px;font-weight:800;color:var(--ink);cursor:pointer}
+  .kp-tool.drill{border-color:var(--sky);background:#EAF5FF;color:var(--sky-deep)}
+  .kp-tool:active{transform:scale(.97)}
+  .kp-tip{background:#FFF6E0;border-radius:13px;padding:11px 13px;font-size:13px;line-height:1.75;color:#6B5320;margin-bottom:10px}
   .wrong-item .wtag{font-size:11.5px;font-weight:800;color:var(--coral-deep);background:#FFEBE6;border-radius:999px;padding:3px 10px;display:inline-block;margin-bottom:7px}
   .wrong-item .wq{font-size:15px;font-weight:700;line-height:1.7}
   .wrong-item .wa{font-size:13.5px;color:var(--grass-deep);font-weight:800;margin-top:5px}
@@ -257,7 +266,151 @@
   .art-item .ai-num{font-size:16px;font-weight:900;width:38px;height:38px;border-radius:12px;background:#F5F1E6;display:flex;align-items:center;justify-content:center;flex:none;color:var(--ink-soft)}
   .art-item h4{font-size:16px;font-weight:800;flex:1}
   .art-item .ai-done{font-size:18px;flex:none}
+  /* 家长交流群入口 */
+  .wxgroup-entry{display:flex;align-items:center;gap:13px;width:100%;border:none;cursor:pointer;font-family:inherit;text-align:left;
+    border-radius:20px;padding:15px 17px;margin-bottom:16px;color:#fff;background:linear-gradient(135deg,#5BC47A,#3FA862);box-shadow:0 6px 0 rgba(0,0,0,.08);transition:transform .08s}
+  .wxgroup-entry:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(0,0,0,.08)}
+  .wxgroup-entry .wg-ic{font-size:30px;flex:none}
+  .wxgroup-entry .wg-tx{flex:1;display:flex;flex-direction:column}
+  .wxgroup-entry .wg-tx b{font-size:16px;font-weight:900}
+  .wxgroup-entry .wg-tx span{font-size:12px;opacity:.95}
+  .wxgroup-entry .wg-go{font-size:13px;font-weight:800;flex:none;background:rgba(255,255,255,.25);border-radius:999px;padding:6px 12px}
+  .wxg-mask{position:fixed;inset:0;background:rgba(20,24,40,.6);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:50;padding:24px}
+  .wxg-box{background:#fff;border-radius:24px;padding:26px 22px;max-width:340px;width:100%;text-align:center;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+  .wxg-close{position:absolute;top:14px;right:16px;border:none;background:#F0EDE4;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:14px;color:var(--ink-soft);font-family:inherit}
+  .wxg-title{font-size:19px;font-weight:900;margin-bottom:6px}
+  .wxg-sub{font-size:13px;color:var(--ink-soft);line-height:1.6;margin-bottom:16px}
+  .wxg-qr{width:220px;height:220px;border-radius:14px;border:1px solid #EEE9DC;display:block;margin:0 auto}
+  .wxg-tip{font-size:12.5px;color:var(--ink-soft);line-height:1.7;margin-top:14px}
+  /* 工具栏三列 */
+  .toolrow-3{grid-template-columns:1fr 1fr 1fr}
+  /* 成就页 */
+  .ach-h{font-size:16px;font-weight:900;margin-bottom:12px}
+  .ach-sub{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin-left:4px}
+  .ach-tip{font-size:12.5px;color:var(--ink-soft);line-height:1.7;margin-bottom:14px}
+  .cal-week{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:6px}
+  .cal-week span{text-align:center;font-size:11px;color:var(--ink-soft);font-weight:700}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+  .cal-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:11px;font-size:13px;font-weight:700;color:var(--ink-soft);background:#F7F3E9}
+  .cal-cell.empty{background:transparent}
+  .cal-cell.studied{background:linear-gradient(135deg,#FFD64D,#FFB300);color:#5A3E00}
+  .cal-cell.today{outline:3px solid var(--sky);outline-offset:-3px;color:var(--sky-deep)}
+  .cal-cell.studied.today{color:#5A3E00}
+  .cal-legend{margin-top:12px;font-size:12px;color:var(--ink-soft);display:flex;gap:16px;align-items:center}
+  .cal-legend .dot{display:inline-block;width:14px;height:14px;border-radius:5px;vertical-align:-2px;margin-right:4px}
+  .cal-legend .dot.studied{background:linear-gradient(135deg,#FFD64D,#FFB300)}
+  .cal-legend .dot.today{background:#fff;outline:2px solid var(--sky);outline-offset:-2px}
+  .badge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .badge{text-align:center;padding:14px 6px;border-radius:16px;background:#F7F3E9}
+  .badge.on{background:linear-gradient(160deg,#FFF6DC,#FFE9C2);box-shadow:0 3px 10px rgba(240,168,0,.18)}
+  .badge .b-emoji{font-size:34px;filter:grayscale(1) opacity(.4)}
+  .badge.on .b-emoji{filter:none}
+  .badge .b-name{font-size:12.5px;font-weight:800;margin-top:5px;color:var(--ink)}
+  .badge.off .b-name{color:var(--ink-soft)}
+  .badge .b-desc{font-size:10.5px;color:var(--ink-soft);margin-top:2px;line-height:1.4}
+  .cert-item{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#FFF6DC,#FFEFC9);border:1.5px solid #F0D69A;border-radius:16px;padding:13px 15px;margin-bottom:10px;cursor:pointer}
+  .cert-item .ci-ic{font-size:28px;flex:none}
+  .cert-item h4{font-size:15px;font-weight:900;color:#8A5A00}
+  .cert-item p{font-size:11.5px;color:#9A7A30;margin-top:2px}
+  .cert-empty{text-align:center;color:var(--ink-soft);font-size:13px;padding:18px 10px;line-height:1.8}
+  /* 奖状弹窗 */
+  .cert-paper{background:linear-gradient(160deg,#FFFDF6,#FFF4DA);border:3px solid #F0C96A;border-radius:22px;padding:30px 24px 24px;max-width:340px;width:100%;text-align:center;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+  .cert-paper::before{content:"";position:absolute;inset:8px;border:1.5px dashed #E0B860;border-radius:15px;pointer-events:none}
+  .cert-ribbon{font-size:48px}
+  .cert-title{font-size:23px;font-weight:900;color:#B57A00;margin:4px 0 16px;letter-spacing:2px}
+  .cert-to{font-size:13px;color:var(--ink-soft)}
+  .cert-name{font-size:26px;font-weight:900;color:var(--ink);margin:6px 0 12px}
+  .cert-body{font-size:14.5px;color:#6B5320;line-height:1.8;padding:0 6px}
+  .cert-foot{display:flex;justify-content:space-between;font-size:11.5px;color:#9A7A30;margin-top:20px;padding:0 4px;font-weight:700}
+  .cert-close{margin-top:18px;border:none;border-radius:14px;padding:12px 28px;background:linear-gradient(180deg,#FFD64D,#FFB300);color:#5A3E00;font-family:inherit;font-weight:800;font-size:15px;cursor:pointer}
+  @media (max-width:430px){ .badge-grid{grid-template-columns:repeat(3,1fr);gap:9px} .badge .b-emoji{font-size:30px} }
+  /* 打印入口（橙红，呼应护眼） */
+  .print-entry{display:flex;align-items:center;gap:13px;width:100%;border:none;cursor:pointer;font-family:inherit;text-align:left;
+    border-radius:20px;padding:15px 17px;margin-bottom:16px;color:#fff;background:linear-gradient(135deg,#FF9A56,#FF6B5E);box-shadow:0 6px 0 rgba(0,0,0,.08);transition:transform .08s}
+  .print-entry:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(0,0,0,.08)}
+  .print-entry .wg-ic{font-size:30px;flex:none}
+  .print-entry .wg-tx{flex:1;display:flex;flex-direction:column}
+  .print-entry .wg-tx b{font-size:16px;font-weight:900}
+  .print-entry .wg-tx span{font-size:12px;opacity:.95}
+  .print-entry .wg-go{font-size:13px;font-weight:800;flex:none;background:rgba(255,255,255,.25);border-radius:999px;padding:6px 12px}
+  /* 账号入口（天蓝） */
+  .account-entry{display:flex;align-items:center;gap:13px;width:100%;border:none;cursor:pointer;font-family:inherit;text-align:left;
+    border-radius:20px;padding:15px 17px;margin-bottom:16px;color:#fff;background:linear-gradient(135deg,#5BB8F5,#3E8FD6);box-shadow:0 6px 0 rgba(0,0,0,.08);transition:transform .08s}
+  .account-entry:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(0,0,0,.08)}
+  .account-entry .wg-ic{font-size:30px;flex:none}
+  .account-entry .wg-tx{flex:1;display:flex;flex-direction:column}
+  .account-entry .wg-tx b{font-size:16px;font-weight:900}
+  .account-entry .wg-tx span{font-size:12px;opacity:.95}
+  .account-entry .wg-go{font-size:13px;font-weight:800;flex:none;background:rgba(255,255,255,.25);border-radius:999px;padding:6px 12px}
+  /* 账号页 */
+  .acc-intro .acc-h{font-size:17px;font-weight:900;margin-bottom:10px}
+  .acc-intro p{font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:10px}
+  .acc-intro p.acc-soft{color:var(--ink-soft);font-size:13px;margin-bottom:0}
+  .acc-tabs{display:flex;gap:8px;margin-bottom:16px}
+  .acc-tab{flex:1;border:2px solid #EDE6D6;background:#fff;border-radius:13px;padding:11px;font-family:inherit;font-weight:800;font-size:15px;color:var(--ink-soft);cursor:pointer}
+  .acc-tab.sel{border-color:var(--sky);background:#EAF5FF;color:var(--sky-deep)}
+  .acc-input{width:100%;padding:13px 14px;border-radius:13px;border:2px solid #EDE6D6;background:#fff;font-family:inherit;font-size:15px;color:var(--ink);margin-bottom:11px}
+  .acc-input:focus{outline:none;border-color:var(--sky)}
+  .acc-err{color:var(--coral);font-size:13px;font-weight:600;min-height:18px;margin-top:10px;text-align:center;line-height:1.5}
+  .acc-note{font-size:12px;color:var(--ink-soft);line-height:1.7;margin-top:12px}
+  .acc-h{font-size:17px;font-weight:900}
+  /* 打印控件 */
+  .pr-label{font-size:14px;font-weight:800;margin:14px 0 10px}
+  .pr-label:first-child{margin-top:0}
+  .pr-subj{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .pr-subj button{border:2px solid #EDE6D6;background:#fff;border-radius:14px;padding:13px;font-family:inherit;font-weight:800;font-size:15px;color:var(--ink);cursor:pointer}
+  .pr-subj button.sel{border-color:var(--sky);background:#EAF5FF;color:var(--sky-deep)}
+  .pr-select{width:100%;padding:13px 14px;border-radius:13px;border:2px solid #EDE6D6;background:#fff;font-family:inherit;font-size:15px;color:var(--ink)}
+  .pr-count{display:flex;gap:10px}
+  .pr-count button{flex:1;border:2px solid #EDE6D6;background:#fff;border-radius:13px;padding:11px;font-family:inherit;font-weight:800;font-size:15px;color:var(--ink);cursor:pointer}
+  .pr-count button.sel{border-color:var(--grass);background:#ECF7ED;color:var(--grass-deep)}
+  .pr-tip{font-size:12.5px;color:var(--ink-soft);line-height:1.7;margin-top:14px}
+  /* 练习卷（屏幕预览 + 打印） */
+  #print-preview{background:#fff;color:#1A1A1A;border-radius:12px;padding:30px 28px;box-shadow:var(--shadow)}
+  .ws-head{text-align:center;border-bottom:2px solid #222;padding-bottom:12px;margin-bottom:6px}
+  .ws-title{font-size:21px;font-weight:900}
+  .ws-meta{font-size:13px;color:#333;margin-top:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .ws-qs{margin:14px 0 0;padding-left:26px}
+  .ws-qs li{margin-bottom:16px;font-size:15px;line-height:1.7;break-inside:avoid}
+  .ws-passage{background:#F5F5F5;border-radius:8px;padding:8px 10px;margin-bottom:6px;font-size:14px;color:#333}
+  .ws-q{font-weight:700}
+  .ws-emoji{font-size:26px;letter-spacing:6px;line-height:1.5;margin:6px 0 2px;word-break:break-word}
+  .ws-opts{margin-top:5px;display:flex;flex-wrap:wrap;gap:6px 20px;font-size:14px;color:#222}
+  .ws-answers{margin-top:20px;border-top:1px dashed #999;padding-top:10px;font-size:12.5px;color:#666;line-height:1.9}
+  .ws-foot{text-align:center;font-size:11px;color:#999;margin-top:16px}
+  @media print {
+    body{background:#fff !important}
+    body * { visibility:hidden !important; }
+    #print-preview, #print-preview * { visibility:visible !important; }
+    #print-preview { position:absolute; left:0; top:0; width:100%; box-shadow:none; border-radius:0; padding:0; }
+    .no-print{ display:none !important; }
+    .ws-qs li{ break-inside:avoid; }
+    @page { margin: 14mm; }
+  }
   .rp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+  .rp-h{font-weight:800;font-size:15.5px;margin-bottom:4px}
+  .rp-sub{font-size:12px;color:var(--ink-soft);margin-bottom:12px;line-height:1.6}
+  .kpm-subj{font-size:13px;font-weight:800;color:var(--ink-soft);margin:10px 0 7px}
+  .kpm-subj:first-child{margin-top:0}
+  .kpm-row{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+  .kpm-name{width:92px;flex:none;font-size:12.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .kpm-track{flex:1;background:#F0EDE2;border-radius:7px;height:16px;overflow:hidden}
+  .kpm-fill{height:100%;border-radius:7px;transition:width .5s}
+  .kpm-pct{width:62px;flex:none;font-size:11.5px;font-weight:700;color:var(--ink-soft);text-align:right}
+  .weak-row{display:flex;align-items:center;gap:10px;background:#FFF3F0;border:1px solid #FFD9D0;border-radius:14px;padding:11px 13px;margin-bottom:9px}
+  .weak-row .wk-info{flex:1}
+  .weak-row .wk-kp{font-weight:800;font-size:14px;color:#C0453A}
+  .weak-row .wk-pct{font-size:12px;color:#B07068;margin-top:2px}
+  .weak-row .wk-btn{flex:none;border:none;background:var(--sky);color:#fff;border-radius:11px;padding:9px 13px;font-family:inherit;font-weight:800;font-size:13px;cursor:pointer}
+  .rp-empty{font-size:13px;color:var(--ink-soft);text-align:center;padding:16px 8px;line-height:1.7}
+  .curve{display:flex;align-items:flex-end;gap:5px;height:120px;margin-top:6px}
+  .curve .cbar{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end;min-width:0}
+  .curve .cbar .cv{font-size:10px;color:var(--ink-soft);font-weight:700}
+  .curve .cbar .cc{width:100%;max-width:24px;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#6FBF73,#4E9D52);min-height:3px}
+  .curve .cbar .cd{font-size:9px;color:var(--ink-soft);white-space:nowrap}
+  .rp-range{display:flex;gap:8px;margin-bottom:12px}
+  .rp-rbtn{flex:1;border:2px solid #EDE6D6;background:#fff;border-radius:11px;padding:9px;font-family:inherit;font-weight:800;font-size:13px;color:var(--ink-soft);cursor:pointer}
+  .rp-rbtn.sel{border-color:var(--sky);background:#EAF5FF;color:var(--sky-deep)}
   .rp-cell{background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:13px 8px;text-align:center}
   .rp-cell .n{font-size:21px;font-weight:800;display:block}
   .rp-cell .l{font-size:11.5px;color:var(--ink-soft)}
@@ -284,12 +437,56 @@
   .prof-row .pn small{display:block;font-weight:600;color:var(--ink-soft);font-size:12px}
   .mini-btn{border:none;border-radius:12px;padding:9px 14px;font-family:inherit;font-weight:800;font-size:13px;cursor:pointer}
   @media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
+
+  /* ===== 平板 / 电脑大屏：放大字号与按钮，看得清、点得准 ===== */
+  @media (min-width:768px){
+    #app{max-width:880px;padding:30px 30px 64px}
+    /* 答题区：题目和选项明显放大，适合大屏和小朋友 */
+    .q-text{font-size:30px;line-height:1.6}
+    .opt{font-size:23px;min-height:80px;padding:22px 16px;border-radius:20px}
+    .opt.big{font-size:48px}
+    .options{gap:16px}
+    /* 主按钮、返回键加大 */
+    .btn{font-size:20px;padding:19px;border-radius:22px}
+    .back-btn{width:52px;height:52px;font-size:24px}
+    .page-title{font-size:22px}
+    /* 学科卡：四科一行排开，图标文字更大 */
+    .subjects{grid-template-columns:repeat(4,1fr);gap:14px}
+    .subject{padding:20px 16px}
+    .subject .icon{font-size:38px}
+    .subject h2{font-size:17.5px}
+    .toolbtn{font-size:16.5px;padding:17px}
+    .chip{font-size:15px;padding:10px 18px}
+    /* 关卡列表 */
+    .level{padding:18px 22px}
+    .level .lv-icon{font-size:30px;width:54px;height:54px}
+    .level h4{font-size:18px}
+    .level p{font-size:13.5px}
+    /* 银河伙伴更大 */
+    .galaxy .friends{gap:14px}
+    /* 科普/阅读正文更易读 */
+    .kepu-card .kp-content,.weekly-box{font-size:16px;line-height:1.95}
+    /* 欢迎页在大屏更舒展 */
+    .wel-hero{padding:48px 30px 40px}
+    .wel-hero h1{font-size:38px}
+    .wel-hero .sub{font-size:17px}
+    .wel-feats{grid-template-columns:repeat(4,1fr)}
+    .wel-cta{font-size:21px;max-width:440px}
+    .wel-stage li{font-size:15px}
+  }
+  /* 更大的电脑屏：进一步留白与放大 */
+  @media (min-width:1100px){
+    #app{max-width:940px}
+    .q-text{font-size:32px}
+    .opt{font-size:24px;min-height:84px}
+  }
+
   /* 手机窄屏适配 */
   @media (max-width:430px){
     #app{padding:14px 12px 40px}
-    .q-text{font-size:21px}
-    .opt{font-size:17px;padding:15px 8px;min-height:58px}
-    .opt.big{font-size:32px}
+    .q-text{font-size:22px}
+    .opt{font-size:18px;padding:16px 8px;min-height:62px}
+    .opt.big{font-size:34px}
     .subjects{gap:10px}
     .subject h2{font-size:15px}
     .brand{font-size:17px}
@@ -438,11 +635,11 @@
       <h3>👨‍👩‍👧 给爸爸妈妈的话</h3>
       <p>这个乐园的设计理念是：<b>保护兴趣比纠正错误更重要</b>。答对有奖励、答错只温柔提示正确答案，从不批评；多孩子档案各自独立，进度自动保存。建议每天 15～20 分钟，配合运动和亲子共读，让孩子在轻松中爱上学习、学会规划、建立自信。</p>
       <p style="margin-top:10px">幼小衔接阶段<b>以游戏和兴趣体验为主</b>，重在激发好奇心、培养专注与习惯，请尊重孩子的节奏、不必追求超前与速度。每个孩子都有自己的花期，慢慢来，比较快。🌱</p>
-      <p style="margin-top:10px;font-size:12px;color:#8A7350">隐私说明：本网站仅收集<b>匿名使用统计</b>（如打开次数、所选年级、使用了哪些功能），用于改进产品；<b>绝不收集孩子的姓名、答题内容等任何个人信息</b>，学习进度只保存在你自己的设备上。</p>
+      <p style="margin-top:10px;font-size:12px;color:#8A7350">隐私说明：本网站默认仅收集<b>匿名使用统计</b>（如打开次数、所选年级、使用了哪些功能）用于改进产品，<b>绝不收集孩子的姓名、答题内容等个人信息</b>。学习进度默认只保存在你自己的设备上；如果你<b>选择用手机号注册登录</b>，进度会同步到云端，方便换设备时找回——是否登录完全自愿，不登录也能正常使用。</p>
     </div>
 
     <button class="wel-cta" onclick="enterApp()" style="margin-top:20px">🌟 进入乐园，开始今天的学习 →</button>
-    <div class="wel-foot">星星学习乐园 · 陪伴孩子快乐成长<br>建议添加到主屏幕，像 App 一样随时打开</div>
+    <div class="wel-foot">星星学习乐园 · 陪伴孩子快乐成长<br>建议添加到主屏幕，像 App 一样随时打开<br><span style="font-size:11px;opacity:.85">© 星星学习乐园　仅收集匿名统计，不收集孩子个人信息　登录后进度上云便于跨设备同步</span></div>
   </div>
 
   <!-- ===== 档案设置页 ===== -->
@@ -501,8 +698,9 @@
       <span class="tb-go">去探索 →</span>
     </button>
 
-    <div class="toolrow">
+    <div class="toolrow toolrow-3">
       <button class="toolbtn" onclick="openWrong()">📕 错题本 <span class="badge" id="wrong-count">0</span><span class="badge badge-due hidden" id="due-count">0</span></button>
+      <button class="toolbtn" onclick="openAchieve()">🏅 我的成就</button>
       <button class="toolbtn" onclick="openReport()">📊 学习报告</button>
     </div>
 
@@ -512,6 +710,24 @@
       <div class="mood-faces" id="mood-faces"></div>
       <div class="mood-resp hidden" id="mood-resp"></div>
     </div>
+
+    <button class="account-entry" id="account-entry" onclick="openAccount()">
+      <span class="wg-ic">☁️</span>
+      <span class="wg-tx" id="account-tx"><b>登录 / 注册</b><span>换设备进度不丢，多台设备同步</span></span>
+      <span class="wg-go" id="account-go">去登录 →</span>
+    </button>
+
+    <button class="print-entry" onclick="openPrint()">
+      <span class="wg-ic">🖨️</span>
+      <span class="wg-tx"><b>打印纸质练习页</b><span>在纸上做，少看屏幕、保护视力</span></span>
+      <span class="wg-go">去打印 →</span>
+    </button>
+
+    <button class="wxgroup-entry" onclick="openWxGroup()">
+      <span class="wg-ic">👨‍👩‍👧</span>
+      <span class="wg-tx"><b>加入家长交流群</b><span>交流学习方法 · 获取更新预告</span></span>
+      <span class="wg-go">扫码加入 →</span>
+    </button>
 
     <div class="galaxy">
       <h3>🌌 星星银河 · 动物伙伴</h3>
@@ -631,6 +847,91 @@
     <div id="wr-list"></div>
   </div>
 
+  <!-- ===== 账号 / 登录注册 ===== -->
+  <div id="page-account" class="hidden">
+    <div class="back-row"><button class="back-btn" onclick="goHome()">←</button><div class="page-title" id="acc-title">登录 / 注册 ☁️</div></div>
+
+    <!-- 未登录：引导 + 表单 -->
+    <div id="acc-guest">
+      <div class="card acc-intro">
+        <div class="acc-h">☁️ 让孩子的学习进度不丢失</div>
+        <p>现在孩子的星星、勋章、错题和学习记录，都保存在<b>这一台设备</b>上。换手机、用平板，或不小心清理了浏览器，进度就会丢失。</p>
+        <p>注册一个账号（手机号 + 密码即可），进度就会<b>自动同步到云端</b>——以后在任何设备登录，孩子的学习记录都能找回，继续学习。</p>
+        <p class="acc-soft">不注册也完全可以正常使用，注册只是为了让进度更安全、跨设备可用。👶 孩子的学习不会中断。</p>
+      </div>
+
+      <div class="card">
+        <div class="acc-tabs">
+          <button id="tab-login" class="acc-tab sel" onclick="accTab('login')">登录</button>
+          <button id="tab-reg" class="acc-tab" onclick="accTab('reg')">注册新账号</button>
+        </div>
+        <input class="acc-input" id="acc-phone" type="tel" inputmode="numeric" maxlength="11" placeholder="手机号（11 位）">
+        <input class="acc-input" id="acc-pwd" type="password" placeholder="密码（至少 6 位）">
+        <input class="acc-input hidden" id="acc-pwd2" type="password" placeholder="再次输入密码">
+        <button class="btn btn-sky" id="acc-submit" onclick="accSubmit()">登录</button>
+        <div class="acc-err" id="acc-err"></div>
+        <div class="acc-note" id="acc-note">提示：当前注册暂不需要短信验证码，请务必记住自己设置的密码。</div>
+      </div>
+    </div>
+
+    <!-- 已登录：账号信息 -->
+    <div id="acc-user" class="hidden">
+      <div class="card" style="text-align:center">
+        <div style="font-size:40px">✅</div>
+        <div class="acc-h" style="margin-top:6px">已登录</div>
+        <p style="font-size:15px;margin:6px 0 4px"><b id="acc-phone-show">138****8000</b></p>
+        <p class="acc-soft">学习进度已自动同步到云端，换设备登录即可找回。</p>
+        <button class="btn btn-ghost" onclick="accDoLogout()" style="margin-top:14px">退出登录</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 打印练习页 ===== -->
+  <div id="page-print" class="hidden">
+    <div class="back-row no-print"><button class="back-btn" onclick="goHome()">←</button><div class="page-title">打印练习页 🖨️</div></div>
+    <div class="card no-print">
+      <div class="pr-label">① 选择科目</div>
+      <div class="pr-subj" id="pr-subj"></div>
+      <div class="pr-label">② 选择练习内容</div>
+      <select class="pr-select" id="pr-level"></select>
+      <div class="pr-label">③ 题目数量</div>
+      <div class="pr-count" id="pr-count"></div>
+      <button class="btn btn-sky" onclick="genWorksheet()" style="margin-top:18px">📝 生成练习页</button>
+      <div class="pr-tip">生成后点"打印 / 存为 PDF"，可直接打印或保存成 PDF。题目下方有选项让孩子圈选，卷末附参考答案供家长核对。</div>
+    </div>
+
+    <div id="ws-wrap" class="hidden">
+      <div class="no-print" style="display:flex;gap:10px;margin-bottom:14px">
+        <button class="btn btn-coral" onclick="doPrint()" style="margin:0">🖨️ 打印 / 存为 PDF</button>
+        <button class="btn btn-ghost" onclick="genWorksheet()" style="margin:0">🔄 换一批题</button>
+      </div>
+      <div id="print-preview"></div>
+    </div>
+  </div>
+
+  <!-- ===== 我的成就（日历·勋章·奖状）===== -->
+  <div id="page-achieve" class="hidden">
+    <div class="back-row"><button class="back-btn" onclick="goHome()">←</button><div class="page-title">我的成就 🏅</div></div>
+
+    <div class="card">
+      <div class="ach-h">📅 打卡日历 <span id="cal-month" class="ach-sub"></span></div>
+      <div class="cal-week"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+      <div class="cal-grid" id="cal-grid"></div>
+      <div class="cal-legend"><span class="dot studied"></span> 学习日　<span class="dot today"></span> 今天</div>
+    </div>
+
+    <div class="card">
+      <div class="ach-h">🏆 学习勋章 <span id="badge-count" class="ach-sub"></span></div>
+      <div class="badge-grid" id="badge-grid"></div>
+    </div>
+
+    <div class="card">
+      <div class="ach-h">🎖️ 我的奖状</div>
+      <div class="ach-tip">每周学满 4 天得「本周学习之星」，每月学满 12 天得「本月成长之星」，自动颁发哦！</div>
+      <div id="cert-list"></div>
+    </div>
+  </div>
+
   <!-- ===== 学习报告 ===== -->
   <div id="page-report" class="hidden">
     <div class="back-row"><button class="back-btn" onclick="goHome()">←</button><div class="page-title">学习报告 📊</div></div>
@@ -646,12 +947,32 @@
       </div>
     </div>
     <div class="card" style="margin-bottom:14px">
-      <div style="font-weight:800;margin-bottom:12px">最近 7 天正确率</div>
+      <div style="font-weight:800;margin-bottom:12px">最近 7 天各科正确率</div>
       <div id="rp-bars"></div>
+    </div>
+    <div class="card" style="margin-bottom:14px">
+      <div class="rp-h">📚 知识点掌握情况</div>
+      <p class="rp-sub">每个知识点做对的比例，红色表示需要加强</p>
+      <div id="rp-kp"></div>
+    </div>
+    <div class="card" style="margin-bottom:14px">
+      <div class="rp-h">📌 需要加强的知识点</div>
+      <p class="rp-sub">点"专项练习"可针对薄弱点练同类新题（查漏 → 练习）</p>
+      <div id="rp-weak"></div>
+    </div>
+    <div class="card" style="margin-bottom:14px">
+      <div class="rp-h">📈 进步曲线</div>
+      <p class="rp-sub">最近每天的答题正确率，看看是不是越来越棒</p>
+      <div id="rp-curve"></div>
     </div>
     <div class="card">
       <div style="font-weight:800;margin-bottom:6px">🤖 AI 学习分析</div>
-      <p style="font-size:13px;color:var(--ink-soft);margin-bottom:12px">让 AI 看看最近的学习记录，找出闪光点和需要加强的地方。</p>
+      <p style="font-size:13px;color:var(--ink-soft);margin-bottom:10px">让 AI 看看学习记录，找出闪光点和需要加强的地方。</p>
+      <div class="rp-range" id="rp-range">
+        <button class="rp-rbtn sel" data-d="7" onclick="setRpRange(7)">近 7 天</button>
+        <button class="rp-rbtn" data-d="30" onclick="setRpRange(30)">近 30 天</button>
+        <button class="rp-rbtn" data-d="90" onclick="setRpRange(90)">近 90 天</button>
+      </div>
       <button class="btn btn-sky" id="rp-btn" onclick="aiAnalyze()">生成 AI 分析</button>
       <div class="ai-box hidden" id="rp-ai"></div>
     </div>
@@ -698,6 +1019,30 @@
       <div class="tc-steps">📖 主题阅读　➗ 情境数学　🔭 主题科普</div>
     </div>
     <button class="btn btn-sky" onclick="startThemeQuiz()">🚀 开始主题闯关</button>
+  </div>
+
+  <!-- ===== 家长交流群二维码弹窗 ===== -->
+  <div id="wxgroup-modal" class="wxg-mask hidden" onclick="closeWxGroup(event)">
+    <div class="wxg-box" onclick="event.stopPropagation()">
+      <button class="wxg-close" onclick="closeWxGroup()">✕</button>
+      <div class="wxg-title">👨‍👩‍👧 加入家长交流群</div>
+      <div class="wxg-sub">微信扫码 / 长按识别下方二维码，添加后即可进群</div>
+      <img class="wxg-qr" alt="家长交流群二维码" src="data:image/png;base64,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">
+      <div class="wxg-tip">进群可以一起交流孩子的学习方法、获取平台更新预告</div>
+    </div>
+  </div>
+
+  <!-- ===== 奖状展示弹窗 ===== -->
+  <div id="cert-modal" class="wxg-mask hidden" onclick="closeCert(event)">
+    <div class="cert-paper" onclick="event.stopPropagation()">
+      <div class="cert-ribbon">🏅</div>
+      <div class="cert-title" id="cert-title">奖状</div>
+      <div class="cert-to">恭喜</div>
+      <div class="cert-name" id="cert-name">小朋友</div>
+      <div class="cert-body" id="cert-body"></div>
+      <div class="cert-foot"><span>星星学习乐园</span><span id="cert-date"></span></div>
+      <button class="cert-close" onclick="closeCert()">收下啦 ✓</button>
+    </div>
   </div>
 
   <!-- ===== 结算 ===== -->
@@ -759,25 +1104,37 @@ let memoryOnly = true;
 function newProfile(name, avatar, grade){
   return { name, avatar, grade,
     stars:{math:0,chinese:0,english:0,kepu:0,sport:0,labor:0},
-    best:{}, lastDay:"", streak:0, plan:null, wrong:[], log:[], read:{},
+    best:{}, lastDay:"", streak:0, plan:null, wrong:[], log:[], read:{}, certs:[], kpStats:{}, daily:{},
     voice: grade<=1 };   // 幼小衔接·一年级默认开启读题语音
 }
 function P(){ return state.profiles[state.active]; }
 function totalStars(p){ p=p||P(); return Object.values(p.stars||{}).reduce((a,b)=>a+(b||0),0); }
 
-function loadState(){
+function readLocalState(){
   try{
     const raw = localStorage.getItem("xxly-quansxueduan");
-    if(raw){ state = JSON.parse(raw); }
-    memoryOnly = false;
-  }catch(e){ memoryOnly = true; }
-  if(!state.profiles) state = { active:0, profiles:[] };
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return null;
+}
+function applyState(s){
+  state = (s && s.profiles) ? s : { active:0, profiles:[] };
+  memoryOnly = false;
+}
+function routeAfterLoad(){
   if(state.profiles.length === 0){ openSetup(true); }
   else { goHome(); }
 }
+function loadState(){
+  const s = readLocalState();
+  if(s) applyState(s); else { state = { active:0, profiles:[] }; memoryOnly = false; }
+  routeAfterLoad();
+}
 function saveState(){
   if(memoryOnly) return;
+  state.updatedAt = Date.now();
   try{ localStorage.setItem("xxly-quansxueduan", JSON.stringify(state)); }catch(e){}
+  scheduleCloudPush();   // 已登录则同步到云端（未登录是空操作）
 }
 
 /* ================================================================
@@ -1878,73 +2235,73 @@ function featuredTheme(grade){ const a=themesFor(grade); if(!a.length) return nu
 const ALLG = [0,1,2,3,4,5,6];
 const LEVELS = {
   math: [
-    {id:"mk1", icon:"🔢", name:"数数小火车", desc:"数一数有几个", subj:"math", grades:[0,1], gen:genCountK},
-    {id:"mk2", icon:"⚖️", name:"比大小", desc:"哪个数更大更小", subj:"math", grades:[0,1], gen:genCompareK},
-    {id:"mk3", icon:"➕", name:"10以内加减法", desc:"5+3、9-4…", subj:"math", grades:[0,1], gen:genAdd10},
-    {id:"mk4", icon:"🔟", name:"凑十好朋友", desc:"和是10的好朋友", subj:"math", grades:[0,1], gen:genFill10},
-    {id:"mk5", icon:"⏰", name:"认识钟表", desc:"几点钟、几点半", subj:"math", grades:[1,2], gen:genClock},
-    {id:"mk6", icon:"💰", name:"认识人民币", desc:"元、角、分", subj:"math", grades:[1,2], bank:RMB0},
-    {id:"mk7", icon:"🔺", name:"图形王国", desc:"圆、三角、长方形", subj:"math", grades:[0,1,2], bank:SHAPES},
-    {id:"m20", icon:"➗", name:"20以内加减", desc:"进位退位练习", subj:"math", grades:[1,2], gen:genAdd20},
-    {id:"m1", icon:"✖️", name:"乘法口诀", desc:"二二得四、九九八十一", subj:"math", grades:[2,3], gen:genMul},
-    {id:"m2", icon:"➗", name:"除法小能手", desc:"表内除法", subj:"math", grades:[2,3], gen:genDiv},
-    {id:"m3", icon:"🧮", name:"两位数加减", desc:"百以内加减", subj:"math", grades:[2,3], gen:genAdd2},
-    {id:"m4", icon:"💯", name:"三位数加减", desc:"万以内加减", subj:"math", grades:[2,3,4], gen:genAdd3},
-    {id:"m5", icon:"🔀", name:"混合运算", desc:"先乘除后加减", subj:"math", grades:[2,3,4], gen:genMix},
-    {id:"m8", icon:"✳️", name:"倍数问题", desc:"几倍是多少", subj:"math", grades:[2,3], gen:genTimes},
-    {id:"m9", icon:"📏", name:"周长小卫士", desc:"长方形正方形周长", subj:"math", grades:[3,4], gen:genPerimeter},
-    {id:"m10", icon:"🍰", name:"分数初步", desc:"几分之一", subj:"math", grades:[3,4], gen:genFrac0},
-    {id:"m6", icon:"🏪", name:"生活数学", desc:"时间、长度、钱币", subj:"math", grades:[2,3,4], bank:LIFE_MATH},
-    {id:"m7", icon:"📝", name:"应用题闯关", desc:"两步计算应用题", subj:"math", grades:[2,3,4], bank:WORDPROB},
-    {id:"mo1", icon:"🧠", name:"奥数思维馆·初级", desc:"找规律·锯木头·植树", subj:"math", grades:[2,3,4], bank:OLYMPIAD},
-    {id:"m11", icon:"📐", name:"角与图形", desc:"锐角钝角、内角和", subj:"math", grades:[4,5], bank:ANGLES},
-    {id:"m12", icon:"✴️", name:"两三位数乘除", desc:"乘法除法进阶", subj:"math", grades:[4,5], gen:genMulBig},
-    {id:"m13", icon:"➗", name:"除法进阶", desc:"两三位数除法", subj:"math", grades:[4,5], gen:genDiv3},
-    {id:"m14", icon:"🔢", name:"小数初步", desc:"认识小数", subj:"math", grades:[4,5], bank:DEC0},
-    {id:"m15", icon:"📊", name:"平均数", desc:"求平均数", subj:"math", grades:[4,5], gen:genAvg},
-    {id:"m16", icon:"🟦", name:"面积达人", desc:"长方形正方形面积", subj:"math", grades:[4,5], gen:genArea},
-    {id:"m17", icon:"🔣", name:"小数运算", desc:"小数加减乘", subj:"math", grades:[5,6], gen:genDec5},
-    {id:"m18", icon:"🍕", name:"分数运算", desc:"同分母加减", subj:"math", grades:[5,6], gen:genFrac5},
-    {id:"m19", icon:"✏️", name:"简易方程", desc:"解 x 的方程", subj:"math", grades:[5,6], gen:genEq},
-    {id:"m21", icon:"🥧", name:"分数乘除", desc:"分数乘法除法", subj:"math", grades:[6], gen:genFracMul},
-    {id:"m22", icon:"💹", name:"百分数", desc:"百分数与打折", subj:"math", grades:[5,6], gen:genPercent},
-    {id:"m23", icon:"⚖️", name:"比和比例", desc:"化简比", subj:"math", grades:[6], gen:genRatio},
-    {id:"m24", icon:"⭕", name:"圆的世界", desc:"周长与面积", subj:"math", grades:[6], gen:genCircle},
-    {id:"m25", icon:"📋", name:"应用题进阶", desc:"行程、单价、总量", subj:"math", grades:[4,5,6], gen:genWP3},
-    {id:"mlife", icon:"🛒", name:"生活数学", desc:"买菜、坐高铁、算温差", subj:"math", grades:[2,3,4,5,6], bank:LIFE_REAL},
-    {id:"mo2", icon:"🧩", name:"奥数思维馆·进阶", desc:"鸡兔同笼·和差·相遇", subj:"math", grades:[4,5,6], bank:OLY2},
+    {id:"mk1", icon:"🔢", name:"数数小火车", desc:"数一数有几个", subj:"math", kp:"数数与基数", grades:[0,1], gen:genCountK},
+    {id:"mk2", icon:"⚖️", name:"比大小", desc:"哪个数更大更小", subj:"math", kp:"比较大小", grades:[0,1], gen:genCompareK},
+    {id:"mk3", icon:"➕", name:"10以内加减法", desc:"5+3、9-4…", subj:"math", kp:"10以内加减法", grades:[0,1], gen:genAdd10},
+    {id:"mk4", icon:"🔟", name:"凑十好朋友", desc:"和是10的好朋友", subj:"math", kp:"凑十法", grades:[0,1], gen:genFill10},
+    {id:"mk5", icon:"⏰", name:"认识钟表", desc:"几点钟、几点半", subj:"math", kp:"认识时间", grades:[1,2], gen:genClock},
+    {id:"mk6", icon:"💰", name:"认识人民币", desc:"元、角、分", subj:"math", kp:"认识人民币", grades:[1,2], bank:RMB0},
+    {id:"mk7", icon:"🔺", name:"图形王国", desc:"圆、三角、长方形", subj:"math", kp:"认识图形", grades:[0,1,2], bank:SHAPES},
+    {id:"m20", icon:"➗", name:"20以内加减", desc:"进位退位练习", subj:"math", kp:"20以内加减法", grades:[1,2], gen:genAdd20},
+    {id:"m1", icon:"✖️", name:"乘法口诀", desc:"二二得四、九九八十一", subj:"math", kp:"表内乘法", grades:[2,3], gen:genMul},
+    {id:"m2", icon:"➗", name:"除法小能手", desc:"表内除法", subj:"math", kp:"表内除法", grades:[2,3], gen:genDiv},
+    {id:"m3", icon:"🧮", name:"两位数加减", desc:"百以内加减", subj:"math", kp:"百以内加减法", grades:[2,3], gen:genAdd2},
+    {id:"m4", icon:"💯", name:"三位数加减", desc:"万以内加减", subj:"math", kp:"万以内加减法", grades:[2,3,4], gen:genAdd3},
+    {id:"m5", icon:"🔀", name:"混合运算", desc:"先乘除后加减", subj:"math", kp:"混合运算", grades:[2,3,4], gen:genMix},
+    {id:"m8", icon:"✳️", name:"倍数问题", desc:"几倍是多少", subj:"math", kp:"倍数问题", grades:[2,3], gen:genTimes},
+    {id:"m9", icon:"📏", name:"周长小卫士", desc:"长方形正方形周长", subj:"math", kp:"周长", grades:[3,4], gen:genPerimeter},
+    {id:"m10", icon:"🍰", name:"分数初步", desc:"几分之一", subj:"math", kp:"分数的初步认识", grades:[3,4], gen:genFrac0},
+    {id:"m6", icon:"🏪", name:"生活数学", desc:"时间、长度、钱币", subj:"math", kp:"常见的量", grades:[2,3,4], bank:LIFE_MATH},
+    {id:"m7", icon:"📝", name:"应用题闯关", desc:"两步计算应用题", subj:"math", kp:"两步应用题", grades:[2,3,4], bank:WORDPROB},
+    {id:"mo1", icon:"🧠", name:"奥数思维馆·初级", desc:"找规律·锯木头·植树", subj:"math", kp:"奥数思维", grades:[2,3,4], bank:OLYMPIAD},
+    {id:"m11", icon:"📐", name:"角与图形", desc:"锐角钝角、内角和", subj:"math", kp:"角与图形", grades:[4,5], bank:ANGLES},
+    {id:"m12", icon:"✴️", name:"两三位数乘除", desc:"乘法除法进阶", subj:"math", kp:"多位数乘法", grades:[4,5], gen:genMulBig},
+    {id:"m13", icon:"➗", name:"除法进阶", desc:"两三位数除法", subj:"math", kp:"多位数除法", grades:[4,5], gen:genDiv3},
+    {id:"m14", icon:"🔢", name:"小数初步", desc:"认识小数", subj:"math", kp:"小数的认识", grades:[4,5], bank:DEC0},
+    {id:"m15", icon:"📊", name:"平均数", desc:"求平均数", subj:"math", kp:"平均数", grades:[4,5], gen:genAvg},
+    {id:"m16", icon:"🟦", name:"面积达人", desc:"长方形正方形面积", subj:"math", kp:"面积", grades:[4,5], gen:genArea},
+    {id:"m17", icon:"🔣", name:"小数运算", desc:"小数加减乘", subj:"math", kp:"小数运算", grades:[5,6], gen:genDec5},
+    {id:"m18", icon:"🍕", name:"分数运算", desc:"同分母加减", subj:"math", kp:"分数加减法", grades:[5,6], gen:genFrac5},
+    {id:"m19", icon:"✏️", name:"简易方程", desc:"解 x 的方程", subj:"math", kp:"简易方程", grades:[5,6], gen:genEq},
+    {id:"m21", icon:"🥧", name:"分数乘除", desc:"分数乘法除法", subj:"math", kp:"分数乘除法", grades:[6], gen:genFracMul},
+    {id:"m22", icon:"💹", name:"百分数", desc:"百分数与打折", subj:"math", kp:"百分数", grades:[5,6], gen:genPercent},
+    {id:"m23", icon:"⚖️", name:"比和比例", desc:"化简比", subj:"math", kp:"比和比例", grades:[6], gen:genRatio},
+    {id:"m24", icon:"⭕", name:"圆的世界", desc:"周长与面积", subj:"math", kp:"圆", grades:[6], gen:genCircle},
+    {id:"m25", icon:"📋", name:"应用题进阶", desc:"行程、单价、总量", subj:"math", kp:"应用题", grades:[4,5,6], gen:genWP3},
+    {id:"mlife", icon:"🛒", name:"生活数学", desc:"买菜、坐高铁、算温差", subj:"math", kp:"生活中的数学", grades:[2,3,4,5,6], bank:LIFE_REAL},
+    {id:"mo2", icon:"🧩", name:"奥数思维馆·进阶", desc:"鸡兔同笼·和差·相遇", subj:"math", kp:"奥数思维", grades:[4,5,6], bank:OLY2},
   ],
   chinese: [
-    {id:"ck1", icon:"🅰️", name:"拼音声母", desc:"找出开头的声母", subj:"chinese", grades:[0,1], gen:genPyInitial},
-    {id:"ck2", icon:"🖼️", name:"看图识字", desc:"看图认汉字", subj:"chinese", grades:[0,1], gen:genPicto},
-    {id:"ck3", icon:"🔢", name:"数字汉字", desc:"一二三…十", subj:"chinese", grades:[0,1], gen:genHanziNum},
-    {id:"ck4", icon:"📖", name:"快乐阅读·启蒙", desc:"读短句，会读题语音", subj:"chinese", grades:[0,1], bank:READING_YOUNG},
-    {id:"cread", icon:"🌈", name:"分级阅读·闯关", desc:"读完一级解锁下一级", subj:"chinese", grades:[0,1,2,3,4,5,6], type:"readlib"},
-    {id:"c1", icon:"🔤", name:"识字读音关", desc:"易错字音", subj:"chinese", grades:[2,3,4], gen:genPinyin},
-    {id:"c2", icon:"↔️", name:"反义词对对碰", desc:"高对矮快对慢", subj:"chinese", grades:[1,2,3], gen:genAntonym},
-    {id:"c3", icon:"🐴", name:"量词小达人", desc:"一匹马一条鱼", subj:"chinese", grades:[1,2,3], gen:genMeasure},
-    {id:"c4", icon:"🏮", name:"古诗大会", desc:"必背古诗填句", subj:"chinese", grades:[1,2,3,4], gen:genPoem},
-    {id:"c5", icon:"🎭", name:"成语乐园", desc:"成语和寓言", subj:"chinese", grades:[2,3,4], gen:genIdiom},
-    {id:"c6", icon:"📚", name:"阅读理解·初级", desc:"读短文答问题", subj:"chinese", grades:[2,3], bank:READING},
-    {id:"c7", icon:"✏️", name:"看图写话工坊", desc:"看图写几句话", subj:"chinese", grades:[1,2,3], type:"writing"},
-    {id:"c8", icon:"🔗", name:"近义词", desc:"意思相近的词", subj:"chinese", grades:[3,4,5], gen:genSyn},
-    {id:"c9", icon:"🎴", name:"成语进阶", desc:"成语含义与故事", subj:"chinese", grades:[4,5,6], gen:genIdiom2},
-    {id:"c10", icon:"📜", name:"古诗词·进阶", desc:"高年级必背名句", subj:"chinese", grades:[4,5,6], gen:genPoem2},
-    {id:"c11", icon:"🩺", name:"病句与关联词", desc:"找毛病、填关联词", subj:"chinese", grades:[4,5,6], bank:SICK},
-    {id:"c12", icon:"🏛️", name:"文学常识", desc:"名著作者与故事", subj:"chinese", grades:[4,5,6], bank:LIT},
-    {id:"c13", icon:"📖", name:"阅读理解·进阶", desc:"读懂含义和道理", subj:"chinese", grades:[4,5,6], bank:READING2},
+    {id:"ck1", icon:"🅰️", name:"拼音声母", desc:"找出开头的声母", subj:"chinese", kp:"拼音", grades:[0,1], gen:genPyInitial},
+    {id:"ck2", icon:"🖼️", name:"看图识字", desc:"看图认汉字", subj:"chinese", kp:"识字", grades:[0,1], gen:genPicto},
+    {id:"ck3", icon:"🔢", name:"数字汉字", desc:"一二三…十", subj:"chinese", kp:"识字", grades:[0,1], gen:genHanziNum},
+    {id:"ck4", icon:"📖", name:"快乐阅读·启蒙", desc:"读短句，会读题语音", subj:"chinese", kp:"阅读理解", grades:[0,1], bank:READING_YOUNG},
+    {id:"cread", icon:"🌈", name:"分级阅读·闯关", desc:"读完一级解锁下一级", subj:"chinese", kp:"阅读理解", grades:[0,1,2,3,4,5,6], type:"readlib"},
+    {id:"c1", icon:"🔤", name:"识字读音关", desc:"易错字音", subj:"chinese", kp:"字音字形", grades:[2,3,4], gen:genPinyin},
+    {id:"c2", icon:"↔️", name:"反义词对对碰", desc:"高对矮快对慢", subj:"chinese", kp:"反义词", grades:[1,2,3], gen:genAntonym},
+    {id:"c3", icon:"🐴", name:"量词小达人", desc:"一匹马一条鱼", subj:"chinese", kp:"量词", grades:[1,2,3], gen:genMeasure},
+    {id:"c4", icon:"🏮", name:"古诗大会", desc:"必背古诗填句", subj:"chinese", kp:"古诗词", grades:[1,2,3,4], gen:genPoem},
+    {id:"c5", icon:"🎭", name:"成语乐园", desc:"成语和寓言", subj:"chinese", kp:"成语", grades:[2,3,4], gen:genIdiom},
+    {id:"c6", icon:"📚", name:"阅读理解·初级", desc:"读短文答问题", subj:"chinese", kp:"阅读理解", grades:[2,3], bank:READING},
+    {id:"c7", icon:"✏️", name:"看图写话工坊", desc:"看图写几句话", subj:"chinese", kp:"写话", grades:[1,2,3], type:"writing"},
+    {id:"c8", icon:"🔗", name:"近义词", desc:"意思相近的词", subj:"chinese", kp:"近义词", grades:[3,4,5], gen:genSyn},
+    {id:"c9", icon:"🎴", name:"成语进阶", desc:"成语含义与故事", subj:"chinese", kp:"成语", grades:[4,5,6], gen:genIdiom2},
+    {id:"c10", icon:"📜", name:"古诗词·进阶", desc:"高年级必背名句", subj:"chinese", kp:"古诗词", grades:[4,5,6], gen:genPoem2},
+    {id:"c11", icon:"🩺", name:"病句与关联词", desc:"找毛病、填关联词", subj:"chinese", kp:"病句与关联词", grades:[4,5,6], bank:SICK},
+    {id:"c12", icon:"🏛️", name:"文学常识", desc:"名著作者与故事", subj:"chinese", kp:"文学常识", grades:[4,5,6], bank:LIT},
+    {id:"c13", icon:"📖", name:"阅读理解·进阶", desc:"读懂含义和道理", subj:"chinese", kp:"阅读理解", grades:[4,5,6], bank:READING2},
   ],
   english: [
-    {id:"e1", icon:"🔠", name:"字母配对站", desc:"大写小写手拉手", subj:"english", grades:[0,1,2,3], gen:genLetter},
-    {id:"e2", icon:"🍎", name:"单词小达人", desc:"看中文选英文", subj:"english", grades:[1,2,3,4], gen:genWordEC},
-    {id:"e3", icon:"🔍", name:"单词翻译官", desc:"看英文选中文", subj:"english", grades:[2,3,4], gen:genWordCE},
-    {id:"e7", icon:"🎧", name:"听音选图", desc:"听单词选图片", subj:"english", grades:[0,1,2,3], gen:genListen},
-    {id:"e4", icon:"🔟", name:"数字英语", desc:"one two three", subj:"english", grades:[1,2,3], gen:genNumEn},
-    {id:"e5", icon:"💬", name:"句子小剧场", desc:"日常对话", subj:"english", grades:[2,3,4], gen:genSent},
-    {id:"e6", icon:"🎤", name:"听音跟读屋", desc:"听一听跟着读", subj:"english", grades:[1,2,3,4,5,6], type:"speak"},
-    {id:"e8", icon:"📕", name:"进阶单词", desc:"职业天气星期", subj:"english", grades:[4,5,6], gen:genWord2},
-    {id:"e9", icon:"🔡", name:"英语语法", desc:"be动词复数介词", subj:"english", grades:[4,5,6], gen:genGrammar},
-    {id:"e10", icon:"📰", name:"英语阅读", desc:"读小短文答题", subj:"english", grades:[4,5,6], bank:EREAD},
+    {id:"e1", icon:"🔠", name:"字母配对站", desc:"大写小写手拉手", subj:"english", kp:"字母", grades:[0,1,2,3], gen:genLetter},
+    {id:"e2", icon:"🍎", name:"单词小达人", desc:"看中文选英文", subj:"english", kp:"词汇", grades:[1,2,3,4], gen:genWordEC},
+    {id:"e3", icon:"🔍", name:"单词翻译官", desc:"看英文选中文", subj:"english", kp:"词汇", grades:[2,3,4], gen:genWordCE},
+    {id:"e7", icon:"🎧", name:"听音选图", desc:"听单词选图片", subj:"english", kp:"听力词汇", grades:[0,1,2,3], gen:genListen},
+    {id:"e4", icon:"🔟", name:"数字英语", desc:"one two three", subj:"english", kp:"数字词汇", grades:[1,2,3], gen:genNumEn},
+    {id:"e5", icon:"💬", name:"句子小剧场", desc:"日常对话", subj:"english", kp:"日常用语", grades:[2,3,4], gen:genSent},
+    {id:"e6", icon:"🎤", name:"听音跟读屋", desc:"听一听跟着读", subj:"english", kp:"听说", grades:[1,2,3,4,5,6], type:"speak"},
+    {id:"e8", icon:"📕", name:"进阶单词", desc:"职业天气星期", subj:"english", kp:"词汇", grades:[4,5,6], gen:genWord2},
+    {id:"e9", icon:"🔡", name:"英语语法", desc:"be动词复数介词", subj:"english", kp:"语法", grades:[4,5,6], gen:genGrammar},
+    {id:"e10", icon:"📰", name:"英语阅读", desc:"读小短文答题", subj:"english", kp:"阅读理解", grades:[4,5,6], bank:EREAD},
   ],
 };
 function levelsFor(subj, grade){ return LEVELS[subj].filter(l=>l.grades.includes(grade)); }
@@ -1955,7 +2312,7 @@ function findLevel(id){ for(const s in LEVELS){ const f=LEVELS[s].find(l=>l.id==
 ================================================================ */
 const PAGES = ["page-welcome","page-setup","page-home","page-levels","page-quiz","page-kepu","page-kepulib",
   "page-writing","page-speakmode","page-sport","page-labor","page-wrong","page-report",
-  "page-readlib","page-readlevel","page-article","page-themes","page-theme","page-result"];
+  "page-readlib","page-readlevel","page-article","page-themes","page-theme","page-account","page-print","page-achieve","page-result"];
 function show(id){ PAGES.forEach(p=>$(p).classList.add("hidden")); $(id).classList.remove("hidden"); window.scrollTo(0,0); }
 
 function goHome(){
@@ -1995,6 +2352,17 @@ function renderHome(){
   if(ft){ $("tb-emoji").textContent = ft.emoji; $("tb-title").textContent = ft.title; tb.classList.remove("hidden"); }
   else tb.classList.add("hidden");
   renderMood();
+  // 账号入口状态
+  if(isLoggedIn()){
+    $("account-tx").innerHTML = "<b>已登录："+maskPhone(curPhone())+"</b><span>进度已云端同步</span>";
+    $("account-go").textContent = "管理 →";
+  }else{
+    $("account-tx").innerHTML = "<b>登录 / 注册</b><span>换设备进度不丢，多台设备同步</span>";
+    $("account-go").textContent = "去登录 →";
+  }
+  // 周/月目标达成自动颁发奖状
+  const newCerts = maybeIssueCerts();
+  if(newCerts.length){ setTimeout(()=>{ sprinkleStars(12); showCert(newCerts[0]); }, 600); }
 }
 function toggleVoice(){
   const p = P(); p.voice = !p.voice; saveState();
@@ -2002,6 +2370,8 @@ function toggleVoice(){
   else { try{ window.speechSynthesis.cancel(); }catch(e){} }
   renderHome();
 }
+function openWxGroup(){ $("wxgroup-modal").classList.remove("hidden"); }
+function closeWxGroup(){ $("wxgroup-modal").classList.add("hidden"); }
 function renderFriends(){
   const total = totalStars();
   $("friends").innerHTML = FRIENDS.map((f,i)=>{
@@ -2012,6 +2382,257 @@ function renderFriends(){
   }).join("");
 }
 
+/* ================================================================
+   我的成就：打卡日历 · 学习勋章 · 奖状
+================================================================ */
+function studiedSet(p){ const s=new Set(); (p.log||[]).forEach(l=>{ if(l && l.d) s.add(l.d); }); return s; }
+function studyDayCount(p){ return studiedSet(p).size; }
+function logCount(p, subj){ return (p.log||[]).filter(l=>l.subj===subj).length; }
+function readLevelsDoneCount(p){ let n=0; (typeof READ_LEVELS!=="undefined"?READ_LEVELS:[]).forEach(lv=>{ if(readLevelDone(p,lv)) n++; }); return n; }
+
+function badgeList(p){
+  const total = totalStars(p);
+  const days = studyDayCount(p);
+  const st = p.streak||0;
+  const allSubj = (p.stars.math>0 && p.stars.chinese>0 && p.stars.english>0);
+  return [
+    {emoji:"🔥", name:"坚持之星", desc:"连续打卡3天", on: st>=3},
+    {emoji:"💪", name:"毅力之星", desc:"连续打卡7天", on: st>=7},
+    {emoji:"🏆", name:"恒心之星", desc:"连续打卡30天", on: st>=30},
+    {emoji:"⭐", name:"小星星", desc:"累计50颗星", on: total>=50},
+    {emoji:"🌟", name:"星星达人", desc:"累计200颗星", on: total>=200},
+    {emoji:"💫", name:"星空大师", desc:"累计500颗星", on: total>=500},
+    {emoji:"📅", name:"勤奋宝宝", desc:"学习满7天", on: days>=7},
+    {emoji:"📆", name:"学习标兵", desc:"学习满30天", on: days>=30},
+    {emoji:"🧮", name:"全科小将", desc:"三科都练过", on: allSubj},
+    {emoji:"📚", name:"阅读之星", desc:"读完1个阅读级", on: readLevelsDoneCount(p)>=1},
+    {emoji:"🤖", name:"科普之星", desc:"科普满30颗星", on: (p.stars.kepu||0)>=30},
+    {emoji:"🏃", name:"运动健将", desc:"运动打卡5次", on: logCount(p,"sport")>=5},
+  ];
+}
+
+function parseDate(str){ const a=String(str).split("-"); return new Date(+a[0], +a[1]-1, +a[2]); }
+function weekStartStr(date){ const d=new Date(date); const wd=(d.getDay()+6)%7; d.setDate(d.getDate()-wd); return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(); }
+
+// 周/月目标达成自动颁发奖状；返回新颁发的奖状数组
+function maybeIssueCerts(){
+  const p = P(); if(!p.certs) p.certs=[];
+  const issued = [];
+  const dates = [...studiedSet(p)].map(parseDate);
+  const now = new Date();
+  // 本周（周一为起点）学习天数
+  const ws = weekStartStr(now); const wsDate = parseDate(ws);
+  const weekDays = dates.filter(d=> d>=wsDate && d<=now).length;
+  if(weekDays>=4 && !p.certs.some(c=>c.type==="week" && c.period===ws)){
+    issued.push({type:"week", period:ws, title:"本周学习之星", body:"本周坚持学习 "+weekDays+" 天，认真又努力，特发此状以资鼓励！", date:todayStr()});
+  }
+  // 本月学习天数
+  const mk = now.getFullYear()+"-"+(now.getMonth()+1);
+  const monthDays = dates.filter(d=> d.getFullYear()===now.getFullYear() && d.getMonth()===now.getMonth()).length;
+  if(monthDays>=12 && !p.certs.some(c=>c.type==="month" && c.period===mk)){
+    issued.push({type:"month", period:mk, title:"本月成长之星", body:"本月累计学习 "+monthDays+" 天，持之以恒，进步看得见，特发此状！", date:todayStr()});
+  }
+  if(issued.length){ issued.forEach(c=>p.certs.push(c)); saveState(); }
+  return issued;
+}
+
+function showCert(c){
+  const p = P();
+  $("cert-title").textContent = c.title;
+  $("cert-name").textContent = p.name;
+  $("cert-body").textContent = c.body;
+  $("cert-date").textContent = c.date;
+  $("cert-modal").classList.remove("hidden");
+}
+function closeCert(){ $("cert-modal").classList.add("hidden"); }
+
+function openAchieve(){
+  planContext = -1;
+  const p = P();
+  // 日历
+  const now = new Date(); const y=now.getFullYear(), m=now.getMonth();
+  $("cal-month").textContent = y+"年"+(m+1)+"月";
+  const studied = studiedSet(p);
+  const first = new Date(y,m,1); const startWd=(first.getDay()+6)%7; // 周一=0
+  const daysInMonth = new Date(y,m+1,0).getDate();
+  const tStr = todayStr();
+  let cells = "";
+  for(let i=0;i<startWd;i++) cells += `<div class="cal-cell empty"></div>`;
+  for(let dd=1; dd<=daysInMonth; dd++){
+    const ds = y+"-"+(m+1)+"-"+dd;
+    const cls = ["cal-cell"];
+    if(studied.has(ds)) cls.push("studied");
+    if(ds===tStr) cls.push("today");
+    cells += `<div class="${cls.join(' ')}">${dd}</div>`;
+  }
+  $("cal-grid").innerHTML = cells;
+  // 勋章
+  const badges = badgeList(p);
+  const earned = badges.filter(b=>b.on).length;
+  $("badge-count").textContent = "已点亮 "+earned+"/"+badges.length;
+  $("badge-grid").innerHTML = badges.map(b=>
+    `<div class="badge ${b.on?'on':'off'}"><div class="b-emoji">${b.emoji}</div><div class="b-name">${b.name}</div><div class="b-desc">${b.on?'已获得':b.desc}</div></div>`
+  ).join("");
+  // 奖状
+  const certs = (p.certs||[]).slice().reverse();
+  $("cert-list").innerHTML = certs.length
+    ? certs.map((c,i)=>{
+        const realIdx = p.certs.length-1-i;
+        return `<button class="cert-item" onclick="showCert(P().certs[${realIdx}])">
+          <span class="ci-ic">🎖️</span>
+          <span><h4>${c.title}</h4><p>颁发于 ${c.date}</p></span>
+        </button>`;
+      }).join("")
+    : `<div class="cert-empty">还没有奖状哦～<br>每周学满 4 天就能得到第一张「本周学习之星」！</div>`;
+  show("page-achieve");
+}
+
+/* ================================================================
+   账号页 UI
+================================================================ */
+let accMode = "login";
+function openAccount(){
+  planContext = -1;
+  if(isLoggedIn()){
+    $("acc-guest").classList.add("hidden");
+    $("acc-user").classList.remove("hidden");
+    $("acc-phone-show").textContent = maskPhone(curPhone());
+    $("acc-title").textContent = "我的账号 ☁️";
+  }else{
+    $("acc-user").classList.add("hidden");
+    $("acc-guest").classList.remove("hidden");
+    $("acc-title").textContent = "登录 / 注册 ☁️";
+    accTab("login");
+    $("acc-phone").value = ""; $("acc-pwd").value = ""; $("acc-pwd2").value = ""; $("acc-err").textContent = "";
+  }
+  show("page-account");
+}
+function accTab(mode){
+  accMode = mode;
+  $("tab-login").classList.toggle("sel", mode==="login");
+  $("tab-reg").classList.toggle("sel", mode==="reg");
+  $("acc-submit").textContent = mode==="login" ? "登录" : "注册并登录";
+  $("acc-pwd2").classList.toggle("hidden", mode!=="reg");   // 仅注册时显示"再次输入密码"
+  $("acc-pwd2").value = "";
+  $("acc-note").textContent = mode==="reg"
+    ? "提示：当前注册暂不需要短信验证码，请务必记住自己设置的密码（忘记密码暂时需要联系我们找回）。"
+    : "提示：用注册时的手机号和密码登录。";
+  $("acc-err").textContent = "";
+}
+async function accSubmit(){
+  const phone = ($("acc-phone").value||"").trim();
+  const pwd = $("acc-pwd").value||"";
+  const err = $("acc-err");
+  if(!/^1\d{10}$/.test(phone)){ err.textContent = "请输入正确的 11 位手机号"; return; }
+  if(pwd.length < 6){ err.textContent = "密码至少 6 位"; return; }
+  if(accMode==="reg" && pwd !== ($("acc-pwd2").value||"")){ err.textContent = "两次输入的密码不一致，请重新输入"; return; }
+  const btn = $("acc-submit"); btn.disabled = true;
+  err.textContent = accMode==="reg" ? "注册中…" : "登录中…";
+  try{
+    let r;
+    if(accMode==="reg"){
+      r = await authRegister(phone, pwd);
+      if(!r.ok){
+        if(r.reason==="exists") err.textContent = "该手机号已注册，请点上方“登录”直接登录";
+        else if(r.reason==="needconfirm") err.textContent = "注册需要开启免验证设置，请联系管理员";
+        else err.textContent = "注册失败，请稍后重试";
+        btn.disabled = false; return;
+      }
+    }else{
+      r = await authLogin(phone, pwd);
+      if(!r.ok){ err.textContent = "手机号或密码不正确"; btn.disabled = false; return; }
+    }
+    // 登录/注册成功：同步进度后回首页
+    err.textContent = "同步进度中…";
+    await syncAfterAuth();
+    btn.disabled = false;
+    goHome();
+  }catch(e){
+    err.textContent = "网络连接失败，请检查网络后重试";
+    btn.disabled = false;
+  }
+}
+function accDoLogout(){
+  if(!confirm("退出登录后，这台设备上仍保留当前进度；下次可重新登录同步。确定退出吗？")) return;
+  authLogout();
+  goHome();
+}
+
+/* ================================================================
+   打印练习页
+================================================================ */
+let printSubj = "math", printCount = 10;
+function printableLevels(subj, grade){
+  return levelsFor(subj, grade).filter(l=> !l.type && l.id!=="e7"); // 排除写作/跟读/分级阅读入口、及听音选图（需音频）
+}
+function openPrint(){
+  planContext = -1;
+  printSubj = "math";
+  $("pr-subj").innerHTML = [["math","数学"],["chinese","语文"],["english","英语"]].map(([k,n])=>
+    `<button class="${k===printSubj?'sel':''}" onclick="pickPrintSubj('${k}')">${n}</button>`).join("");
+  $("pr-count").innerHTML = [10,20,30].map(n=>
+    `<button class="${n===printCount?'sel':''}" onclick="setPrintCount(${n})">${n} 题</button>`).join("");
+  renderPrintLevels();
+  $("ws-wrap").classList.add("hidden");
+  show("page-print");
+}
+function pickPrintSubj(s){
+  printSubj = s;
+  document.querySelectorAll("#pr-subj button").forEach(b=>b.classList.remove("sel"));
+  $("pr-subj").innerHTML = [["math","数学"],["chinese","语文"],["english","英语"]].map(([k,n])=>
+    `<button class="${k===printSubj?'sel':''}" onclick="pickPrintSubj('${k}')">${n}</button>`).join("");
+  renderPrintLevels();
+  $("ws-wrap").classList.add("hidden");
+}
+function setPrintCount(n){
+  printCount = n;
+  $("pr-count").innerHTML = [10,20,30].map(x=>
+    `<button class="${x===printCount?'sel':''}" onclick="setPrintCount(${x})">${x} 题</button>`).join("");
+}
+function renderPrintLevels(){
+  const g = P().grade;
+  const list = printableLevels(printSubj, g);
+  $("pr-level").innerHTML = list.length
+    ? list.map(l=>`<option value="${l.id}">${l.name}</option>`).join("")
+    : `<option value="">（暂无可打印的内容）</option>`;
+}
+function printText(html){ return String(html||"").replace(/<[^>]+>/g,"").replace(/&nbsp;/g," ").replace(/\s+/g," ").trim(); }
+function buildN(level, n){
+  if(level.bank) return pickN(level.bank, Math.min(n, level.bank.length));
+  const out=[], seen=new Set(); let g=0;
+  while(out.length<n && g<n*15){ g++; const q=level.gen();
+    const k=(q.text||"")+"|"+(q.answer||""); if(seen.has(k)) continue; seen.add(k); out.push(q); }
+  return out;
+}
+function genWorksheet(){
+  const id = $("pr-level").value;
+  if(!id){ alert("请先选择练习内容"); return; }
+  const lv = findLevel(id);
+  const qs = buildN(lv, printCount);
+  const subjName = ({math:"数学",chinese:"语文",english:"英语"})[printSubj];
+  const keys = [];
+  const items = qs.map((q,i)=>{
+    const opts = shuffle(q.options.slice());
+    const ci = opts.indexOf(q.answer);
+    keys.push((i+1)+". "+("ABCD"[ci]||"?"));
+    const passage = q.passage ? `<div class="ws-passage">${printText(q.passage)}</div>` : "";
+    const emoji = q.emoji ? `<div class="ws-emoji">${q.emoji}</div>` : "";
+    const optline = opts.map((o,j)=>`<span class="ws-opt">${"ABCD"[j]}. ${printText(o)}</span>`).join("");
+    return `<li>${passage}<div class="ws-q">${printText(q.text)}</div>${emoji}<div class="ws-opts">${optline}</div></li>`;
+  }).join("");
+  const today = new Date(); const dstr = today.getFullYear()+"年"+(today.getMonth()+1)+"月"+today.getDate()+"日";
+  $("print-preview").innerHTML = `
+    <div class="ws-head">
+      <div class="ws-title">星星学习乐园 · ${subjName}练习（${GRADE_NAMES[P().grade]}）</div>
+      <div class="ws-meta"><span>姓名：____________</span><span>日期：____________</span><span>用时：________</span></div>
+    </div>
+    <ol class="ws-qs">${items}</ol>
+    <div class="ws-answers"><b>参考答案（家长核对）：</b><br>${keys.join("　")}</div>
+    <div class="ws-foot">星星学习乐园 · liuliuheshuaishuai.com　生成于 ${dstr}</div>`;
+  $("ws-wrap").classList.remove("hidden");
+  $("ws-wrap").scrollIntoView({behavior:"smooth", block:"start"});
+}
+function doPrint(){ window.print(); }
 /* ===== 情绪小卡片（不评分、不施压）===== */
 function renderMood(){
   const p = P(), t = todayStr();
@@ -2130,22 +2751,25 @@ function backToLevels(){
 ================================================================ */
 let quiz = null;
 function buildQuestions(level){
+  let out;
   if(level.bank){
     // 题库型：随机取不重复的题；不足 8 道就出全部
-    return pickN(level.bank, Math.min(8, level.bank.length));
+    out = pickN(level.bank, Math.min(8, level.bank.length));
+  }else{
+    // 生成型：按题面+答案去重，避免一轮里出现重复题
+    out = []; const seen = new Set(); let guard = 0;
+    while(out.length < 8 && guard < 120){
+      guard++;
+      const q = level.gen();
+      const key = (q.text||"")+"|"+(q.emoji||"")+"|"+(q.passage||"")+"|"+(q.answer||"")+"|"+(q.say||"");
+      if(seen.has(key)) continue;
+      seen.add(key);
+      out.push(q);
+    }
   }
-  // 生成型：按题面+答案去重，避免一轮里出现重复题
-  const out = [], seen = new Set();
-  let guard = 0;
-  while(out.length < 8 && guard < 120){
-    guard++;
-    const q = level.gen();
-    const key = (q.text||"")+"|"+(q.emoji||"")+"|"+(q.passage||"")+"|"+(q.answer||"")+"|"+(q.say||"");
-    if(seen.has(key)) continue;
-    seen.add(key);
-    out.push(q);
-  }
-  // 若该题型能产生的不同题面不足 8 道，就出实际数量（不再用重复填充）
+  // 盖上知识点+学科标签（来自关卡），供错题分类/掌握率/薄弱点分析使用
+  if(level.kp) out.forEach(q=>{ if(!q.kp) q.kp = level.kp; });
+  if(level.subj) out.forEach(q=>{ if(!q.subj) q.subj = level.subj; });
   return out;
 }
 function startLevel(id){
@@ -2178,6 +2802,7 @@ function renderQuestion(){
   $("options").innerHTML = q.options.map((o,i)=>
     `<button class="opt${big}" onclick="answer(${i})">${o}</button>`).join("");
   quiz.locked = false;
+  quiz._qStart = Date.now();   // 记录本题开始时间，用于统计答题用时
   // 自动朗读
   if(q.autoSay && q.say){ setTimeout(()=>speak(q.say), 350); }
   else if(voiceOn()){
@@ -2194,6 +2819,27 @@ function speakCurrent(){ const q = quiz && quiz.questions[quiz.index]; if(!q) re
 
 const PRAISE = ["太棒了！🌟","答对啦！👏","真聪明！✨","完全正确！🎉","你真厉害！💪","好样的！🦄"];
 const CHEER = ["没关系，再想想～","下次一定行！💛","错了也是学习，加油！","记住它，你就更棒啦！"];
+// 记录每道题的知识点·对错·用时（为掌握率/易错点/进步曲线积累原始数据）
+function recordKpStat(q, right, sec){
+  const p = P(); if(!p) return;
+  const subj = q.subj || currentSubject || "";
+  if(q.kp){
+    if(!p.kpStats) p.kpStats = {};
+    const key = subj + "|" + q.kp;
+    const s = p.kpStats[key] || (p.kpStats[key] = {subj:subj, kp:q.kp, n:0, c:0, t:0});
+    s.n++; if(right) s.c++; s.t += Math.min(Math.max(sec,0), 120);
+  }
+  // 每日正确率（进步曲线用）
+  if(!p.daily) p.daily = {};
+  const d = todayStr();
+  const dd = p.daily[d] || (p.daily[d] = {n:0, c:0});
+  dd.n++; if(right) dd.c++;
+  const keys = Object.keys(p.daily);
+  if(keys.length > 180){
+    keys.sort((a,b)=>parseDate(a)-parseDate(b));
+    for(let i=0;i<keys.length-180;i++) delete p.daily[keys[i]];
+  }
+}
 function answer(i){
   if(quiz.locked) return;
   quiz.locked = true;
@@ -2208,6 +2854,8 @@ function answer(i){
   });
   const fb = $("feedback");
   q._got = right;
+  const elapsed = quiz._qStart ? (Date.now()-quiz._qStart)/1000 : 0;
+  recordKpStat(q, right, elapsed);   // 记录知识点·对错·用时（地基数据）
   const isTheme = quiz.source && quiz.source.type==="theme";
   if(right){
     quiz.correct++;
@@ -2543,7 +3191,7 @@ function addToWrong(q){
   const ex = p.wrong.find(w=>w.key===k);
   if(ex){ srsReschedule(ex, false); saveState(); return; }   // 已在本中：答错→重置复习计划
   p.wrong.push({key:k, tag:q.tag, text:q.text, options:q.options, answer:q.answer,
-    emoji:q.emoji||"", passage:q.passage||"", say:q.say||"", subj:currentSubject,
+    emoji:q.emoji||"", passage:q.passage||"", say:q.say||"", subj:q.subj||currentSubject, kp:q.kp||"",
     stage:0, due:dayIndex()+SRS_INTERVALS[0]});
   if(p.wrong.length>100) p.wrong = p.wrong.slice(-100);
   saveState();
@@ -2562,6 +3210,65 @@ function removeFromWrong(q){
   p.wrong = p.wrong.filter(w=>w.key!==k);
   if(p.wrong.length!==n) saveState();
 }
+/* ===== 知识点讲解（按知识点写"这类题怎么想"，错题分组时显示）===== */
+const KP_TIPS = {
+  "数数与基数":"一个一个数，数到最后一个就是总数。可以用手指点着数，做到不重复、不漏数。",
+  "比较大小":"先看位数：位数多的更大；位数一样，就从最高位一位一位地比。",
+  "10以内加减法":"加法是合起来，减法是去掉。可以借助小棒或手指数一数。",
+  "凑十法":"想一想：这个数再加几就到 10。比如 7 凑 10，就加 3。",
+  "认识时间":"时针指着几就是几点；分针指 12 是整点，指 6 是半点。",
+  "认识人民币":"记住 1 元=10 角、1 角=10 分。买东西先算总价，再算找零。",
+  "认识图形":"记住每种图形的特征：三角形 3 条边，正方形 4 条边一样长，圆没有角。",
+  "20以内加减法":"进位加：先凑十再加剩下的；退位减：不够减就向前一位借 10。",
+  "表内乘法":"乘法就是几个相同的数相加。把乘法口诀背熟，又快又准。",
+  "表内除法":"除法可以想乘法：12÷3，就想'3 乘几等于 12'。",
+  "百以内加减法":"相同数位对齐，从个位算起；满十进一，不够就向前一位借。",
+  "万以内加减法":"数位对齐，从个位起一位一位算，注意进位和退位别漏。",
+  "混合运算":"先算乘除，后算加减；有括号要先算括号里面的。",
+  "倍数问题":"几倍就是几个几，用乘法；求一倍数（每份）用除法。",
+  "周长":"周长是绕一圈的总长度。长方形周长=(长+宽)×2。",
+  "分数的初步认识":"把一个整体平均分成几份，每一份就是它的几分之一。",
+  "常见的量":"记牢单位换算：1 米=100 厘米、1 元=10 角、1 时=60 分。",
+  "两步应用题":"先读懂问题，想清楚要先算什么、再算什么，分两步解决。",
+  "奥数思维":"先找规律或画个图，把复杂的问题变简单，别急着列算式。",
+  "角与图形":"锐角小于 90°，直角等于 90°，钝角大于 90°；三角形内角和是 180°。",
+  "多位数乘法":"从个位开始一位一位地乘，注意对齐数位、加上进位。",
+  "多位数除法":"从最高位除起，不够除就多看一位；余数一定要比除数小。",
+  "小数的认识":"小数点左边是整数，右边依次是十分位、百分位。",
+  "平均数":"平均数=总和÷个数。先把所有数加起来，再平均分。",
+  "面积":"长方形面积=长×宽，正方形面积=边长×边长。",
+  "小数运算":"加减时小数点对齐；乘法先按整数算，最后点上小数点。",
+  "分数加减法":"同分母分数，分母不变，把分子相加减就行。",
+  "简易方程":"把未知数设为 x，根据等量关系列式，两边同时加减乘除求出 x。",
+  "分数乘除法":"分数乘分数：分子乘分子、分母乘分母；除以一个数等于乘它的倒数。",
+  "百分数":"百分数就是分母为 100 的分数。打八折就是按 80% 来算。",
+  "比和比例":"比可以化简：前项和后项同时除以它们的最大公因数。",
+  "圆":"圆周长=π×直径，圆面积=π×半径×半径，π 约等于 3.14。",
+  "应用题":"先找出已知条件和要求的问题，画图或理清关系，再分步计算。",
+  "生活中的数学":"把题目和真实生活联系起来，想想现实中会怎么算。",
+  "拼音":"声母在前、韵母在后。多读几遍，注意发音的口型。",
+  "识字":"记住字的样子和读音，可以联系图画或组词来帮助记忆。",
+  "字音字形":"特别注意多音字和形近字，结合词语来判断读音和写法。",
+  "反义词":"想一想这个词相反的意思，比如'大'的反义词是'小'。",
+  "量词":"不同的东西用不同的量词：一匹马、一条鱼、一只鸟，平时多积累。",
+  "古诗词":"先理解诗的意思再背诵，记住上下句的对应，比死记更牢。",
+  "成语":"了解成语的意思和来历（小故事），用起来才准确。",
+  "近义词":"想意思相近的词，再体会它们之间细微的差别和用法。",
+  "病句与关联词":"读一遍句子，看是否通顺、有没有重复或矛盾；关联词常常成对出现。",
+  "文学常识":"记住名著、作者和主要人物，平时多读、多积累。",
+  "阅读理解":"先通读短文，再带着问题回到原文里找答案，不要凭印象猜。",
+  "写话":"看清图意，按'谁、在哪里、做什么'的顺序，写通顺几句话。",
+  "字母":"记住 26 个字母的大小写和顺序，注意容易混的 b/d、p/q。",
+  "词汇":"看图记单词，多读多拼写，把单词和中文意思牢牢对应起来。",
+  "数字词汇":"先记住 one 到 twenty 的拼写，再记整十的写法。",
+  "日常用语":"把常用对话整句记下来，多读多用，记住使用的场合。",
+  "听说":"跟着大声读、大声说，注意模仿语音和语调。",
+  "语法":"记住基本规则：be 动词随主语变化，名词复数一般加 s。",
+  "听力词汇":"听清单词的发音，把声音和图片、意思对应起来。",
+};
+function kpTip(kp){ return KP_TIPS[kp] || "仔细读题，想清楚这道题考的是什么，再作答。回看课本上这部分的例子会很有帮助。"; }
+const SUBJ_NAME = {math:"数学", chinese:"语文", english:"英语", review:"复习", kepu:"科普"};
+
 function srsDots(w){
   const total = SRS_INTERVALS.length, done = w.stage||0;
   const t = dayIndex(), isDue = (w.due==null?t:w.due) <= t;
@@ -2586,20 +3293,55 @@ function openWrong(){
   }else{
     $("wr-action").innerHTML = "";
   }
-  $("wr-list").innerHTML = p.wrong.length
-    ? p.wrong.slice().sort((a,b)=>(a.due||0)-(b.due||0)).map(w=>
+  // 错题按知识点分组
+  if(p.wrong.length){
+    const groups = {};
+    p.wrong.forEach(w=>{
+      const subj = w.subj||"", kp = w.kp||"未分类";
+      const key = subj+"|"+kp;
+      (groups[key] || (groups[key]={subj, kp, items:[]})).items.push(w);
+    });
+    const arr = Object.values(groups).sort((a,b)=>b.items.length-a.items.length);
+    $("wr-list").innerHTML = arr.map((g,gi)=>{
+      const sn = SUBJ_NAME[g.subj] || "";
+      const canDrill = g.kp!=="未分类" && g.subj && LEVELS[g.subj] && LEVELS[g.subj].some(l=>l.kp===g.kp && !l.type);
+      const items = g.items.slice().sort((a,b)=>(a.due||0)-(b.due||0)).map(w=>
         `<div class="wrong-item"><span class="wtag">${w.tag||'题目'}</span>
          <div class="wq">${w.emoji?w.emoji+' ':''}${(w.passage?('<div style="font-size:13px;color:var(--ink-soft);margin-bottom:5px">'+w.passage+'</div>'):'')}${w.text}</div>
          <div class="wa">✓ 正确答案：${w.answer}</div>
-         <div class="srs-dots">${srsDots(w)}</div></div>`).join("")
-    : `<div class="card" style="text-align:center;padding:40px 20px">
+         <div class="srs-dots">${srsDots(w)}</div></div>`).join("");
+      return `<div class="kp-group">
+        <div class="kp-head"><span class="kp-name">${sn?sn+'·':''}${g.kp}</span><span class="kp-cnt">${g.items.length} 道</span></div>
+        <div class="kp-tools">
+          <button class="kp-tool" onclick="toggleKpTip(${gi})">💡 这类题怎么想</button>
+          ${canDrill?`<button class="kp-tool drill" onclick="startKpDrill('${g.subj}','${g.kp.replace(/'/g,"")}')">✏️ 同类强化练习</button>`:``}
+        </div>
+        <div class="kp-tip hidden" id="kptip-${gi}">${kpTip(g.kp)}</div>
+        ${items}
+      </div>`;
+    }).join("");
+  }else{
+    $("wr-list").innerHTML = `<div class="card" style="text-align:center;padding:40px 20px">
         <div style="font-size:48px">📭</div><p style="margin-top:10px;color:var(--ink-soft)">错题本是空的，太棒了！<br>答错的题会自动收进来，并按 1 天、3 天、7 天的节奏提醒你复习，连续答对就"毕业"啦。</p></div>`;
+  }
   show("page-wrong");
+}
+function toggleKpTip(gi){ $("kptip-"+gi).classList.toggle("hidden"); }
+function startKpDrill(subj, kp){
+  const g = P().grade;
+  let lv = (LEVELS[subj]||[]).find(l=>l.kp===kp && !l.type && l.grades.includes(g))
+        || (LEVELS[subj]||[]).find(l=>l.kp===kp && !l.type);
+  if(!lv){ alert("这个知识点暂时没有可练习的同类题～"); return; }
+  xxlyFeature("drill");
+  currentLevel = lv; currentSubject = subj; planContext = -1;
+  quiz = { questions: buildQuestions(lv), index:0, correct:0, locked:false, source:{type:"level"} };
+  show("page-quiz"); renderQuestion();
 }
 function buildReviewQuiz(items){
   const picked = pickN(items, Math.min(10, items.length));
   quiz = { questions: picked.map(w=>({tag:"复习 · "+(w.tag||''), text:w.text,
-      options:shuffle(w.options.slice()), answer:w.answer, emoji:w.emoji, passage:w.passage, say:w.say, _key:w.key})),
+      options:shuffle(w.options.slice()), answer:w.answer, emoji:w.emoji, passage:w.passage, say:w.say,
+      kp:w.kp, subj:w.subj, _key:w.key})),
     index:0, correct:0, locked:false, source:{type:"wrong", subj:"review"} };
   currentSubject = "review";
   show("page-quiz"); renderQuestion();
@@ -2754,6 +3496,68 @@ function last7(){
     days.push(d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()); }
   return days;
 }
+/* ===== 第3条：知识点掌握 / 薄弱点 / 进步曲线 ===== */
+let rpRange = 7;
+function kpMasteryList(p){
+  const out = [];
+  for(const key in (p.kpStats||{})){
+    const s = p.kpStats[key]; if(!s || !s.n) continue;
+    out.push({subj:s.subj, kp:s.kp, n:s.n, c:s.c, t:s.t||0,
+      pct: Math.round(s.c/s.n*100), sec: Math.round((s.t||0)/s.n)});
+  }
+  return out;
+}
+function kpColor(pct){ return pct>=85 ? "#6FBF73" : pct>=70 ? "#FFB300" : "#FF7E67"; }
+function renderKpMastery(p){
+  const list = kpMasteryList(p);
+  if(!list.length){ $("rp-kp").innerHTML = `<div class="rp-empty">继续做题，这里会显示每个知识点的掌握情况～</div>`; return; }
+  const bySubj = {};
+  list.forEach(x=>{ (bySubj[x.subj] || (bySubj[x.subj]=[])).push(x); });
+  let html = "";
+  ["math","chinese","english"].forEach(subj=>{
+    const arr = bySubj[subj]; if(!arr) return;
+    arr.sort((a,b)=>a.pct-b.pct);   // 薄弱在前
+    html += `<div class="kpm-subj">${SUBJ_NAME[subj]||subj}</div>`;
+    html += arr.map(x=>{
+      const few = x.n<3 ? `<span style="color:#B9A98A">(题量少)</span>` : `${x.sec}秒/题`;
+      return `<div class="kpm-row">
+        <span class="kpm-name">${x.kp}</span>
+        <span class="kpm-track"><i class="kpm-fill" style="width:${x.pct}%;background:${kpColor(x.pct)}"></i></span>
+        <span class="kpm-pct">${x.pct}% · ${few}</span></div>`;
+    }).join("");
+  });
+  $("rp-kp").innerHTML = html || `<div class="rp-empty">继续做题，这里会显示每个知识点的掌握情况～</div>`;
+}
+function renderWeakKp(p){
+  const list = kpMasteryList(p).filter(x=>x.n>=3 && x.pct<70).sort((a,b)=>a.pct-b.pct).slice(0,6);
+  const enough = kpMasteryList(p).some(x=>x.n>=3);
+  if(!enough){ $("rp-weak").innerHTML = `<div class="rp-empty">继续学习，积累一些题量后，这里会自动找出需要加强的知识点。</div>`; return; }
+  if(!list.length){ $("rp-weak").innerHTML = `<div class="rp-empty">👍 暂时没有明显薄弱的知识点，继续保持！</div>`; return; }
+  $("rp-weak").innerHTML = list.map(x=>
+    `<div class="weak-row">
+      <div class="wk-info"><div class="wk-kp">${SUBJ_NAME[x.subj]||''}·${x.kp}</div><div class="wk-pct">掌握 ${x.pct}%（做了 ${x.n} 题）</div></div>
+      <button class="wk-btn" onclick="startKpDrill('${x.subj}','${x.kp.replace(/'/g,"")}')">✏️ 专项练习</button>
+    </div>`).join("");
+}
+function renderProgressCurve(p){
+  const daily = p.daily || {};
+  const days = [];
+  for(let i=13;i>=0;i--){ const d=new Date(); d.setDate(d.getDate()-i);
+    days.push(d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()); }
+  const withData = days.filter(d=>daily[d] && daily[d].n>0);
+  if(withData.length<3){ $("rp-curve").innerHTML = `<div class="rp-empty">继续学习几天，就能看到正确率的进步曲线啦～</div>`; return; }
+  $("rp-curve").innerHTML = `<div class="curve">` + days.map(d=>{
+    const r = daily[d];
+    const md = d.split("-").slice(1).join("/");
+    if(!r || !r.n) return `<div class="cbar"><span class="cv"></span><div class="cc" style="height:2px;background:#E8E3D6"></div><span class="cd">${md}</span></div>`;
+    const pct = Math.round(r.c/r.n*100);
+    return `<div class="cbar"><span class="cv">${pct}</span><div class="cc" style="height:${Math.max(pct,3)}%"></div><span class="cd">${md}</span></div>`;
+  }).join("") + `</div>`;
+}
+function setRpRange(d){
+  rpRange = d;
+  document.querySelectorAll("#rp-range .rp-rbtn").forEach(b=>b.classList.toggle("sel", +b.getAttribute("data-d")===d));
+}
 function openReport(){
   planContext = -1;
   const p = P();
@@ -2777,6 +3581,11 @@ function openReport(){
       <span class="bp">${q?pct+'%':'—'}</span></div>`;
   }
   $("rp-bars").innerHTML = bars;
+  renderKpMastery(p);
+  renderWeakKp(p);
+  renderProgressCurve(p);
+  rpRange = 7;
+  document.querySelectorAll("#rp-range .rp-rbtn").forEach(b=>b.classList.toggle("sel", b.getAttribute("data-d")==="7"));
   $("rp-ai").classList.add("hidden");
   $("rp-ai").textContent = "";
   $("rp-btn").disabled = false;
@@ -2848,38 +3657,60 @@ function copyWeekly(){
   try{ document.execCommand && document.execCommand("copy"); }catch(e){}
   done();
 }
+function datesInRange(n){
+  const set = new Set();
+  for(let i=0;i<n;i++){ const d=new Date(); d.setDate(d.getDate()-i); set.add(d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()); }
+  return set;
+}
 function buildReportData(){
-  const p = P(), days = last7();
-  const subjName = {math:"数学",chinese:"语文",english:"英语",kepu:"科普",sport:"运动"};
+  const p = P(), n = rpRange||7;
+  const inRange = datesInRange(n);
+  const subjName = {math:"数学",chinese:"语文",english:"英语",kepu:"科普",sport:"运动",labor:"劳动"};
   const stat = {};
-  p.log.filter(l=>days.includes(l.d)).forEach(l=>{
+  p.log.filter(l=>inRange.has(l.d)).forEach(l=>{
     const k = subjName[l.subj]||l.subj;
     if(!stat[k]) stat[k]={c:0,n:0};
     stat[k].c += l.c; stat[k].n += 8;
   });
+  // 知识点掌握 / 薄弱点 / 速度
+  const kpAll = kpMasteryList(p);
+  const kpMastery = kpAll.filter(x=>x.n>=3).map(x=>({kp:(subjName[x.subj]||'')+"·"+x.kp, pct:x.pct, n:x.n, sec:x.sec}));
+  const weak = kpAll.filter(x=>x.n>=3 && x.pct<70).sort((a,b)=>a.pct-b.pct).slice(0,5)
+    .map(x=>(subjName[x.subj]||'')+"·"+x.kp+`(${x.pct}%)`);
+  // 进步：范围内每日正确率
+  const prog = [];
+  [...inRange].sort((a,b)=>parseDate(a)-parseDate(b)).forEach(d=>{
+    const r = (p.daily||{})[d]; if(r && r.n) prog.push(Math.round(r.c/r.n*100));
+  });
+  const trend = prog.length>=4 ? (prog.slice(-3).reduce((a,b)=>a+b,0)/3 - prog.slice(0,3).reduce((a,b)=>a+b,0)/3) : 0;
   const wrongTags = {};
-  p.wrong.forEach(w=>{ const t=(w.tag||'').split(' · ')[0]; wrongTags[t]=(wrongTags[t]||0)+1; });
-  return { name:p.name, grade:GRADE_NAMES[p.grade], stat, streak:p.streak||0,
-    totalStars:totalStars(), wrongCount:p.wrong.length, wrongTags };
+  p.wrong.forEach(w=>{ const t=(w.subj?(subjName[w.subj]+'·'):'')+(w.kp||(w.tag||'').split(' · ')[0]); wrongTags[t]=(wrongTags[t]||0)+1; });
+  return { name:p.name, grade:GRADE_NAMES[p.grade], stat, streak:p.streak||0, periodDays:n,
+    totalStars:totalStars(), wrongCount:p.wrong.length, wrongTags, kpMastery, weak, trend:Math.round(trend) };
 }
 function localAnalyze(d){
-  let s = `${d.name}（${d.grade}）最近 7 天学习小结\n\n`;
+  const pl = d.periodDays===7?"最近 7 天":d.periodDays===30?"最近 30 天":"最近 90 天";
+  let s = `${d.name}（${d.grade}）${pl}学习小结\n\n`;
   s += `⭐ 累计星星 ${d.totalStars} 颗，连续学习 ${d.streak} 天。\n\n`;
   const arr = Object.entries(d.stat).map(([k,v])=>[k, v.n?Math.round(v.c/v.n*100):0, v.n]);
   if(arr.length){
     arr.sort((a,b)=>b[1]-a[1]);
     s += "📊 各科表现：\n";
     arr.forEach(([k,p,n])=> s += `· ${k}：正确率 ${p}%（练习 ${n/8} 关）\n`);
-    const best = arr[0], weak = arr[arr.length-1];
-    s += `\n💪 ${best[0]}学得最扎实，继续保持！`;
-    if(weak[1] < 70 && weak[0]!==best[0]) s += `\n📌 ${weak[0]}可以多练一练，别着急，一步一步来。`;
-  }else{
-    s += "这几天还没有完成练习记录，先从今天的计划开始吧！\n";
   }
+  if(d.kpMastery && d.kpMastery.length){
+    const top = d.kpMastery.slice().sort((a,b)=>b.pct-a.pct)[0];
+    s += `\n💪 掌握最好的知识点：${top.kp}（${top.pct}%），真棒！`;
+  }
+  if(d.weak && d.weak.length){
+    s += `\n📌 需要加强：${d.weak.join("、")}。可以用报告里的"专项练习"针对性练一练。`;
+  }else if(d.kpMastery && d.kpMastery.length){
+    s += `\n👍 各知识点掌握都不错，继续保持！`;
+  }
+  if(d.trend>5) s += `\n📈 正确率在稳步上升，进步看得见！`;
+  else if(d.trend<-5) s += `\n🌱 最近正确率有些波动，放慢一点、把基础打牢就好。`;
   const wt = Object.entries(d.wrongTags).sort((a,b)=>b[1]-a[1]);
-  if(wt.length){
-    s += `\n\n📕 错题本里「${wt[0][0]}」类题目最多（${wt[0][1]} 道），建议优先复习。`;
-  }
+  if(wt.length){ s += `\n\n📕 错题本里「${wt[0][0]}」最多（${wt[0][1]} 道），建议优先复习。`; }
   s += "\n\n🌟 给家长的小建议：多肯定孩子的努力而不是结果，每天 15～20 分钟、配合运动和亲子共读，效果最好。";
   return s;
 }
@@ -2890,10 +3721,14 @@ async function aiAnalyze(){
   box.textContent = "🤖 正在认真阅读学习记录……";
   const d = buildReportData();
   try{
-    const prompt = `你是一位温暖、专业的小学老师。这是学生「${d.name}」（${d.grade}）最近7天的学习数据：\n`+
+    const pl = d.periodDays===7?"最近7天":d.periodDays===30?"最近30天":"最近90天";
+    const prompt = `你是一位温暖、专业的小学老师。这是学生「${d.name}」（${d.grade}）${pl}的学习数据：\n`+
       `累计星星：${d.totalStars}，连续学习：${d.streak}天，错题数：${d.wrongCount}\n`+
-      `各科正确率：${JSON.stringify(d.stat)}\n错题分类：${JSON.stringify(d.wrongTags)}\n\n`+
-      `请用中文写一段150字左右的鼓励性学习分析，给孩子看：①先具体表扬亮点；②温柔指出1个可以加强的地方；③给一句鼓励的话。语气亲切，适合${d.grade}的孩子阅读，多用"你"。不要用markdown符号。`;
+      `各科正确率：${JSON.stringify(d.stat)}\n`+
+      `各知识点掌握率：${JSON.stringify(d.kpMastery)}\n`+
+      `较薄弱的知识点：${JSON.stringify(d.weak)}\n`+
+      `正确率变化趋势(正数为进步)：${d.trend}\n\n`+
+      `请用中文写一段约180字的鼓励性学习分析，给家长和孩子看：①具体表扬1-2个掌握好的知识点或进步；②温柔指出1-2个需要加强的具体知识点并给简短建议；③用一句话鼓励。语气亲切，适合${d.grade}的孩子，多用"你"。不要用markdown符号和星号。`;
     const resp = await fetch("https://api.anthropic.com/v1/messages",{
       method:"POST", headers:{"Content-Type":"application/json"},
       body:JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:1000,
@@ -2990,10 +3825,148 @@ function xxlyInit(){
   }catch(e){}
 }
 
+/* ================================================================
+   账号 + 跨设备进度同步（可选登录：不登录照常本地用）
+   手机号 + 密码（暂不验证码）：手机号内部转成虚拟邮箱接入 Supabase
+================================================================ */
+const AUTH_URL = "https://ghxwzqaxifumxiuimcvz.supabase.co";
+const AUTH_KEY = "sb_publishable_f3gUm3FRy0424pTwua-DUA_y1PImumD";
+const AUTH_SESSION = "xxly-user-session";
+function phoneToEmail(phone){ return phone + "@u.liuliuheshuaishuai.com"; }
+function getUserSession(){ try{ return JSON.parse(localStorage.getItem(AUTH_SESSION)||"null"); }catch(e){ return null; } }
+function setUserSession(s){ try{ localStorage.setItem(AUTH_SESSION, JSON.stringify(s)); }catch(e){} }
+function clearUserSession(){ try{ localStorage.removeItem(AUTH_SESSION); }catch(e){} }
+function isLoggedIn(){ const s=getUserSession(); return !!(s && s.access_token); }
+function curPhone(){ const s=getUserSession(); return s && s.phone ? s.phone : ""; }
+function maskPhone(p){ return p && p.length===11 ? p.slice(0,3)+"****"+p.slice(7) : p; }
+
+async function authRequest(path, body){
+  const res = await fetch(AUTH_URL + path, {
+    method:"POST",
+    headers:{ "Content-Type":"application/json", "apikey":AUTH_KEY },
+    body: JSON.stringify(body)
+  });
+  const data = await res.json().catch(()=>({}));
+  return { ok: res.ok, status: res.status, data };
+}
+
+// 注册：手机号 + 密码
+async function authRegister(phone, password){
+  const r = await authRequest("/auth/v1/signup", { email: phoneToEmail(phone), password });
+  if(!r.ok){
+    const msg = (r.data && (r.data.msg || r.data.error_description || r.data.message)) || "";
+    if(/registered|exists|already/i.test(msg)) return { ok:false, reason:"exists" };
+    return { ok:false, reason:"other", msg };
+  }
+  // signup 成功通常直接返回 session（需关闭邮箱确认）
+  if(r.data && r.data.access_token){
+    saveSession(r.data, phone);
+    return { ok:true, session:true };
+  }
+  // 若返回 user 但无 token：尝试直接登录一次
+  const li = await authLogin(phone, password);
+  return li.ok ? { ok:true, session:true } : { ok:false, reason:"needconfirm" };
+}
+
+// 登录
+async function authLogin(phone, password){
+  const r = await authRequest("/auth/v1/token?grant_type=password", { email: phoneToEmail(phone), password });
+  if(!r.ok || !r.data.access_token) return { ok:false };
+  saveSession(r.data, phone);
+  return { ok:true };
+}
+
+function saveSession(tok, phone){
+  setUserSession({
+    access_token: tok.access_token,
+    refresh_token: tok.refresh_token,
+    user_id: tok.user && tok.user.id ? tok.user.id : (tok.user_id||""),
+    phone: phone
+  });
+}
+
+async function authRefresh(){
+  const s = getUserSession();
+  if(!s || !s.refresh_token) return false;
+  const r = await authRequest("/auth/v1/token?grant_type=refresh_token", { refresh_token: s.refresh_token });
+  if(r.ok && r.data.access_token){ saveSession(r.data, s.phone); return true; }
+  return false;
+}
+
+function authLogout(){
+  const s = getUserSession();
+  try{ if(s&&s.access_token) fetch(AUTH_URL+"/auth/v1/logout",{method:"POST",headers:{"apikey":AUTH_KEY,"Authorization":"Bearer "+s.access_token}}).catch(()=>{}); }catch(e){}
+  clearUserSession();
+}
+
+// 云端读取进度
+async function cloudFetch(){
+  const s = getUserSession(); if(!s) return null;
+  let res = await fetch(AUTH_URL+"/rest/v1/xxly_progress?select=data,updated_at&user_id=eq."+s.user_id, {
+    headers:{ "apikey":AUTH_KEY, "Authorization":"Bearer "+s.access_token }
+  });
+  if(res.status===401){ if(await authRefresh()){ return cloudFetch(); } return null; }
+  if(!res.ok) return null;
+  const arr = await res.json().catch(()=>[]);
+  return (arr && arr[0]) ? arr[0] : null;
+}
+
+// 云端保存进度（去抖、不阻塞）
+let cloudPushTimer = null;
+function scheduleCloudPush(){
+  if(!isLoggedIn()) return;
+  clearTimeout(cloudPushTimer);
+  cloudPushTimer = setTimeout(cloudPushNow, 1500);
+}
+async function cloudPushNow(){
+  const s = getUserSession(); if(!s) return;
+  try{
+    const body = { user_id: s.user_id, data: state, updated_at: new Date().toISOString() };
+    let res = await fetch(AUTH_URL+"/rest/v1/xxly_progress?on_conflict=user_id", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json", "apikey":AUTH_KEY, "Authorization":"Bearer "+s.access_token, "Prefer":"resolution=merge-duplicates,return=minimal" },
+      body: JSON.stringify(body)
+    });
+    if(res.status===401){ if(await authRefresh()) cloudPushNow(); }
+  }catch(e){}
+}
+
+// 登录后：合并本地与云端（按更新时间取较新者）
+async function syncAfterAuth(){
+  const local = readLocalState();
+  let cloud = null;
+  try{ cloud = await cloudFetch(); }catch(e){}
+  if(cloud && cloud.data && cloud.data.profiles){
+    const cloudUpd = cloud.data.updatedAt || Date.parse(cloud.updated_at) || 0;
+    const localUpd = (local && local.updatedAt) || 0;
+    if(local && local.profiles && local.profiles.length && localUpd > cloudUpd){
+      applyState(local); saveStateLocalOnly(); cloudPushNow();   // 本地更新，推到云端
+    }else{
+      applyState(cloud.data); saveStateLocalOnly();               // 用云端
+    }
+  }else{
+    // 云端还没有数据：把本地进度上传
+    if(local && local.profiles) applyState(local); else applyState({active:0,profiles:[]});
+    saveStateLocalOnly(); cloudPushNow();
+  }
+}
+function saveStateLocalOnly(){
+  try{ localStorage.setItem("xxly-quansxueduan", JSON.stringify(state)); }catch(e){}
+}
+
 function enterApp(){
   try{ window.speechSynthesis && window.speechSynthesis.getVoices(); }catch(e){}  // 预热语音
   xxlyInit();
-  loadState();
+  if(isLoggedIn()){
+    bootWithCloud();
+  }else{
+    loadState();
+  }
+}
+async function bootWithCloud(){
+  try{ await syncAfterAuth(); }
+  catch(e){ const s=readLocalState(); if(s) applyState(s); else applyState({active:0,profiles:[]}); }
+  routeAfterLoad();
 }
 // 打开网站先展示欢迎介绍页
 show("page-welcome");
