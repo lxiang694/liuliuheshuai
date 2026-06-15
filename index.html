@@ -467,12 +467,15 @@
     /* 科普/阅读正文更易读 */
     .kepu-card .kp-content,.weekly-box{font-size:16px;line-height:1.95}
     /* 欢迎页在大屏更舒展 */
-    .wel-hero{padding:48px 30px 40px}
-    .wel-hero h1{font-size:38px}
+    .wel-hero{padding:54px 30px 44px}
+    .wel-hero h1{font-size:40px}
     .wel-hero .sub{font-size:17px}
     .wel-feats{grid-template-columns:repeat(4,1fr)}
     .wel-cta{font-size:21px;max-width:440px}
     .wel-stage li{font-size:15px}
+    .wel-stats .ws-item b{font-size:30px}
+    .wel-step .stx h4{font-size:15px}
+    .wel-step .stx p{font-size:12.5px}
   }
   /* 更大的电脑屏：进一步留白与放大 */
   @media (min-width:1100px){
@@ -514,24 +517,38 @@
   #page-welcome{ animation:fadeIn .4s ease; }
   @keyframes fadeIn{from{opacity:0}to{opacity:1}}
   .wel-hero{
-    position:relative; text-align:center; border-radius:32px; padding:40px 22px 34px; overflow:hidden;
-    background:linear-gradient(150deg,#5BB8F5 0%,#7C9DF5 45%,#9B7EDE 100%);
-    box-shadow:0 12px 30px rgba(91,140,220,.35); margin-bottom:18px;
+    position:relative; text-align:center; border-radius:34px; padding:46px 24px 36px; overflow:hidden;
+    background:linear-gradient(155deg,#5BB8F5 0%,#6E9BF2 40%,#9B7EDE 78%,#B57EE6 100%);
+    box-shadow:0 18px 40px rgba(91,140,220,.38); margin-bottom:16px;
   }
   .wel-hero::before{content:"";position:absolute;inset:0;
     background-image:radial-gradient(circle,rgba(255,255,255,.9) 2px,transparent 2.4px),radial-gradient(circle,rgba(255,255,255,.5) 1.5px,transparent 2px);
-    background-size:70px 60px,40px 38px;opacity:.35;}
-  .wel-mascots{font-size:46px;letter-spacing:4px;position:relative;margin-bottom:6px;animation:bob 3s ease-in-out infinite}
+    background-size:70px 60px,40px 38px;opacity:.3;}
+  .wel-glow{position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,200,61,.5),transparent 70%);top:-90px;right:-70px;filter:blur(8px)}
+  .wel-mascots{font-size:48px;letter-spacing:4px;position:relative;margin-bottom:8px;animation:bob 3s ease-in-out infinite}
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-  .wel-hero h1{position:relative;color:#fff;font-size:30px;font-weight:900;letter-spacing:1px;text-shadow:0 3px 0 rgba(0,0,0,.12);margin-bottom:8px;line-height:1.3}
-  .wel-hero .sub{position:relative;color:#fff;font-size:15.5px;opacity:.95;line-height:1.7;max-width:460px;margin:0 auto 6px}
-  .wel-badges{position:relative;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:14px}
-  .wel-badge{background:rgba(255,255,255,.22);border:1.5px solid rgba(255,255,255,.4);color:#fff;border-radius:999px;padding:5px 13px;font-size:12.5px;font-weight:700;backdrop-filter:blur(4px)}
-  .wel-cta{display:block;width:100%;max-width:380px;margin:18px auto 0;border:none;border-radius:20px;cursor:pointer;
+  .wel-hero h1{position:relative;color:#fff;font-size:33px;font-weight:900;letter-spacing:2px;text-shadow:0 3px 0 rgba(0,0,0,.14);margin-bottom:10px;line-height:1.25}
+  .wel-hero .sub{position:relative;color:#fff;font-size:15.5px;opacity:.96;line-height:1.75;max-width:460px;margin:0 auto}
+  .wel-cta{display:block;width:100%;max-width:380px;margin:22px auto 0;border:none;border-radius:20px;cursor:pointer;
     font-family:inherit;font-weight:900;font-size:19px;letter-spacing:2px;color:#7A4A00;padding:18px;
     background:linear-gradient(180deg,#FFD64D,#FFC107);box-shadow:0 6px 0 #E8A800;position:relative;transition:transform .08s}
   .wel-cta:active{transform:translateY(3px);box-shadow:0 3px 0 #E8A800}
   .wel-cta .arr{margin-left:6px}
+  .wel-cta-sub{position:relative;color:#fff;font-size:12px;opacity:.92;margin-top:12px;line-height:1.7}
+  /* 数据信任条 */
+  .wel-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:16px 10px;margin-bottom:18px}
+  .wel-stats .ws-item{text-align:center}
+  .wel-stats .ws-item b{display:block;font-size:24px;font-weight:900;color:var(--sky-deep);line-height:1.1}
+  .wel-stats .ws-item:nth-child(2) b{color:var(--coral-deep)}
+  .wel-stats .ws-item:nth-child(3) b{color:var(--grass-deep)}
+  .wel-stats .ws-item:nth-child(4) b{color:var(--violet-deep)}
+  .wel-stats .ws-item span{font-size:11.5px;color:var(--ink-soft);font-weight:700}
+  /* 三步开始 */
+  .wel-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:8px}
+  .wel-step{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:14px 10px;text-align:center}
+  .wel-step .sn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(180deg,#FFD64D,#FFC107);color:#7A4A00;font-weight:900;font-size:15px;margin-bottom:8px}
+  .wel-step .stx h4{font-size:13.5px;font-weight:900;margin-bottom:3px;color:var(--ink)}
+  .wel-step .stx p{font-size:11px;color:var(--ink-soft);line-height:1.5}
 
   .wel-sec-title{font-size:20px;font-weight:900;text-align:center;margin:26px 0 4px;color:var(--ink)}
   .wel-sec-sub{font-size:13px;color:var(--ink-soft);text-align:center;margin-bottom:16px}
@@ -557,12 +574,16 @@
   .wel-foot{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:22px;line-height:1.7}
 
   @media (max-width:430px){
-    .wel-hero h1{font-size:25px}
-    .wel-hero{padding:32px 16px 28px}
+    .wel-hero h1{font-size:26px}
+    .wel-hero{padding:34px 16px 28px}
     .wel-mascots{font-size:38px}
     .wel-feats{gap:10px}
     .wel-feat{padding:14px 12px}
     .wel-sec-title{font-size:18px}
+    .wel-stats{padding:14px 6px;gap:6px}
+    .wel-stats .ws-item b{font-size:21px}
+    .wel-stats .ws-item span{font-size:10.5px}
+    .wel-step{padding:12px 7px}
   }
   @media (max-width:340px){
     .wel-feats{grid-template-columns:1fr}
@@ -575,29 +596,38 @@
   <!-- ===== 欢迎介绍页 ===== -->
   <div id="page-welcome" class="hidden">
     <div class="wel-hero">
+      <div class="wel-glow"></div>
       <div class="wel-mascots">🐰🦊🐼🦄🐧</div>
       <h1>星星学习乐园</h1>
-      <div class="sub">幼小衔接到六年级，一个让孩子<b>爱上学习</b>的乐园。<br>边玩边学，攒星星、交伙伴，每天进步一点点！</div>
-      <div class="wel-badges">
-        <span class="wel-badge">🎯 分年级闯关</span>
-        <span class="wel-badge">⭐ 集星星</span>
-        <span class="wel-badge">🔊 启蒙会读题</span>
-        <span class="wel-badge">🔭 科普百科</span>
-      </div>
-      <button class="wel-cta" onclick="enterApp()">🚀 开始学习<span class="arr">→</span></button>
+      <div class="sub">幼小衔接到六年级，一个让孩子<b>爱上学习</b>的乐园<br>边玩边学 · 集星星 · 交伙伴，每天进步一点点</div>
+      <button class="wel-cta" onclick="enterApp()">🚀 免费开始学习<span class="arr">→</span></button>
+      <div class="wel-cta-sub">✓ 打开即用，无需注册　✓ 想换设备同步进度再登录</div>
+    </div>
+
+    <div class="wel-stats">
+      <div class="ws-item"><b>7</b><span>年级段</span></div>
+      <div class="ws-item"><b>3</b><span>主科目</span></div>
+      <div class="ws-item"><b>60+</b><span>关卡闯关</span></div>
+      <div class="ws-item"><b>53</b><span>知识点</span></div>
+    </div>
+
+    <div class="wel-steps">
+      <div class="wel-step"><span class="sn">1</span><div class="stx"><h4>选孩子年级</h4><p>自动匹配适龄内容</p></div></div>
+      <div class="wel-step"><span class="sn">2</span><div class="stx"><h4>每天玩着学</h4><p>闯关答题集星星</p></div></div>
+      <div class="wel-step"><span class="sn">3</span><div class="stx"><h4>越学越自信</h4><p>解锁伙伴与奖状</p></div></div>
     </div>
 
     <div class="wel-sec-title">为什么孩子喜欢，家长放心 💛</div>
     <div class="wel-sec-sub">把"要我学"变成"我要学"</div>
     <div class="wel-feats">
       <div class="wel-feat" style="--c:#5BB8F5"><span class="fi">🎯</span><h3>分年级精准匹配</h3><p>幼小衔接到六年级，每个孩子只看到适合自己的内容，由易到难，不打击信心。</p></div>
-      <div class="wel-feat" style="--c:#FFC107"><span class="fi">⭐</span><h3>游戏化激励</h3><p>答对得星星，每 25 颗解锁一位动物伙伴，越学越有成就感。</p></div>
+      <div class="wel-feat" style="--c:#FFC107"><span class="fi">⭐</span><h3>游戏化激励</h3><p>答对得星星，每 25 颗解锁一位动物伙伴，还有勋章和电子奖状，越学越有成就感。</p></div>
       <div class="wel-feat" style="--c:#6FBF73"><span class="fi">📅</span><h3>每日计划+预告</h3><p>每天五件事一目了然，还有"明日预告"，从小培养规划力和自驱力。</p></div>
-      <div class="wel-feat" style="--c:#FF7E67"><span class="fi">🔊</span><h3>启蒙语音读题</h3><p>不识字也能学！题目自动朗读，数学读成"3加5等于几"，科普整篇朗读。</p></div>
-      <div class="wel-feat" style="--c:#9B7EDE"><span class="fi">📕</span><h3>错题本自动收集</h3><p>答错的题自动收进错题本，复习答对就移除，让"错误"变成"进步"。</p></div>
+      <div class="wel-feat" style="--c:#FF7E67"><span class="fi">🔊</span><h3>启蒙语音读题</h3><p>不识字也能学！题目自动朗读，数学读成"3 加 5 等于几"，科普整篇朗读。</p></div>
+      <div class="wel-feat" style="--c:#9B7EDE"><span class="fi">📕</span><h3>错题本+知识点</h3><p>答错自动收进错题本、按知识点归类，还能一键练同类题，把"错误"变成"进步"。</p></div>
       <div class="wel-feat" style="--c:#2E86C9"><span class="fi">🔭</span><h3>28 篇分年级科普</h3><p>AI、火箭、宇宙、火山、奥运、航天……知识跟上时代，开阔眼界。</p></div>
-      <div class="wel-feat" style="--c:#4E9D52"><span class="fi">🏃</span><h3>运动+护眼提醒</h3><p>每天运动打卡（家长确认），完成后语音提醒休息护眼，劳逸结合。</p></div>
-      <div class="wel-feat" style="--c:#E8A800"><span class="fi">📊</span><h3>报告+AI 分析</h3><p>七天学习报告，AI 帮你找出闪光点和薄弱项，多鼓励、有方向。</p></div>
+      <div class="wel-feat" style="--c:#4E9D52"><span class="fi">🏃</span><h3>运动+护眼提醒</h3><p>每天运动打卡（家长确认），还能打印纸质练习页，少看屏幕、保护视力。</p></div>
+      <div class="wel-feat" style="--c:#E8A800"><span class="fi">📊</span><h3>报告+AI 分析</h3><p>学习报告含知识点掌握率、薄弱点和进步曲线，AI 帮你找方向、多鼓励。</p></div>
     </div>
 
     <div class="wel-sec-title">每个阶段，都有针对性的帮助 🌱</div>
